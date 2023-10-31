@@ -1,8 +1,7 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
-
-import LandingPage from "./pages/Home";
+import { Outlet } from "react-router-dom";
 
 export default function App() {
   return (
@@ -10,9 +9,7 @@ export default function App() {
       <Header>
         <Nav />
       </Header>
-      <main className="h-full">
-        <LandingPage />
-      </main>
+      <Outlet />
       <Footer>
         <Nav />
       </Footer>
