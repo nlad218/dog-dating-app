@@ -1,5 +1,5 @@
-const User = require("./User");
-const DogProfile = require("./DogProfile");
-const Meetup = require("./Meetup");
+const dogProfile = require("./dogProfile");
+const userProfile = require("./userProfile");
+const eventPage = require("./eventPage");
 
-module.exports = { User, DogProfile, Meetup };
+module.exports = { userProfile, dogProfile, eventPage };
