@@ -1,4 +1,4 @@
-const DogProfile = require("./dogProfiles");
+const DogProfile = require("./dogProfile");
 const User = require("./userProfile");
 const eventPage = require("./eventPage");
 
