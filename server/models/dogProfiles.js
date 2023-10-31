@@ -37,6 +37,6 @@ const dogProfile = new Schema({
   },
 });
 
-const DogProfile = model("DogProfile", dogProfile);
+const DogProfile = model("DogProfiles", dogProfile);
 
 module.exports = DogProfile;
