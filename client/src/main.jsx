@@ -4,6 +4,10 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App.jsx";
+import LandingPage from "./pages/Home";
+import Main from "./pages/Main";
+import Chat from "./pages/Chat";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +17,19 @@ const router = createBrowserRouter([
       {
         // ALL non-users should be redirected to this page, no matter what
         index: true,
+        element: <LandingPage />,
+      },
+      {
+        path: "/main",
+        element: <Main />,
+      },
+      {
+        path: "/chat",
+        element: <Chat />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },
