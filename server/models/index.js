@@ -1,5 +1,5 @@
-const dogProfile = require("./dogProfile");
+const DogProfile = require("./dogProfile");
 const User = require("./userProfile");
 const eventPage = require("./eventPage");
 
-module.exports = { User, dogProfile, eventPage };
+module.exports = { User, DogProfile, eventPage };
