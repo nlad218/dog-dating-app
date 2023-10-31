@@ -17,3 +17,7 @@ const eventSchema = new Schema({
     type: Date,
   },
 });
+
+const Event = model("Event", eventSchema);
+
+module.exports = Event;
