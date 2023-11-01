@@ -1,28 +1,30 @@
 const typeDefs = `
 type User {
-   name: String
+   ownerName: String
    email: String
    password: String 
-},
-
-type DogProfile {
-    name: String
+    dogName: String
     image: String
     breed: String
     age: Int
     size: String
     about: String
     hobbies: [String]
-    user: User
-    // likes: 
+    likes: [User]
+    matches: [Match]
 }
 
-type Event {
-    event: String
-    location: String
-    activity: String 
-    eventDate: String 
-} 
+type Match {
+user1: [User]
+user2: [User]
+messages: [Message]
+}
+
+type Message {
+  user: [User]
+  createdAt: String
+  messageText: String
+}
 
 type Auth {
     token: ID! 
