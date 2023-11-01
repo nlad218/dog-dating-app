@@ -14,6 +14,7 @@ type DogProfile {
     about: String
     hobbies: [String]
     user: User
+    // likes: 
 }
 
 type Event {
@@ -28,9 +29,15 @@ type Auth {
     user: User
 }
 
-# need to insert queries 
+# QUERIES
+## users (except for self)
+# pull random users that they haven't already liked or matched with (does not have a chat with current user and not been liked)
 
-# insert mutations 
+
+# MUTATIONS
+## addUser 
+## addUser to liked list 
+## editProfile 
 
 `;
 
