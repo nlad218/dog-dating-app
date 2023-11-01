@@ -4,9 +4,9 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     // GET route: user, findOne
-    user: async (parent, {userId}) => {
-      const singleUser = await User.findOne({_id: userId});
-      console.log(singleUser)
+    user: async (parent, { userId }) => {
+      const singleUser = await User.findOne({ _id: userId });
+      console.log(singleUser);
       return singleUser;
     },
     // GET route: users, find
@@ -20,22 +20,19 @@ const resolvers = {
     // GET route: messages,
 
     // GET route: matches, see all matches
-        //don't need this, this should be in the GET ME ROUTE (.populate matches)
-    // Get route: match, find one specific match 
-    oneMatch: async(parent, {matchId}) => {
-      return Match.findOne({_id: matchId})
+    //don't need this, this should be in the GET ME ROUTE (.populate matches)
+    // Get route: match, find one specific match
+    oneMatch: async (parent, { matchId }) => {
+      return Match.findOne({ _id: matchId });
     },
     // // GET route: purpose - find selected user's likes and return them
-    getLikes: async(parent, {userId}) => {
-      const userInfo = await User.findOne({_id: userId}); 
-      console.log(userInfo)
+    getLikes: async (parent, { userId }) => {
+      const userInfo = await User.findOne({ _id: userId });
+      console.log(userInfo);
       //const likesArray = userInfo.likes
-    }
-
+    },
   },
   Mutation: {
-    // CREATE route: handles login
-
     // CREATE route: create user account - Maya
     createUser: async (parent, { ownerName, email, password }) => {
       const user = await User.create({ ownerName, email, password });
@@ -58,35 +55,31 @@ const resolvers = {
       }
     },
 
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
-      const token = signToken(user);
-      return { token, user };
-    },
+  
     // DELETE route: delete user account
 
-// // PUT route: update user account 
+    // // PUT route: update user account
 
-// // CREATE route: post a message 
+    // // CREATE route: post a message
 
-// // PUT route: update user account with an added friend
-    addLike: async (parent, {myId, otherId}) => {
+    // // PUT route: update user account with an added friend
+    addLike: async (parent, { myId, otherId }) => {
       const myProfile = await User.findOneAndUpdate(
-        {_id: myId},
-        {$push: {likes: otherId}},
-        {new: true}
+        { _id: myId },
+        { $push: { likes: otherId } },
+        { new: true }
       );
-    }
+    },
 
-// // CREATE route: match two users together 
-//   // isAMatch: async (parent, {myId, otherId}) => {
-//   //   const myProfile = await User.findOne({_id: myId})
-//   //   const myLikes = myProfile.likes
-    
-//   //   const otherProfile = await User.findOne({_id: otherId})
-//   //   const otherLikes = otherProfile.likes
+    // // CREATE route: match two users together
+    //   // isAMatch: async (parent, {myId, otherId}) => {
+    //   //   const myProfile = await User.findOne({_id: myId})
+    //   //   const myLikes = myProfile.likes
 
-//   // }
+    //   //   const otherProfile = await User.findOne({_id: otherId})
+    //   //   const otherLikes = otherProfile.likes
+
+    //   // }
   },
 };
 
