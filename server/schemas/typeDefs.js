@@ -37,9 +37,13 @@ type Auth {
 
 
 # MUTATIONS
-## addUser 
+## addUser
 ## addUser to liked list 
 ## editProfile 
+
+type Mutation {
+    createUser(ownerName: String!, email: String!, password: String!): Auth
+}
 
 `;
 
