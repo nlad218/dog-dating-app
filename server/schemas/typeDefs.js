@@ -1,9 +1,6 @@
 const typeDefs = `
 type User {
-<<<<<<< HEAD
-=======
     _id: ID
->>>>>>> main
     ownerName: String
     email: String
     password: String 
@@ -37,13 +34,6 @@ type Auth {
     user: User
 }
 
-type Query {
-  user: 
-  users:
-  me:
-}
-
-# QUERIES
 type Query {
     user(userId: ID!): User
     oneMatch(matchId: ID!): Match
