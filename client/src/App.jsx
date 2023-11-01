@@ -9,7 +9,7 @@ export default function App() {
 			<Header>
 				<Nav />
 			</Header>
-			<div className="flex justify-center items-center p-4">
+			<div className="flex justify-center items-center p-4 mb-10">
 				<Outlet />
 			</div>
 			<Footer>
