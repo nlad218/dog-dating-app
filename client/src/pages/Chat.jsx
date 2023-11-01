@@ -15,14 +15,17 @@ export default function Chat() {
   const tempNameList = ["Nick F", "Nick D", "Jake", "Maya", "Josh"]
 
   return (
-    <div className="bg-base-100 shadow-xl rounded-xl max-w-5xl">
-      <div>
-        THIS WILL APPEAR ABOVE THE LIST OF CONVERSATIONS
-        <ConversationList names={tempNameList} activeConversation={activeConversation} setActiveConversation={setActiveConversation} />
+    <div className="drawer md:drawer-open">
+      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content flex flex-col items-center justify-center">
+         <ActiveConversation />
+        <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button md:hidden">Open drawer</label>
       </div>
-      <div>
-        THIS WILL APPEAR ABOVE THE ACTIVE CONVERSATION
-        <ActiveConversation />
+      <div className="drawer-side">
+        <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
+        <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+          <ConversationList names={tempNameList} active={activeConversation} set={setActiveConversation} />
+        </ul>
       </div>
     </div>
   )
