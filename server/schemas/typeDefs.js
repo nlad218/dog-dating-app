@@ -1,6 +1,9 @@
 const typeDefs = `
 type User {
+<<<<<<< HEAD
+=======
     _id: ID
+>>>>>>> main
     ownerName: String
     email: String
     password: String 
@@ -49,6 +52,11 @@ type Query {
 }
 
 type Mutation {
+<<<<<<< HEAD
+    createUser(ownerName: String!, email: String!, password: String!): Auth
+}
+
+=======
   login(): 
   createUser: 
   deleteUser:
@@ -58,6 +66,7 @@ type Mutation {
 
 
 
+>>>>>>> main
 `;
 
 module.exports = typeDefs;
