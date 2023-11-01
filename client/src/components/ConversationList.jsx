@@ -1,11 +1,11 @@
-export default function ConversationList(props) {
+export default function ConversationList({ names, active, set }) {
   return (
     <ul className="menu">
-      {props.names.map((name, index) => (
-        <li key={index}>
+      {names.map((name, index) => (
+        <li key={index} onClick={() => set(index)}>
           <div
             className={
-              index == 2
+              index == active
                 ? "items-start flex flex-col active"
                 : "items-start flex flex-col"
             }

@@ -27,7 +27,7 @@ export default function Chat() {
           </label>
         </ActiveConversation>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side z-50">
         <label
           htmlFor="my-drawer"
           aria-label="close sidebar"
