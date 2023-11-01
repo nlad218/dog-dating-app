@@ -8,6 +8,12 @@ const messageSchema = new Schema({
         type: Date, 
         default: Date.now, 
         get: (date => {return date.toString()})
+    },
+    messageText: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 280,
     }
 },
 {
