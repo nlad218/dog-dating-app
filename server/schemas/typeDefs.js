@@ -32,7 +32,7 @@ type Auth {
 }
 
 # QUERIES
-## users (except for self)
+user(userId: ID!)
 # pull random users that they haven't already liked or matched with (does not have a chat with current user and not been liked)
 
 
