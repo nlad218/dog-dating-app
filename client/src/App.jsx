@@ -5,17 +5,17 @@ import Nav from "./components/Nav";
 import LandingPage from "./pages/Home";
 
 export default function App() {
-  return (
-    <>
-      <Header>
-        <Nav />
-      </Header>
-      <main className="h-full">
-        <LandingPage />
-      </main>
-      <Footer>
-        <Nav />
-      </Footer>
-    </>
-  );
+	return (
+		<>
+			<Header>
+				<Nav />
+			</Header>
+			<main className="h-full">
+				<LandingPage />
+			</main>
+			<Footer>
+				<Nav />
+			</Footer>
+		</>
+	);
 }

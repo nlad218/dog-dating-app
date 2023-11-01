@@ -1,4 +1,18 @@
+import React, { useState } from "react";
+
+import LoginModal from "../components/Login";
+
 export default function LandingPage() {
+	const [isModalOpen, setModalOpen] = useState(false);
+
+	const openModal = () => {
+		setModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setModalOpen(false);
+	};
+
 	const reviews = [
 		{
 			name: "Josh K.",
@@ -60,7 +74,9 @@ export default function LandingPage() {
 					<div className="max-w-md">
 						<h1 className="mb-5 text-5xl font-bold">Go for a walk?</h1>
 						<p className="mb-5">Find a best freind for man's best freind!</p>
-						<button className="btn btn-primary">Login / Sign up</button>
+						<button className="btn btn-primary" onClick={openModal}>
+							Login / Sign up
+						</button>
 					</div>
 				</div>
 			</div>
@@ -69,6 +85,7 @@ export default function LandingPage() {
 					<ReviewCards key={index} name={review.name} review={review.review} />
 				))}
 			</div>
+			<LoginModal isOpen={isModalOpen} onClose={closeModal} />
 		</div>
 	);
 }
