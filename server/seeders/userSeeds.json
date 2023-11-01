@@ -1,8 +1,14 @@
 [
   {
-    "name": "Bob",
+    "ownerName": "Bob",
     "email": "bob@gmail.com",
-    "password": "Ilovedogs23!"
+    "password": "Ilovedogs23!",
+    "dogName": "teddy",
+    "breed": "english lab",
+    "age": "5",
+    "size": "medium",
+    "about": "love playing fetch",
+    "hobbies": "fetch and longs walks"
   }
 ]
 
