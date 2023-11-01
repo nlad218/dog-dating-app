@@ -15,9 +15,9 @@ export default function Chat() {
   const tempNameList = ["Nick F", "Nick D", "Jake", "Maya", "Josh"];
 
   return (
-    <div className="drawer md:drawer-open">
+    <div className="drawer md:drawer-open gap-4">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center">
+      <div className="drawer-content flex flex-col items-center justify-center min-h-full">
         <ActiveConversation>
           <label
             htmlFor="my-drawer"
@@ -33,13 +33,13 @@ export default function Chat() {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+        <div className="p-4 w-80 min-h-full bg-base-200 text-base-content rounded-r-xl md:rounded-l-xl">
           <ConversationList
             names={tempNameList}
             active={activeConversation}
             set={setActiveConversation}
           />
-        </ul>
+        </div>
       </div>
     </div>
   );
