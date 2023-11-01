@@ -15,6 +15,18 @@ type DogProfile {
     hobbies: [String]
     user: User
 }
+
+# need to insert eventPage type 
+
+type Auth {
+    token: ID! 
+    user: User
+}
+
+# need to insert queries 
+
+# insert mutations 
+
 `;
 
 module.exports = typeDefs;
