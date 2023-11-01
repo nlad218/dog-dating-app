@@ -1,5 +1,5 @@
-const Match = require('./Match.js');
-const User = require('./Message.js');
-const Message = require('./UserProfile.js');
+const Match = require("./Match.js");
+const User = require("./UserProfile.js");
+const Message = require("./Message.js");
 
 module.exports = { User, Match, Message };
