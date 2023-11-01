@@ -40,8 +40,19 @@ const resolvers = {
       return { token, user };
     },
 
-    // DELETE route: delete user account - Maya
-
+    // DELETE route: delete user account 
+    deleteUser: async (parent, { userId }, context) => {
+      if (context.user) {
+        const user = await User.findOneAndRemove({
+          _id: userId,
+          ownerName: context.user.ownerName,
+        });
+  
+        return { message: "Account deleted successfully." };
+      }
+      throw new AuthenticationError('You must be logged in to delete your account');
+    }
+  },
     // PUT route: update user account - Nick D
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
