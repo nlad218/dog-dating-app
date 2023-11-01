@@ -18,8 +18,9 @@ export default function Chat() {
     <div className="drawer md:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center">
-         <ActiveConversation />
-        <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button md:hidden">Open drawer</label>
+        <ActiveConversation>
+          <label htmlFor="my-drawer-2" className="drawer-button bg-primary-focus rounded-full p-2 md:hidden">&lt;</label>
+        </ActiveConversation>
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
