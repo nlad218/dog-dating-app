@@ -25,6 +25,17 @@ const resolvers = {
   },
   Mutation: {
     // CREATE route: handles login
+
+    // CREATE route: create user account - Maya
+    createUser: async (parent, { ownerName, email, password }) => {
+      const user = await User.create({ ownerName, email, password });
+      const token = signToken(user);
+      return { token, user };
+    },
+
+    // DELETE route: delete user account - Maya
+
+    // PUT route: update user account - Nick D
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {

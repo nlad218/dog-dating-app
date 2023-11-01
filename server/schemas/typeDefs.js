@@ -1,6 +1,9 @@
 const typeDefs = `
 type User {
+<<<<<<< HEAD
+=======
     _id: ID
+>>>>>>> main
     ownerName: String
     email: String
     password: String 
@@ -44,13 +47,21 @@ type Query {
 ## users (except for self)
 # pull random users that they haven't already liked or matched with (does not have a chat with current user and not been liked)
 
+type Query {
+    user: User
+}
 
 # MUTATIONS
-## addUser 
+## addUser
 ## addUser to liked list 
 ## editProfile 
 
 type Mutation {
+<<<<<<< HEAD
+    createUser(ownerName: String!, email: String!, password: String!): Auth
+}
+
+=======
   login(): 
   createUser: 
   deleteUser:
@@ -59,6 +70,7 @@ type Mutation {
 
 
 
+>>>>>>> main
 `;
 
 module.exports = typeDefs;
