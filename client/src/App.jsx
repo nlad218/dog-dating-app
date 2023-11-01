@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
+import { Outlet } from "react-router-dom";
 
 export default function App() {
   return (
@@ -8,7 +9,7 @@ export default function App() {
       <Header>
         <Nav />
       </Header>
-      <main className="h-full">CONTENT GOES HERE</main>
+      <Outlet />
       <Footer>
         <Nav />
       </Footer>
