@@ -16,7 +16,12 @@ type DogProfile {
     user: User
 }
 
-# need to insert eventPage type 
+type Event {
+    event: String
+    location: String
+    activity: String 
+    eventDate: String 
+} 
 
 type Auth {
     token: ID! 
