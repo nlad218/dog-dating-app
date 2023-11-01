@@ -18,7 +18,7 @@ export default function Main() {
 				<figure>
 					<img
 						src={profiles[0].image}
-						alt="Shoes"
+						alt="ProfilePic"
 						style={{ width: "100%", height: "100%", objectFit: "cover" }}
 					/>
 				</figure>
@@ -29,6 +29,17 @@ export default function Main() {
 					<h3 className="card-subtitle text-white">
 						{profiles[0].gender} {profiles[0].breed}
 					</h3>
+					<div className="collapse bg-primary mt-3" style={{ width: "50%" }}>
+						<input type="checkbox" />
+						<div className="collapse-title text-white text-sm font-medium p-0">
+							More Details
+						</div>
+						<div className="collapse-content p-0">
+							<h4 className="text-white mb-2">Size: {profiles[0].size}</h4>
+							<h4 className="text-white mb-2">Bio: {profiles[0].about}</h4>
+							<h4 className="text-white">Hobbies: {profiles[0].hobbies}</h4>
+						</div>
+					</div>
 					<div className=" mt-3 card-actions justify-between">
 						<button className="btn btn-circle">
 							<svg
@@ -36,7 +47,7 @@ export default function Main() {
 								className="h-6 w-6"
 								fill="none"
 								viewBox="0 0 24 24"
-								stroke="currentColor"
+								stroke="red"
 							>
 								<path
 									strokeLinecap="round"
@@ -51,13 +62,13 @@ export default function Main() {
 								xmlns="http://www.w3.org/2000/svg"
 								fill="none"
 								viewBox="0 0 24 24"
-								stroke-width="1.5"
-								stroke="currentColor"
-								class="w-6 h-6"
+								strokeWidth="1.5"
+								stroke="green"
+								className="w-6 h-6"
 							>
 								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
+									strokeLinecap="round"
+									strokeLinejoin="round"
 									d="M4.5 12.75l6 6 9-13.5"
 								/>
 							</svg>
@@ -68,4 +79,3 @@ export default function Main() {
 		</div>
 	);
 }
-//comment
