@@ -1,8 +1,8 @@
 const typeDefs = `
 type User {
-   ownerName: String
-   email: String
-   password: String 
+    ownerName: String
+    email: String
+    password: String 
     dogName: String
     image: String
     breed: String
@@ -35,6 +35,9 @@ type Auth {
 ## users (except for self)
 # pull random users that they haven't already liked or matched with (does not have a chat with current user and not been liked)
 
+type Query {
+    user: User
+}
 
 # MUTATIONS
 ## addUser
