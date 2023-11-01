@@ -16,14 +16,14 @@ export default function Chat() {
 
   return (
     <div className="drawer md:drawer-open">
-      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center">
         <ActiveConversation>
-          <label htmlFor="my-drawer-2" className="drawer-button bg-primary-focus rounded-full p-2 md:hidden">&lt;</label>
+          <label htmlFor="my-drawer" className="drawer-button bg-primary-focus rounded-full p-2 md:hidden">&lt;</label>
         </ActiveConversation>
       </div>
       <div className="drawer-side">
-        <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
+        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
           <ConversationList names={tempNameList} active={activeConversation} set={setActiveConversation} />
         </ul>
