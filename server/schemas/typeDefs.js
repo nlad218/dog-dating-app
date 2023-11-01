@@ -1,8 +1,9 @@
 const typeDefs = `
 type User {
-   ownerName: String
-   email: String
-   password: String 
+    _id: ID
+    ownerName: String
+    email: String
+    password: String 
     dogName: String
     image: String
     breed: String
@@ -15,12 +16,14 @@ type User {
 }
 
 type Match {
+  _id: ID
 user1: [User]
 user2: [User]
 messages: [Message]
 }
 
 type Message {
+  _id: ID
   user: [User]
   createdAt: String
   messageText: String
@@ -29,6 +32,12 @@ type Message {
 type Auth {
     token: ID! 
     user: User
+}
+
+type Query {
+  user: 
+  users:
+  me:
 }
 
 # QUERIES
@@ -40,6 +49,15 @@ type Auth {
 ## addUser 
 ## addUser to liked list 
 ## editProfile 
+
+type Mutation {
+  login(): 
+  createUser: 
+  deleteUser:
+  updateUser:
+}
+
+
 
 `;
 
