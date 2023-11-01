@@ -44,33 +44,21 @@ type Query {
 }
 
 # QUERIES
-## users (except for self)
-# pull random users that they haven't already liked or matched with (does not have a chat with current user and not been liked)
-
 type Query {
-    user: User
-}
+    user(userId: ID!): User
+    oneMatch(matchId: ID!): Match
+    getLikes(userId: ID!): User
 
-# MUTATIONS
-## addUser
-## addUser to liked list 
-## editProfile 
+}
 
 type Mutation {
-<<<<<<< HEAD
-    createUser(ownerName: String!, email: String!, password: String!): Auth
-}
-
-=======
+  createUser(ownerName: String!, email: String!, password: String!): Auth
   login(): 
   createUser: 
   deleteUser:
   updateUser:
+  addLike(myId: ID!, otherId: ID!): User
 }
-
-
-
->>>>>>> main
 `;
 
 module.exports = typeDefs;

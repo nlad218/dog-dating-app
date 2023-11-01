@@ -4,8 +4,10 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     // GET route: user, findOne
-    user: async (parent, { username }) => {
-      return User.findOne({ username });
+    user: async (parent, {userId}) => {
+      const singleUser = await User.findOne({_id: userId});
+      console.log(singleUser)
+      return singleUser;
     },
     // GET route: users, find
     users: async () => {
@@ -18,10 +20,18 @@ const resolvers = {
     // GET route: messages,
 
     // GET route: matches, see all matches
+        //don't need this, this should be in the GET ME ROUTE (.populate matches)
+    // Get route: match, find one specific match 
+    oneMatch: async(parent, {matchId}) => {
+      return Match.findOne({_id: matchId})
+    },
+    // // GET route: purpose - find selected user's likes and return them
+    getLikes: async(parent, {userId}) => {
+      const userInfo = await User.findOne({_id: userId}); 
+      console.log(userInfo)
+      //const likesArray = userInfo.likes
+    }
 
-    // Get route: match, find one specific match
-
-    // GET route: purpose - find selected user's likes and return them
   },
   Mutation: {
     // CREATE route: handles login
@@ -55,11 +65,28 @@ const resolvers = {
     },
     // DELETE route: delete user account
 
-    // PUT route: update user account
+// // PUT route: update user account 
 
-    // CREATE route: post a message
+// // CREATE route: post a message 
 
-    // CREATE route: match two users together
+// // PUT route: update user account with an added friend
+    addLike: async (parent, {myId, otherId}) => {
+      const myProfile = await User.findOneAndUpdate(
+        {_id: myId},
+        {$push: {likes: otherId}},
+        {new: true}
+      );
+    }
+
+// // CREATE route: match two users together 
+//   // isAMatch: async (parent, {myId, otherId}) => {
+//   //   const myProfile = await User.findOne({_id: myId})
+//   //   const myLikes = myProfile.likes
+    
+//   //   const otherProfile = await User.findOne({_id: otherId})
+//   //   const otherLikes = otherProfile.likes
+
+//   // }
   },
 };
 
