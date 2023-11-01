@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "react";
 import ConversationList from "../components/ConversationList";
 import ActiveConversation from "../components/ActiveConversation";
 
@@ -10,24 +10,37 @@ export default function Chat() {
   // - Keep track of the active conversation
   // - Possibly open a websocket for the current conversation?
 
-  const [activeConversation, setActiveConversation] = useState(0)
+  const [activeConversation, setActiveConversation] = useState(0);
 
-  const tempNameList = ["Nick F", "Nick D", "Jake", "Maya", "Josh"]
+  const tempNameList = ["Nick F", "Nick D", "Jake", "Maya", "Josh"];
 
   return (
     <div className="drawer md:drawer-open">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center">
         <ActiveConversation>
-          <label htmlFor="my-drawer" className="drawer-button bg-primary-focus rounded-full p-2 md:hidden">&lt;</label>
+          <label
+            htmlFor="my-drawer"
+            className="drawer-button bg-primary-focus rounded-full p-2 md:hidden"
+          >
+            &lt;
+          </label>
         </ActiveConversation>
       </div>
       <div className="drawer-side">
-        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+        <label
+          htmlFor="my-drawer"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        ></label>
         <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-          <ConversationList names={tempNameList} active={activeConversation} set={setActiveConversation} />
+          <ConversationList
+            names={tempNameList}
+            active={activeConversation}
+            set={setActiveConversation}
+          />
         </ul>
       </div>
     </div>
-  )
+  );
 }

@@ -10,33 +10,33 @@ import Chat from "./pages/Chat";
 import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        // ALL non-users should be redirected to this page, no matter what
-        index: true,
-        element: <LandingPage />,
-      },
-      {
-        path: "/main",
-        element: <Main />,
-      },
-      {
-        path: "/chat",
-        element: <Chat />,
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-    ],
-  },
+	{
+		path: "/",
+		element: <App />,
+		children: [
+			{
+				// ALL non-users should be redirected to this page, no matter what
+				index: true,
+				element: <LandingPage />,
+			},
+			{
+				path: "/main",
+				element: <Main />,
+			},
+			{
+				path: "/chat",
+				element: <Chat />,
+			},
+			{
+				path: "/profile",
+				element: <Profile />,
+			},
+		],
+	},
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+	<React.StrictMode>
+		<RouterProvider router={router} />
+	</React.StrictMode>
 );
