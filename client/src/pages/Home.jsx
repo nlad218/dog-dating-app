@@ -73,7 +73,7 @@ export default function LandingPage() {
 				<div className="hero-content text-center text-neutral-content">
 					<div className="max-w-md">
 						<h1 className="mb-5 text-5xl font-bold">Go for a walk?</h1>
-						<p className="mb-5">Find a best freind for man's best freind!</p>
+						<p className="mb-5">Find a best friend for man's best friend!</p>
 						<button className="btn btn-primary" onClick={openModal}>
 							Login / Sign up
 						</button>

@@ -1,5 +1,6 @@
 const typeDefs = `
 type User {
+    _id: ID
     ownerName: String
     email: String
     password: String 
@@ -15,20 +16,28 @@ type User {
 }
 
 type Match {
-    user1: [User]
-    user2: [User]
-    messages: [Message]
+  _id: ID
+user1: [User]
+user2: [User]
+messages: [Message]
 }
 
 type Message {
-    user: [User]
-    createdAt: String
-    messageText: String
+  _id: ID
+  user: [User]
+  createdAt: String
+  messageText: String
 }
 
 type Auth {
     token: ID! 
     user: User
+}
+
+type Query {
+  user: 
+  users:
+  me:
 }
 
 # QUERIES
@@ -38,9 +47,17 @@ type Query {
     getLikes(userId: ID!): User
 
 }
+
 type Mutation {
-    addLike(myId: ID!, otherId: ID!): User
+  login(): 
+  createUser: 
+  deleteUser:
+  updateUser:
+  addLike(myId: ID!, otherId: ID!): User
 }
+
+
+
 `;
 
 module.exports = typeDefs;

@@ -10,10 +10,14 @@ const resolvers = {
       return singleUser;
     },
     // GET route: users, find
-
+    users: async () => {
+      return User.find();
+    },
     // GET route: me, findOne
-
-    // GET route: messages, 
+    me: async (parent) => {
+      return User.findById({ _id: User._id });
+    },
+    // GET route: messages,
 
     // GET route: matches, see all matches
         //don't need this, this should be in the GET ME ROUTE (.populate matches)
@@ -30,26 +34,25 @@ const resolvers = {
 
   },
   Mutation: {
-// // CREATE route: handles login 
-// login: async (parent, { email, password }) => {
-//   const user = await User.findOne({ email });
-//   if (!user) {
-//     throw AuthenticationError;
-//   }
+    // CREATE route: handles login
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw AuthenticationError;
+      }
+      const pwAuth = await user.isCorrctPassword(password);
 
-//   const correctPw = await user.isCorrectPassword(password);
+      if (!pwAuth) {
+        throw AuthenticationError;
+      }
+    },
 
-//   if (!correctPw) {
-//     throw AuthenticationError;
-//   }
-
-//   const token = signToken(user);
-
-//   return { token, user };
-// },
-// // CREATE route: create user account
-
-// // DELETE route: delete user account 
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
+    },
+    // DELETE route: delete user account
 
 // // PUT route: update user account 
 
