@@ -11,8 +11,9 @@ module.exports = {
         }
     }),
     authMiddleware: function({req}) {
-        let token = req.headers.authorization;
-        
+          
+        let token = req.body.token || req.query.token || req.headers.authorization;
+
         if (req.headers.authorization) {
             token = token.split(' ').pop().trim();
         }
@@ -30,7 +31,7 @@ module.exports = {
         return req;
     },
     signToken: function ({firstName, email, _id}) {
-        const payload = {firsName, email, _id};
+        const payload = {firstName, email, _id};
 
         return jwt.sign(
             { data: payload },

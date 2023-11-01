@@ -9,6 +9,61 @@
     "size": "medium",
     "about": "love playing fetch",
     "hobbies": "fetch and longs walks"
+  },
+  {
+    "ownerName": "Joe",
+    "email": "j@gmail.com",
+    "password": "IamJoeJoe!",
+    "dogName": "teddy",
+    "breed": "english lab",
+    "age": "5",
+    "size": "medium",
+    "about": "love playing fetch",
+    "hobbies": "fetch and longs walks"
+  },
+  {
+    "ownerName": "Nick",
+    "email": "nick@gmail.com",
+    "password": "Nick123456",
+    "dogName": "teddy",
+    "breed": "english lab",
+    "age": "5",
+    "size": "medium",
+    "about": "love playing fetch",
+    "hobbies": "fetch and longs walks"
+  },
+  {
+    "ownerName": "Maya",
+    "email": "maya@gmail.com",
+    "password": "Maya123456!",
+    "dogName": "teddy",
+    "breed": "english lab",
+    "age": "5",
+    "size": "medium",
+    "about": "love playing fetch",
+    "hobbies": "fetch and longs walks"
+  },
+  {
+    "ownerName": "Dillon",
+    "email": "dillon@gmail.com",
+    "password": "Dillon123456!",
+    "dogName": "teddy",
+    "breed": "english lab",
+    "age": "5",
+    "size": "medium",
+    "about": "love playing fetch",
+    "hobbies": "fetch and longs walks"
+  },
+  {
+    "ownerName": "Josh",
+    "email": "josh@gmail.com",
+    "password": "Josh1234567!",
+    "dogName": "teddy",
+    "breed": "english lab",
+    "age": "5",
+    "size": "medium",
+    "about": "love playing fetch",
+    "hobbies": "fetch and longs walks"
   }
 ]
 
