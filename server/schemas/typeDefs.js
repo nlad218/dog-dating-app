@@ -52,21 +52,13 @@ type Query {
 }
 
 type Mutation {
-<<<<<<< HEAD
-    createUser(ownerName: String!, email: String!, password: String!): Auth
-}
-
-=======
+  createUser(ownerName: String!, email: String!, password: String!): Auth
   login(): 
   createUser: 
   deleteUser:
   updateUser:
   addLike(myId: ID!, otherId: ID!): User
 }
-
-
-
->>>>>>> main
 `;
 
 module.exports = typeDefs;
