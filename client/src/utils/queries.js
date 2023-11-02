@@ -41,14 +41,6 @@ export const QUERY_MATCH_MESSAGES = gql`
   }
 `;
 
-export const QUERY_USER_LIKES = gql`
-  query userLikes($userId: ID!) {
-    getLikes(userId: $userId) {
-
-    }
-  }
-`;
-
 export const QUERY_DISPLAYABLE_USERS = gql`
   query showableUsers {
     getRandomUsers {

@@ -43,7 +43,9 @@ const resolvers = {
     getRandomUsers: async (parent, args, { user }) => {
       let skipTheseIds = user.likes;
       skipTheseIds.push(user._id);
-      let allUsers = await User.find({ _id: { $nin: skipTheseIds } });
+      let allUsers = await User.find({ _id: { $nin: skipTheseIds } }).populate(
+        "likes"
+      );
       //fisher-yates sort
       for (let i = allUsers.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -61,7 +63,7 @@ const resolvers = {
       skipTheseIds.push(user._id);
       const filteredBreed = await User.find({
         $and: [{ breed: { $eq: user.breed } }, { _id: { $nin: skipTheseIds } }],
-      });
+      }).populate("likes");
       console.log(filteredBreed);
       //fisher yates sort
       for (let i = filteredBreed.length - 1; i > 0; i--) {
