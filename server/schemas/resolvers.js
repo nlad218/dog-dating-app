@@ -1,6 +1,8 @@
 const { User, Match, Message } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
+
+
 const resolvers = {
   Query: {
     // GET route: user, findOne
@@ -16,7 +18,8 @@ const resolvers = {
     },
     // // GET route: me, findOne
     me: async (parent, args, {user}) => {
-      return User.findById({ _id: user._id }).populate('likes').populate('matches').populate('messages');
+      console.log(user)
+      return User.findById({ _id: user._id });
       },
 
     // Get route: match, find one specific match
@@ -29,6 +32,38 @@ const resolvers = {
       console.log(userInfo);
       //const likesArray = userInfo.likes
     },
+    //filters already liked profiles and own profile
+    getRandomUsers: async (parent, args, {user}) => {
+      let skipTheseIds = user.likes;
+      skipTheseIds.push(user._id)
+      let allUsers = await User.find({_id: {$nin: skipTheseIds}})
+      //fisher-yates sort
+        for (let i = allUsers.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const temp = allUsers[i];
+          allUsers[i] = allUsers[j];
+          allUsers[j] = temp;
+          console.log(allUsers)
+         }
+         return allUsers;
+  },
+  //filter out already liked profile,own profile, then shows alike breeds
+    filterUsersByBreed: async (parent, args, {user}) => {
+      let skipTheseIds = user.likes;
+      console.log(user)
+      skipTheseIds.push(user._id)
+      const filteredBreed = await User.find({$and:[{breed: {$eq: user.breed}},{_id: {$nin:skipTheseIds}}]})
+      console.log(filteredBreed)
+      //fisher yates sort
+      for (let i = filteredBreed.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = filteredBreed[i];
+        filteredBreed[i] = filteredBreed[j];
+        filteredBreed[j] = temp;
+        console.log(filteredBreed)
+     } 
+      return filteredBreed;
+    }
   },
   Mutation: {
     // CREATE route: create user account - Maya
@@ -108,6 +143,7 @@ const resolvers = {
         {$push: {likes: otherId}},
         {new: true}
       ).populate('likes');
+      console.log("Added user to your likes list")
       //check if other profile already liked current user
       let isAMatch = false;
       const otherProfile = await User.findOne({_id: otherId}).populate('likes')
