@@ -22,7 +22,7 @@
     "size": "small",
     "about": "I am the strongest dog in the world",
     "hobbies": ["barking", "fighting"],
-    "likes":["6543aa42993184d39c99f89f", "6543aa42993184d39c99f89e"]
+    "likes":[]
   },
   {
     "ownerName": "Nick",
@@ -217,64 +217,88 @@
     "hobbies": ["barking", "walks", "swimming"]
   },
   {
-    "ownerName": "Lillian",
-    "email": "lil45@gmail.com",
-    "password": "Lillian3456!",
-    "dogName": "Sergeant",
-    "breed": "German Shephard",
-    "image": "german-shephard4_g3pzfj",
-    "age": "4",
-    "size": "medium",
-    "about": "I will protect my children and my humans",
-    "hobbies": ["barking", "walks", "swimming"]
+    "ownerName": "Benjamin",
+    "email": "benny@gmail.com",
+    "password": "Ben34356!",
+    "dogName": "Twilight",
+    "breed": "Lab",
+    "image": "lab2_clyf4t",
+    "age": "6",
+    "size": "large",
+    "about": "I like my coffee with some pumpkin spice creamer",
+    "hobbies": ["barking", "fetch", "swimming"]
   },
   {
-    "ownerName": "Lillian",
-    "email": "lil45@gmail.com",
-    "password": "Lillian3456!",
-    "dogName": "Sergeant",
+    "ownerName": "Andrew",
+    "email": "and45@gmail.com",
+    "password": "andrew32456!",
+    "dogName": "JJ",
     "breed": "German Shephard",
-    "image": "german-shephard4_g3pzfj",
-    "age": "4",
-    "size": "medium",
-    "about": "I will protect my children and my humans",
-    "hobbies": ["barking", "walks", "swimming"]
+    "image": "german-shephard3_bkwhyb",
+    "age": "8",
+    "size": "large",
+    "about": "I hike every day in the Appalachians",
+    "hobbies": ["barking", "fetch", "swimming"]
   },
   {
-    "ownerName": "Lillian",
-    "email": "lil45@gmail.com",
-    "password": "Lillian3456!",
-    "dogName": "Sergeant",
-    "breed": "German Shephard",
-    "image": "german-shephard4_g3pzfj",
-    "age": "4",
-    "size": "medium",
-    "about": "I will protect my children and my humans",
-    "hobbies": ["barking", "walks", "swimming"]
+    "ownerName": "Ava",
+    "email": "ava45@gmail.com",
+    "password": "Ava2346!",
+    "dogName": "BamBam",
+    "breed": "Lab",
+    "image": "lab4_qf1li0",
+    "age": "8",
+    "size": "large",
+    "about": "Tug of war is the name of the game",
+    "hobbies": ["fetch", "tug-of-war", "swimming"]
   },
   {
-    "ownerName": "Lillian",
-    "email": "lil45@gmail.com",
-    "password": "Lillian3456!",
-    "dogName": "Sergeant",
-    "breed": "German Shephard",
-    "image": "german-shephard4_g3pzfj",
-    "age": "4",
-    "size": "medium",
-    "about": "I will protect my children and my humans",
-    "hobbies": ["barking", "walks", "swimming"]
+    "ownerName": "Jordan",
+    "email": "jordan45@gmail.com",
+    "password": "Jordan3456!",
+    "dogName": "Sport",
+    "breed": "Lab",
+    "image": "lab3_lsvpwr",
+    "age": "1",
+    "size": "small",
+    "about": "I like cuddles and eating grass",
+    "hobbies": ["barking", "walks", "naps"]
   },
   {
-    "ownerName": "Lillian",
-    "email": "lil45@gmail.com",
-    "password": "Lillian3456!",
-    "dogName": "Sergeant",
+    "ownerName": "Erica",
+    "email": "erica45@gmail.com",
+    "password": "Erica3456!",
+    "dogName": "Blazer",
     "breed": "German Shephard",
-    "image": "german-shephard4_g3pzfj",
+    "image": "german-shephard2_bysydv",
     "age": "4",
+    "size": "large",
+    "about": "The inner mechinations of my mind are an enigmas",
+    "hobbies": ["barking", "fetch", "swimming"]
+  },
+  {
+    "ownerName": "Kevin",
+    "email": "kev45@gmail.com",
+    "password": "Kevy3456!",
+    "dogName": "King Pin",
+    "breed": "Lab",
+    "image": "2_w64tjt",
+    "age": "1",
+    "size": "small",
+    "about": "I will bite your toes",
+    "hobbies": ["barking", "fetch", "fighting"]
+  },
+  {
+    "ownerName": "Maddie",
+    "email": "maddie45@gmail.com",
+    "password": "Maddie34266!",
+    "dogName": "Rosey",
+    "breed": "Lab",
+    "image": "1_pbte95",
+    "age": "5",
     "size": "medium",
-    "about": "I will protect my children and my humans",
-    "hobbies": ["barking", "walks", "swimming"]
+    "about": "There is nobody sweeter than me",
+    "hobbies": ["cuddles", "naps", "walks"]
   }
 ]
 
