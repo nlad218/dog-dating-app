@@ -45,9 +45,11 @@ type Query {
 
 type Mutation {
   createUser(ownerName: String!, email: String!, password: String!): Auth
+  deleteUser(userId: ID!): User
   addLikeCheckAddMatch(otherId: ID!): User
   createMessage(messageText: String!, matchId: ID!): Message
   login(email: String!, password: String!): Auth
+  updateUser(ownerName: String!, newEmail: String!, newPassword: String!): User
 }
 `;
 

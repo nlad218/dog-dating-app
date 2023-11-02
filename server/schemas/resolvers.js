@@ -16,12 +16,9 @@ const resolvers = {
     },
     // // GET route: me, findOne
     me: async (parent, args, {user}) => {
-      return User.findById({ _id: user._id });
+      return User.findById({ _id: user._id }).populate('likes').populate('matches').populate('messages');
       },
-    // GET route: messages,
 
-    // GET route: matches, see all matches
-    //don't need this, this should be in the GET ME ROUTE (.populate matches)
     // Get route: match, find one specific match
     oneMatch: async (parent, { matchId }) => {
       return Match.findOne({ _id: matchId });
@@ -53,20 +50,21 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-  },
-
+  // LOGIN: login User
   login: async (parent, { email, password }) => {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({email});
     if (!user) {
       throw AuthenticationError;
     }
-    const pwAuth = await user.isCorrctPassword(password);
-
-    if (!pwAuth) {
+    const correctPw = await user.isCorrectPassword(password);
+    if (!correctPw) {
       throw AuthenticationError;
     }
+    const token = signToken(user);
+    return { token, user };
   },
 
+  // PUT: update user
   updateUser: async (
     parent,
     { userId, newOwnerName, newEmail, newPassword },
@@ -87,8 +85,6 @@ const resolvers = {
     }
     throw AuthenticationError;
   },
-
-  // // CREATE route: post a message
 
 // // PUT route: check if user already liked, then update user with new like, then check for match then create match
     addLikeCheckAddMatch: async (parent, {otherId}, {user}) => {
@@ -144,8 +140,8 @@ const resolvers = {
       console.log("Created new message and stored to Match")
       return updateMatch;
     }
-    },
+    }
+  }
 
-};
 
 module.exports = resolvers;
