@@ -40,58 +40,73 @@ const resolvers = {
       return { token, user };
     },
 
-    // DELETE route: delete user account 
+    // DELETE route: delete user account
     deleteUser: async (parent, { userId }, context) => {
       if (context.user) {
         const user = await User.findOneAndRemove({
           _id: userId,
           ownerName: context.user.ownerName,
         });
-  
+
         return { message: "Account deleted successfully." };
       }
-      throw new AuthenticationError('You must be logged in to delete your account');
+      throw AuthenticationError;
+    },
+  },
+
+  login: async (parent, { email, password }) => {
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw AuthenticationError;
+    }
+    const pwAuth = await user.isCorrctPassword(password);
+
+    if (!pwAuth) {
+      throw AuthenticationError;
     }
   },
-    // PUT route: update user account - Nick D
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
-      if (!user) {
-        throw AuthenticationError;
-      }
-      const pwAuth = await user.isCorrctPassword(password);
 
-      if (!pwAuth) {
-        throw AuthenticationError;
-      }
-    },
-
-  
-    // DELETE route: delete user account
-
-    // // PUT route: update user account
-
-    // // CREATE route: post a message
-
-    // // PUT route: update user account with an added friend
-    addLike: async (parent, { myId, otherId }) => {
-      const myProfile = await User.findOneAndUpdate(
-        { _id: myId },
-        { $push: { likes: otherId } },
+  updateUser: async (
+    parent,
+    { userId, newOwnerName, newEmail, newPassword },
+    context
+  ) => {
+    if (context.user) {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: userId, ownerName: context.user.ownerName },
+        { ownerName: newOwnerName, email: newEmail, password: newPassword },
         { new: true }
       );
-    },
 
-    // // CREATE route: match two users together
-    //   // isAMatch: async (parent, {myId, otherId}) => {
-    //   //   const myProfile = await User.findOne({_id: myId})
-    //   //   const myLikes = myProfile.likes
-
-    //   //   const otherProfile = await User.findOne({_id: otherId})
-    //   //   const otherLikes = otherProfile.likes
-
-    //   // }
+      if (updatedUser) {
+        return { message: "Account updated successfully.", user: updatedUser };
+      } else {
+        throw new UserInputError("Update failed.");
+      }
+    }
+    throw AuthenticationError;
   },
+
+  // // CREATE route: post a message
+
+  // // PUT route: update user account with an added friend
+  addLike: async (parent, { myId, otherId }) => {
+    const myProfile = await User.findOneAndUpdate(
+      { _id: myId },
+      { $push: { likes: otherId } },
+      { new: true }
+    );
+  },
+
+  // // CREATE route: match two users together
+  //   // isAMatch: async (parent, {myId, otherId}) => {
+  //   //   const myProfile = await User.findOne({_id: myId})
+  //   //   const myLikes = myProfile.likes
+
+  //   //   const otherProfile = await User.findOne({_id: otherId})
+  //   //   const otherLikes = otherProfile.likes
+
+  //   // }
 };
 
 module.exports = resolvers;
