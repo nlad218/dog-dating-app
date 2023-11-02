@@ -17,7 +17,7 @@ export default function Chat() {
   return (
     <div className="drawer md:drawer-open gap-4">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center min-h-full">
+      <div className="drawer-content flex flex-col items-center justify-start min-h-fit max-h-full">
         <ActiveConversation>
           <label
             htmlFor="my-drawer"
@@ -27,13 +27,13 @@ export default function Chat() {
           </label>
         </ActiveConversation>
       </div>
-      <div className="drawer-side z-50">
+      <div className="drawer-side max-md:z-50">
         <label
           htmlFor="my-drawer"
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="p-4 w-80 min-h-full bg-base-200 text-base-content rounded-r-xl md:rounded-l-xl">
+        <div className="p-4 w-80 max-md:min-h-full md:min-h-fit max-h-full bg-base-200 text-base-content rounded-r-xl md:rounded-l-xl md:shadow-xl">
           <ConversationList
             names={tempNameList}
             active={activeConversation}

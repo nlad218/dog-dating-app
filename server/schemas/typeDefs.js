@@ -40,6 +40,8 @@ type Query {
   oneMatch(matchId: ID!): Match
   getLikes(userId: ID!): User
   me: User
+  getRandomUsers: [User]
+  filterUsersByBreed: [User]
 
 }
 
