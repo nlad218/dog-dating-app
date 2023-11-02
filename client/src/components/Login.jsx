@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../utils/mutations";
+import Auth from "../utils/auth";
 
 export default function LoginModal({ isOpen, onClose }) {
   const [activeTab, setActiveTab] = useState("login");
@@ -24,9 +25,9 @@ export default function LoginModal({ isOpen, onClose }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(
-      `Initiated attempted login\nEmail: ${email}\nPass: ${password}`
-    );
+    // console.log(
+    //   `Initiated attempted login\nEmail: ${email}\nPass: ${password}`
+    // );
     try {
       const { data } = await login({
         variables: {
@@ -35,6 +36,7 @@ export default function LoginModal({ isOpen, onClose }) {
         },
       });
       console.info(data);
+      Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
     }
