@@ -77,12 +77,12 @@ export default function LoginModal({ isOpen, onClose }) {
 
 	return (
 		<div
-			className={`fixed inset-0 z-50 flex items-center justify-center overflow-auto ${
+			className={`fixed inset-0 z-50 flex items-center justify-center overflow-none ${
 				isOpen ? "block" : "hidden"
 			}`}
 		>
-			<div className="modal-container">
-				<div className="bg-primary w-96 rounded-lg shadow-lg p-4">
+			<div className="modal-container mx-2 sm:mx-0">
+				<div className="bg-primary w-full sm:w-96 rounded-lg shadow-lg p-4">
 					<div className="flex justify-between">
 						<button className="text-white-600 text-2xl" onClick={onClose}>
 							&times;
