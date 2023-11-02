@@ -14,6 +14,7 @@ export default function LoginModal({ isOpen, onClose }) {
 	const [name, setName] = useState("");
 	const [errorText, setErrorText] = useState(false);
 	const [dupeText, setDupeText] = useState(false);
+	const [invalidText, setInvalidText] = useState(false);
 
 	const passwordRegex =
 		/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -26,10 +27,14 @@ export default function LoginModal({ isOpen, onClose }) {
 		setName("");
 		setErrorText(false);
 		setDupeText(false);
+		setInvalidText(false);
 	};
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
+
+		setInvalidText(false);
+
 		try {
 			const { data } = await login({
 				variables: {
@@ -40,6 +45,7 @@ export default function LoginModal({ isOpen, onClose }) {
 			Auth.login(data.login.token);
 		} catch (err) {
 			console.error(err);
+			setInvalidText(true);
 		}
 	};
 
@@ -134,6 +140,13 @@ export default function LoginModal({ isOpen, onClose }) {
 					</div>
 					{activeTab === "login" && (
 						<div className="mt-4">
+							<h2
+								className={
+									invalidText === false ? "hidden" : "text-center text-red-700"
+								}
+							>
+								Invalid email or password!
+							</h2>
 							<form onSubmit={handleLogin}>
 								<div className="mb-4">
 									<label
@@ -185,7 +198,7 @@ export default function LoginModal({ isOpen, onClose }) {
 									errorText === false ? "hidden" : "text-center text-red-700"
 								}
 							>
-								Invalid email or password!
+								Password does not meet requirements!
 							</h2>
 							<h2
 								className={
