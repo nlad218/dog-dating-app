@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../utils/mutations";
 
 export default function LoginModal({ isOpen, onClose }) {
 	const [activeTab, setActiveTab] = useState("login");
+
+	const [login, { data, loading }] = useMutation(LOGIN);
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -18,8 +22,17 @@ export default function LoginModal({ isOpen, onClose }) {
 		setErrorText(false);
 	};
 
-	const handleLogin = (e) => {
+	const handleLogin = async (e) => {
 		e.preventDefault();
+		console.log("Hello");
+
+		const res = await login({
+			variables: {
+				email: email,
+				password: password,
+			},
+		});
+		console.log(res);
 	};
 
 	const handleSignUp = (e) => {
