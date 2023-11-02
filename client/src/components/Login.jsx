@@ -13,6 +13,7 @@ export default function LoginModal({ isOpen, onClose }) {
 	const [password, setPassword] = useState("");
 	const [name, setName] = useState("");
 	const [errorText, setErrorText] = useState(false);
+	const [dupeText, setDupeText] = useState(false);
 
 	const passwordRegex =
 		/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -24,6 +25,7 @@ export default function LoginModal({ isOpen, onClose }) {
 		setPassword("");
 		setName("");
 		setErrorText(false);
+		setDupeText(false);
 	};
 
 	const handleLogin = async (e) => {
@@ -44,6 +46,9 @@ export default function LoginModal({ isOpen, onClose }) {
 	const handleSignUp = async (e) => {
 		e.preventDefault();
 
+		setErrorText(false);
+		setDupeText(false);
+
 		if (passwordRegex.test(password) && emailRegex.test(email)) {
 			setErrorText(false);
 			try {
@@ -57,6 +62,7 @@ export default function LoginModal({ isOpen, onClose }) {
 				Auth.signUp(data.createUser.token);
 			} catch (err) {
 				console.error(err);
+				setDupeText(true);
 			}
 		} else {
 			setErrorText(true);
@@ -180,6 +186,13 @@ export default function LoginModal({ isOpen, onClose }) {
 								}
 							>
 								Invalid email or password!
+							</h2>
+							<h2
+								className={
+									dupeText === false ? "hidden" : "text-center text-red-700"
+								}
+							>
+								Email already in use!
 							</h2>
 							<form onSubmit={handleSignUp}>
 								<div className="mb-4">
