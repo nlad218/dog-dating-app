@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN, CREATE_USER } from "../utils/mutations";
+import Auth from "../utils/auth";
 
 export default function LoginModal({ isOpen, onClose }) {
 	const [login] = useMutation(LOGIN);
