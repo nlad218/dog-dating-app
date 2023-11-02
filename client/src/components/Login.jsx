@@ -1,10 +1,57 @@
 import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../utils/mutations";
 
 export default function LoginModal({ isOpen, onClose }) {
 	const [activeTab, setActiveTab] = useState("login");
 
+	const [login, { data, loading }] = useMutation(LOGIN);
+
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [errorText, setErrorText] = useState(false);
+
+	const passwordRegex =
+		/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+	const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
 	const handleTabClick = (tab) => {
 		setActiveTab(tab);
+		setEmail("");
+		setPassword("");
+		setErrorText(false);
+	};
+
+	const handleLogin = async (e) => {
+		e.preventDefault();
+		console.log("Hello");
+
+		const res = await login({
+			variables: {
+				email: email,
+				password: password,
+			},
+		});
+		console.log(res);
+	};
+
+	const handleSignUp = (e) => {
+		e.preventDefault();
+
+		if (passwordRegex.test(password) && emailRegex.test(email)) {
+			console.log("Signed up");
+			setErrorText(false);
+		} else {
+			setErrorText(true);
+		}
+	};
+
+	const handleEmailChange = (e) => {
+		setEmail(e.target.value);
+	};
+
+	const handlePasswordChange = (e) => {
+		setPassword(e.target.value);
 	};
 
 	return (
@@ -60,7 +107,7 @@ export default function LoginModal({ isOpen, onClose }) {
 					</div>
 					{activeTab === "login" && (
 						<div className="mt-4">
-							<form>
+							<form onSubmit={handleLogin}>
 								<div className="mb-4">
 									<label
 										className="block text-white-700 text-sm font-bold mb-2"
@@ -69,10 +116,12 @@ export default function LoginModal({ isOpen, onClose }) {
 										Email
 									</label>
 									<input
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										className="shadow appearance-none border rounded w-full py-2 px-3 text-white-700 leading-tight focus:outline-none focus:shadow-outline"
 										id="LoginEmail"
 										type="email"
 										placeholder="Email"
+										value={email}
+										onChange={handleEmailChange}
 									/>
 								</div>
 								<div className="mb-4">
@@ -83,15 +132,17 @@ export default function LoginModal({ isOpen, onClose }) {
 										Password
 									</label>
 									<input
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										className="shadow appearance-none border rounded w-full py-2 px-3 text-white-700 leading-tight focus:outline-none focus:shadow-outline"
 										id="LoginPassword"
 										type="password"
 										placeholder="Password"
+										value={password}
+										onChange={handlePasswordChange}
 									/>
 								</div>
 								<div className="flex items-center justify-center">
 									<button
-										className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+										className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded focus-outline-none focus-shadow-outline"
 										type="submit"
 									>
 										Log In
@@ -102,7 +153,14 @@ export default function LoginModal({ isOpen, onClose }) {
 					)}
 					{activeTab === "signup" && (
 						<div className="mt-4">
-							<form>
+							<h2
+								className={
+									errorText === false ? "hidden" : "text-center text-red-700"
+								}
+							>
+								Invalid email or password!
+							</h2>
+							<form onSubmit={handleSignUp}>
 								<div className="mb-4">
 									<label
 										className="block text-white-700 text-sm font-bold mb-2"
@@ -115,6 +173,8 @@ export default function LoginModal({ isOpen, onClose }) {
 										id="SignUpEmail"
 										type="email"
 										placeholder="Email"
+										value={email}
+										onChange={handleEmailChange}
 									/>
 								</div>
 								<div className="mb-4">
@@ -148,6 +208,8 @@ export default function LoginModal({ isOpen, onClose }) {
 										id="SignUpPassword"
 										type="password"
 										placeholder="Password"
+										value={password}
+										onChange={handlePasswordChange}
 									/>
 								</div>
 								<div className="flex items-center justify-center">
