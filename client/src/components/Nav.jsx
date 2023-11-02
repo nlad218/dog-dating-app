@@ -14,10 +14,6 @@ export default function Nav() {
 			name: "Profile",
 			path: "/profile",
 		},
-		{
-			name: "ExImgUpload",
-			path: "/imgupload",
-		},
 	];
 	return (
 		<nav className="flex flex-row justify-around gap-4 w-full text-2xl font-semibold">
