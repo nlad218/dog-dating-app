@@ -21,22 +21,19 @@ const resolvers = {
     // GET route: messages,
 
     // GET route: matches, see all matches
-        //don't need this, this should be in the GET ME ROUTE (.populate matches)
-    // Get route: match, find one specific match 
-    oneMatch: async(parent, {matchId}) => {
-      return Match.findOne({_id: matchId})
+    //don't need this, this should be in the GET ME ROUTE (.populate matches)
+    // Get route: match, find one specific match
+    oneMatch: async (parent, { matchId }) => {
+      return Match.findOne({ _id: matchId });
     },
     // // GET route: purpose - find selected user's likes and return them
-    getLikes: async(parent, {userId}) => {
-      const userInfo = await User.findOne({_id: userId}); 
-      console.log(userInfo)
+    getLikes: async (parent, { userId }) => {
+      const userInfo = await User.findOne({ _id: userId });
+      console.log(userInfo);
       //const likesArray = userInfo.likes
-    }
-
+    },
   },
   Mutation: {
-    // CREATE route: handles login
-
     // CREATE route: create user account - Maya
     createUser: async (parent, { ownerName, email, password }) => {
       const user = await User.create({ ownerName, email, password });
@@ -44,26 +41,54 @@ const resolvers = {
       return { token, user };
     },
 
-    // DELETE route: delete user account - Maya
+    // DELETE route: delete user account
+    deleteUser: async (parent, { userId }, context) => {
+      if (context.user) {
+        const user = await User.findOneAndRemove({
+          _id: userId,
+          ownerName: context.user.ownerName,
+        });
 
-    // PUT route: update user account - Nick D
-      login: async (parent, { email, password }) => {
-        const user = await User.findOne({email});
-        if (!user) {
-          throw AuthenticationError;
-        }
-        const correctPw = await user.isCorrectPassword(password);
-        if (!correctPw) {
-          throw AuthenticationError;
-        }
-        const token = signToken(user);
-        return { token, user };
-      },
-// DELETE route: delete user account
+        return { message: "Account deleted successfully." };
+      }
+      throw AuthenticationError;
+    },
+  },
 
-// // PUT route: update user account 
+  login: async (parent, { email, password }) => {
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw AuthenticationError;
+    }
+    const pwAuth = await user.isCorrctPassword(password);
 
-// // CREATE route: post a message 
+    if (!pwAuth) {
+      throw AuthenticationError;
+    }
+  },
+
+  updateUser: async (
+    parent,
+    { userId, newOwnerName, newEmail, newPassword },
+    context
+  ) => {
+    if (context.user) {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: userId, ownerName: context.user.ownerName },
+        { ownerName: newOwnerName, email: newEmail, password: newPassword },
+        { new: true }
+      );
+
+      if (updatedUser) {
+        return { message: "Account updated successfully.", user: updatedUser };
+      } else {
+        throw new UserInputError("Update failed.");
+      }
+    }
+    throw AuthenticationError;
+  },
+
+  // // CREATE route: post a message
 
 // // PUT route: check if user already liked, then update user with new like, then check for match then create match
     addLikeCheckAddMatch: async (parent, {otherId}, {user}) => {
