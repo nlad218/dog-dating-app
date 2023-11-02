@@ -8,6 +8,7 @@ import LandingPage from "./pages/Home";
 import Main from "./pages/Main";
 import Chat from "./pages/Chat";
 import Profile from "./pages/Profile";
+import ExImgUpload from "./pages/ExImgUpload.jsx"
 
 const router = createBrowserRouter([
 	{
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
 				path: "/profile",
 				element: <Profile />,
 			},
+			{
+				path: '/imgupload',
+				element: <ExImgUpload />
+			}
 		],
 	},
 ]);

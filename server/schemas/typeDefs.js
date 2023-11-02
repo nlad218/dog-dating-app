@@ -17,14 +17,14 @@ type User {
 
 type Match {
   _id: ID
-user1: [User]
-user2: [User]
+user1: User
+user2: User
 messages: [Message]
 }
 
 type Message {
   _id: ID
-  user: [User]
+  user: User
   createdAt: String
   messageText: String
 }
@@ -35,19 +35,21 @@ type Auth {
 }
 
 type Query {
-    user(userId: ID!): User
-    oneMatch(matchId: ID!): Match
-    getLikes(userId: ID!): User
+  users: [User]
+  user(userId: ID!): User
+  oneMatch(matchId: ID!): Match
+  getLikes(userId: ID!): User
+  me: User
 
 }
 
 type Mutation {
   createUser(ownerName: String!, email: String!, password: String!): Auth
-  login(): 
-  createUser: 
-  deleteUser:
-  updateUser:
-  addLike(myId: ID!, otherId: ID!): User
+  deleteUser(userId: ID!): User
+  addLikeCheckAddMatch(otherId: ID!): User
+  createMessage(messageText: String!, matchId: ID!): Message
+  login(email: String!, password: String!): Auth
+  updateUser(ownerName: String!, newEmail: String!, newPassword: String!): User
 }
 `;
 
