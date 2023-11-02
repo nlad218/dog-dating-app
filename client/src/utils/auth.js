@@ -23,6 +23,12 @@ class AuthService {
 		return localStorage.getItem("id_token");
 	}
 
+	getStatus() {
+		if (localStorage.getItem("id_token")) {
+			return true;
+		} else return false;
+	}
+
 	login(idToken) {
 		localStorage.setItem("id_token", idToken);
 		window.location.assign("/");
