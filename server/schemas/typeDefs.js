@@ -51,7 +51,7 @@ type Mutation {
 
 addToLikes(otherId: ID!): User
 createMatch(otherId: ID!): User
-
+  addLikeCheckAddMatch(otherId: ID!): User
   createMessage(messageText: String!, matchId: ID!): Message
   login(email: String!, password: String!): Auth
   updateUser(ownerName: String!, newEmail: String!, newPassword: String!): User
