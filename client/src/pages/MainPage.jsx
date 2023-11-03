@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { useQuery } from "@apollo/client";
-import React, { useState } from "react";
 import { QUERY_DISPLAYABLE_USERS } from "../utils/queries";
 
 export default function MainPage() {
 	const [index, setIndex] = useState(0);
+	const [showDetails, setShowDetails] = useState(false);
 
 	const { loading, data, error } = useQuery(QUERY_DISPLAYABLE_USERS);
 
@@ -18,15 +19,15 @@ export default function MainPage() {
 
 	const profiles = data.getRandomUsers;
 
+	const leftSwipe = () => {
+		setIndex(
+			(prevIndex) => (prevIndex + 1 + profiles.length) % profiles.length
+		);
+	};
+
 	const rightSwipe = () => {
 		setIndex((prevIndex) => (prevIndex + 1) % profiles.length);
 	};
-
-	const leftSwipe = () => {
-		setIndex((prevIndex) => (prevIndex + 1) % profiles.length);
-	};
-
-	const [showDetails, setShowDetails] = useState(false);
 
 	const toggleDetails = () => {
 		setShowDetails(!showDetails);
