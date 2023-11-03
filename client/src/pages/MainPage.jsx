@@ -38,20 +38,16 @@ export default function MainPage() {
             {profiles[0].gender} {profiles[0].breed}
           </h3>
           <div className="mt-3">
-            {/* <input type="checkbox" />
-            <div className="collapse-title text-white text-sm font-medium p-0"> */}
             <button
               onClick={toggleDetails}
               className="md:hidden text-white text-sm font-medium p-0 cursor-pointer"
             >
               More Details
             </button>
-            {/* <div className="collapse-content p-0"> */}
             <div className={`md:block ${showDetails ? "block" : "hidden"}`}>
               <h4 className="text-white mb-2">Size: {profiles[0].size}</h4>
               <h4 className="text-white mb-2">Bio: {profiles[0].about}</h4>
               <h4 className="text-white mb-2">Hobbies: {profiles[0].hobbies}</h4>
-              {/* </div> */}
             </div>
           </div>
           <div className=" mt-3 card-actions justify-between">
