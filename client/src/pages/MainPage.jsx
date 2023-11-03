@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_DISPLAYABLE_USERS } from "../utils/queries";
+import { ADD_TO_LIKES, CREATE_MATCH } from "../utils/mutations";
+import Auth from "../utils/auth";
 
 export default function MainPage() {
 	const [index, setIndex] = useState(0);
 	const [showDetails, setShowDetails] = useState(false);
+
+	const [addToLikes] = useMutation(ADD_TO_LIKES);
+	const [createMatch] = useMutation(CREATE_MATCH);
 
 	const { loading, data, error } = useQuery(QUERY_DISPLAYABLE_USERS);
 
@@ -26,6 +31,19 @@ export default function MainPage() {
 	};
 
 	const rightSwipe = () => {
+		addToLikes({
+			variables: { otherId: profiles[index]._id },
+		});
+
+		for (let i = 0; i < profiles[index].likes.length; i++) {
+			if (profiles[index].likes[i]._id == Auth.getProfile().data._id) {
+				console.log("match");
+				createMatch({
+					variables: { otherId: profiles[index]._id },
+				});
+			}
+		}
+
 		setIndex((prevIndex) => (prevIndex + 1) % profiles.length);
 	};
 
