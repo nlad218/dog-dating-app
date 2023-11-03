@@ -26,9 +26,15 @@ export default function MainPage() {
 		setIndex((prevIndex) => (prevIndex + 1) % profiles.length);
 	};
 
+	const [showDetails, setShowDetails] = useState(false);
+
+	const toggleDetails = () => {
+		setShowDetails(!showDetails);
+	};
+
 	return (
-		<div className="flex m-2">
-			<div className="card w-96 shadow-xl bg-primary">
+		<div className="flex items-center my-10">
+			<div className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10">
 				<figure>
 					<img
 						src={profiles[index].image}
@@ -38,20 +44,22 @@ export default function MainPage() {
 				</figure>
 				<div className="card-body">
 					<h2 className="card-title text-white text-4xl">
-						{profiles[index].dogName} - {profiles[index].age}
+						{profiles[index].dogName} - {profiles[index].age} yrs
 					</h2>
 					<h3 className="card-subtitle text-white">
 						{profiles[index].gender} {profiles[index].breed}
 					</h3>
-					<div className="collapse bg-primary mt-3" style={{ width: "50%" }}>
-						<input type="checkbox" />
-						<div className="collapse-title text-white text-sm font-medium p-0">
+					<div className="mt-3">
+						<button
+							onClick={toggleDetails}
+							className="md:hidden text-white text-sm font-medium p-0 cursor-pointer"
+						>
 							More Details
-						</div>
-						<div className="collapse-content p-0">
+						</button>
+						<div className={`md:block ${showDetails ? "block" : "hidden"}`}>
 							<h4 className="text-white mb-2">Size: {profiles[index].size}</h4>
 							<h4 className="text-white mb-2">Bio: {profiles[index].about}</h4>
-							<h4 className="text-white">
+							<h4 className="text-white mb-2">
 								Hobbies:
 								<ul>
 									{profiles[index].hobbies.map((hobby, index) => (
