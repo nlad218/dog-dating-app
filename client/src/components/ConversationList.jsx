@@ -9,20 +9,21 @@ export default function ConversationList({ active, set }) {
   if (loading) return "loading...";
   if (error) return `Error! ${error.message}`;
 
-  const matches = data.me.matches.map(({ _id, user1, user2 }) => {
-    const selfId = Auth.getProfile();
-    let dogName, ownerName;
-    if (user1.id === selfId) {
-      dogName = user2.dogName;
-      ownerName = user2.ownerName;
-    } else if (user2.id === selfId) {
-      dogName = user1.dogName;
-      ownerName = user1.ownerName;
-    } else {
-      throw new Error("Neither user in match is the current user");
-    }
-    return { _id, dogName, ownerName };
-  });
+  const matches =
+    data?.me.matches.map(({ _id, user1, user2 }) => {
+      const selfId = Auth.getProfile();
+      let dogName, ownerName;
+      if (user1.id === selfId) {
+        dogName = user2.dogName;
+        ownerName = user2.ownerName;
+      } else if (user2.id === selfId) {
+        dogName = user1.dogName;
+        ownerName = user1.ownerName;
+      } else {
+        throw new Error("Neither user in match is the current user");
+      }
+      return { _id, dogName, ownerName };
+    }) || [];
 
   if (matches.length < 1) return <div>No matches yet!</div>;
 
