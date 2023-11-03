@@ -80,6 +80,30 @@ const resolvers = {
     },
   },
   Mutation: {
+    addToLikes: async (parent, {otherId}, {user}) => {
+      //if not already liked, update user profile
+      const updateMyProfile = await User.findOneAndUpdate(
+        { _id: user._id },
+        { $push: { likes: otherId } },
+        { new: true }
+      ).populate("likes");
+      console.log("Added user to your likes list");
+    },
+    createMatch: async (parent, {otherId}, {user}) => {
+      const newMatch = await Match.create({
+        user1: user._id.toString(),
+        user2: otherId.toString(),
+      });
+      await User.findOneAndUpdate(
+        { _id: user._id },
+        { $push: { matches: newMatch._id } }
+      );
+      await User.findOneAndUpdate(
+        { _id: otherId },
+        { $push: { matches: newMatch._id } }
+      );
+      return newMatch
+    },
     // CREATE route: create user account - Maya
     createUser: async (parent, { ownerName, email, password }) => {
       const user = await User.create({ ownerName, email, password });

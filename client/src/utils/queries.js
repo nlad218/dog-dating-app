@@ -16,7 +16,7 @@ export const QUERY_SELF_PROFILE = gql`
     }
   }
 `;
-
+//Matches for ConversationList.jsx
 export const QUERY_SELF_MATCHES = gql`
   query selfMatches {
     me {
@@ -32,7 +32,21 @@ export const QUERY_SELF_MATCHES = gql`
     }
   }
 `;
-
+//Display Conversation for a Single Match
+export const QUERY_CURRENT_MATCH_CONVO = gql`
+query CurrentMatchConvo($matchId: ID!) {
+  oneMatch(matchId: $matchId) {
+    messages {
+      _id
+      createdAt
+      messageText
+      user {
+        _id
+      }
+    }
+  }
+}
+  `;
 export const QUERY_MATCH_MESSAGES = gql`
   query matchMessages($matchId: ID!) {
     oneMatch(matchId: $matchID) {
