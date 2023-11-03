@@ -48,7 +48,8 @@ type Query {
 type Mutation {
   createUser(ownerName: String!, email: String!, password: String!): Auth
   deleteUser(userId: ID!): User
-
+  addToLikes(otherId: ID!): User
+  createMatch(otherId: ID!):User
 addToLikes(otherId: ID!): User
 createMatch(otherId: ID!): User
   addLikeCheckAddMatch(otherId: ID!): User
