@@ -26,7 +26,7 @@ const resolvers = {
         console.log(user);
         return User.findById({ _id: user._id })
           .populate("hobbies")
-          .populate("matches");
+          .populate("matches")
       }
       throw new AuthenticationError
     },
