@@ -3,7 +3,7 @@ import { QUERY_SELF_MATCHES } from "../utils/queries";
 import Auth from "../utils/auth";
 import { useEffect } from "react";
 
-export default function ConversationList({ active, set }) {
+export default function ConversationList({ active, setActive }) {
   const { data, loading, error } = useQuery(QUERY_SELF_MATCHES);
 
   if (loading) return "loading...";
@@ -27,9 +27,7 @@ export default function ConversationList({ active, set }) {
 
   if (matches.length < 1) return <div>No matches yet!</div>;
 
-  useEffect(() => {
-    set(matches[0]._id);
-  }, []);
+  setActive(matches[0]._id);
 
   return (
     <ul className="menu">
