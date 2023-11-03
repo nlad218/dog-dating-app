@@ -36,7 +36,7 @@ export default function Chat() {
         <div className="p-4 w-80 max-md:min-h-full md:min-h-fit max-h-full bg-base-200 text-base-content rounded-r-xl md:rounded-l-xl md:shadow-xl">
           <ConversationList
             active={activeConversation}
-            set={setActiveConversation}
+            setActive={setActiveConversation}
           />
         </div>
       </div>

@@ -11,6 +11,9 @@ export default function ActiveConversation({ active, children }) {
     },
   });
 
+  if (loading) return "loading...";
+  if (err) return `Error! ${err}`;
+
   const selfId = Auth.getProfile()._id;
   const messages =
     data?.messages.map((message) => {
@@ -27,9 +30,6 @@ export default function ActiveConversation({ active, children }) {
     // USE MUTATION TO ADD A MESSAGE TO THE CONVERSATION
     setNewMessage("");
   }
-
-  if (loading) return "loading...";
-  if (err) return `Error! ${err}`;
 
   return (
     <div className="w-full min-h-fit rounded-xl bg-base-200 shadow-xl">
