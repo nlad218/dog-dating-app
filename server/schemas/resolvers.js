@@ -57,7 +57,6 @@ const resolvers = {
 				const temp = allUsers[i];
 				allUsers[i] = allUsers[j];
 				allUsers[j] = temp;
-				console.log(allUsers);
 			}
 			return allUsers;
 		},
