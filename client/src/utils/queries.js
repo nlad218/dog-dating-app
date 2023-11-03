@@ -24,29 +24,33 @@ export const QUERY_SELF_MATCHES = gql`
         _id
         user1 {
           _id
+          ownerName
+          dogName
         }
         user2 {
           _id
+          ownerName
+          dogName
         }
       }
     }
   }
 `;
-//Display Conversation for a Single Match
-export const QUERY_CURRENT_MATCH_CONVO = gql`
-query CurrentMatchConvo($matchId: ID!) {
-  oneMatch(matchId: $matchId) {
-    messages {
-      _id
-      createdAt
-      messageText
-      user {
-        _id
-      }
-    }
-  }
-}
-  `;
+// //Display Conversation for a Single Match
+// export const QUERY_CURRENT_MATCH_CONVO = gql`
+//   query CurrentMatchConvo($matchId: ID!) {
+//     oneMatch(matchId: $matchId) {
+//       messages {
+//         _id
+//         createdAt
+//         messageText
+//         user {
+//           _id
+//         }
+//       }
+//     }
+//   }
+// `;
 export const QUERY_MATCH_MESSAGES = gql`
   query matchMessages($matchId: ID!) {
     oneMatch(matchId: $matchID) {
@@ -57,9 +61,11 @@ export const QUERY_MATCH_MESSAGES = gql`
         _id
       }
       messages {
-        user{
+        _id
+        createdAt
+        user {
           _id
-        } 
+        }
         messageText
       }
     }
