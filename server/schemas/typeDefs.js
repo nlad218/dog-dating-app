@@ -49,12 +49,11 @@ type Mutation {
   createUser(ownerName: String!, email: String!, password: String!): Auth
   deleteUser(userId: ID!): User
   addToLikes(otherId: ID!): User
-  createMatch(otherId: ID!):User
-addToLikes(otherId: ID!): User
-createMatch(otherId: ID!): User
+  createMatch(otherId: ID!): User
   addLikeCheckAddMatch(otherId: ID!): User
   createMessage(messageText: String!, matchId: ID!): Message
   login(email: String!, password: String!): Auth
+  logout: String
   updateUser(ownerName: String!, newEmail: String!, newPassword: String!): User
 }
 `;
