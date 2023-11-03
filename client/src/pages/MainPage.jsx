@@ -18,6 +18,14 @@ export default function MainPage() {
 
 	const profiles = data.getRandomUsers;
 
+	const rightSwipe = () => {
+		setIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+	};
+
+	const leftSwipe = () => {
+		setIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+	};
+
 	return (
 		<div className="flex m-2">
 			<div className="card w-96 shadow-xl bg-primary">
@@ -56,13 +64,14 @@ export default function MainPage() {
 						</div>
 					</div>
 					<div className=" mt-3 card-actions justify-between">
-						<button className="btn btn-circle">
+						<button id="left" className="btn btn-circle">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-6 w-6"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="red"
+								onClick={leftSwipe}
 							>
 								<path
 									strokeLinecap="round"
@@ -72,7 +81,7 @@ export default function MainPage() {
 								/>
 							</svg>
 						</button>
-						<button className="btn btn-circle">
+						<button id="right" className="btn btn-circle">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								fill="none"
@@ -80,6 +89,7 @@ export default function MainPage() {
 								strokeWidth="1.5"
 								stroke="green"
 								className="w-6 h-6"
+								onClick={rightSwipe}
 							>
 								<path
 									strokeLinecap="round"
