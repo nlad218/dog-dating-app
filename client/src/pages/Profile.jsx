@@ -16,27 +16,27 @@ export default function Profile() {
   const [imageId, setImageId] = useState("eimq5aiwwim0kdjdztmg");
   // Create a Cloudinary instance and set your cloud name.
   const cld = new Cloudinary({
-	  cloud: {
-		  cloudName: "dkxtk2v4z",
-	  },
+    cloud: {
+      cloudName: "dkxtk2v4z",
+    },
   });
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
   useEffect(() => {
-	  cloudinaryRef.current = window.cloudinary;
-	  // console.log(cloudinaryRef.current);
-	  widgetRef.current = cloudinaryRef.current.createUploadWidget(
-		  {
-			  cloudName: "dkxtk2v4z",
-			  uploadPreset: "dogprofile_test",
-		  },
-		  function (error, result) {
-			  console.log(result.info.public_id);
-			  if (result.info.public_id) {
-				  setImageId(result.info.public_id);
-			  }
-		  }
-	  );
+    cloudinaryRef.current = window.cloudinary;
+    // console.log(cloudinaryRef.current);
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: "dkxtk2v4z",
+        uploadPreset: "dogprofile_test",
+      },
+      function (error, result) {
+        console.log(result.info.public_id);
+        if (result.info.public_id) {
+          setImageId(result.info.public_id);
+        }
+      }
+    );
   });
 
   // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
@@ -63,13 +63,13 @@ export default function Profile() {
         <h3>{userData.size}</h3>
         <h3>{userData.about}</h3>
         <h3>{userData.dogName}</h3>
-		<button
-				onClick={() => widgetRef.current.open()}
-				className="border-8 border-red-400 block"
-			>
-				Click Here to Upload Image
-			</button>
-			<AdvancedImage cldImg={myImage} className="block" />
+        <button
+          onClick={() => widgetRef.current.open()}
+          className="border-8 border-red-400 block"
+        >
+          Click Here to Upload Image
+        </button>
+        <AdvancedImage cldImg={myImage} className="block" />
       </div>
     </div>
   );
