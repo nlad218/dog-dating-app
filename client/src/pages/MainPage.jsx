@@ -21,7 +21,7 @@ export default function MainPage() {
   };
 
   return (
-    <div className="flex m-2">
+    <div className="flex items-center mt-10">
       <div className="card w-96 shadow-xl bg-primary">
         <figure>
           <img
