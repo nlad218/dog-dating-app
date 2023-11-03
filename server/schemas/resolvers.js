@@ -1,6 +1,6 @@
 const { User, Match, Message } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
-
+const bcrypt = require("bcrypt");
 
 const resolvers = {
   Query: {
@@ -25,16 +25,22 @@ const resolvers = {
     me: async (parent, args, { user }) => {
       if (user) {
         console.log(user);
-        return User.findById({ _id: user._id })
+        return await User.findById({ _id: user._id })
           .populate("hobbies")
-          .populate("matches")
+          .populate({
+            path: "matches",
+            populate: [{ path: "user1" }, { path: "user2" }],
+          });
       }
-      throw new AuthenticationError
+      throw new AuthenticationError();
     },
 
     // Get route: match, find one specific match
     oneMatch: async (parent, { matchId }) => {
-      return Match.findOne({ _id: matchId }).populate("messages");
+      return Match.findOne({ _id: matchId })
+        .populate("user1")
+        .populate("user2")
+        .populate("messages");
     },
 
     // // GET route: purpose - find selected user's likes and return them
@@ -81,7 +87,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    addToLikes: async (parent, {otherId}, {user}) => {
+    addToLikes: async (parent, { otherId }, { user }) => {
       //if not already liked, update user profile
       const updateMyProfile = await User.findOneAndUpdate(
         { _id: user._id },
@@ -90,7 +96,7 @@ const resolvers = {
       ).populate("likes");
       console.log("Added user to your likes list");
     },
-    createMatch: async (parent, {otherId}, {user}) => {
+    createMatch: async (parent, { otherId }, { user }) => {
       const newMatch = await Match.create({
         user1: user._id.toString(),
         user2: otherId.toString(),
@@ -103,7 +109,7 @@ const resolvers = {
         { _id: otherId },
         { $push: { matches: newMatch._id } }
       );
-      return newMatch
+      return newMatch;
     },
     // CREATE route: create user account - Maya
     createUser: async (parent, { ownerName, email, password }) => {
@@ -141,27 +147,32 @@ const resolvers = {
     // PUT: update user
     updateUser: async (
       parent,
-      { userId, newOwnerName, newEmail, newPassword },
+      args,
       context
     ) => {
       if (context.user) {
+        const updateInfo = {...args}
+        if(updateInfo.password) {
+          const saltRounds = 10;
+          updateInfo.password = await bcrypt.hash(updateInfo.password, saltRounds)
+        }
         const updatedUser = await User.findOneAndUpdate(
-          { _id: userId, ownerName: context.user.ownerName },
-          { ownerName: newOwnerName, email: newEmail, password: newPassword },
+          { _id: context.user._id, ownerName: context.user.ownerName },
+          { ...updateInfo },
           { new: true }
         );
+				if (updatedUser) {
+					return {
+						message: "Account updated successfully.",
+						user: updatedUser,
+					};
+				} else {
+					throw new UserInputError("Update failed.");
+				}
+			}
+			throw AuthenticationError;
+		},
 
-        if (updatedUser) {
-          return {
-            message: "Account updated successfully.",
-            user: updatedUser,
-          };
-        } else {
-          throw new UserInputError("Update failed.");
-        }
-      }
-      throw AuthenticationError;
-    },
 
     // // PUT route: check if user already liked, then update user with new like, then check for match then create match
     addLikeCheckAddMatch: async (parent, { otherId }, { user }) => {

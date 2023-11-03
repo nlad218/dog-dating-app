@@ -1,41 +1,53 @@
 import { useState } from "react";
+import { QUERY_MATCH_MESSAGES } from "../utils/queries";
+import { useQuery } from "@apollo/client";
+import Auth from "../utils/auth";
 
-export default function ActiveConversation(props) {
+export default function ActiveConversation({ active, children }) {
   const [newMessage, setNewMessage] = useState("");
+  //TODO: This is returning a 400 bad request and I don't know why at all.
+  const { data, loading, err } = useQuery(QUERY_MATCH_MESSAGES, {
+    variables: {
+      matchId: active,
+    },
+  });
 
-  const messages = [
-    { sender: false, content: "Hello there!" },
-    { sender: true, content: "Hello there!" },
-    { sender: false, content: "Hello there!" },
-    { sender: true, content: "Hello there!" },
-    { sender: false, content: "Hello there!" },
-  ];
+  if (active == "") return "Select a conversation...";
+
+  if (loading) return "loading...";
+  if (err) return `Error! ${err}`;
+
+  const selfId = Auth.getProfile()._id;
+  const messages = data?.messages || [];
 
   function handleSendMessage(event) {
     event.preventDefault();
+    // USE MUTATION TO ADD A MESSAGE TO THE CONVERSATION
     setNewMessage("");
   }
 
   return (
     <div className="w-full min-h-fit rounded-xl bg-base-200 shadow-xl">
       <div className="text-2xl bg-primary text-primary-content font-semibold rounded-t-xl flex flex-row gap-4">
-        <div className="p-2">{props.children}</div>
-        <h1 className="p-2">(NAME)</h1>
+        <div className="p-2">{children}</div>
+        <h1 className="p-2">Stranger</h1>
       </div>
       <div className="text-lg lg:text-2xl py-4">
-        {messages.map((message, index) => (
+        {messages.map((message) => (
           <div
-            className={message.sender ? "chat chat-end" : "chat chat-start"}
-            key={index}
+            className={
+              message.user._id === selfId ? "chat chat-end" : "chat chat-start"
+            }
+            key={message._id}
           >
             <div
               className={
-                message.sender
+                message.user._id === selfId
                   ? "chat-bubble chat-bubble-primary"
                   : "chat-bubble"
               }
             >
-              {message.content}
+              {message.messageText}
             </div>
           </div>
         ))}

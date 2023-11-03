@@ -24,61 +24,71 @@ export const QUERY_SELF_MATCHES = gql`
         _id
         user1 {
           _id
+          ownerName
+          dogName
         }
         user2 {
           _id
+          ownerName
+          dogName
         }
       }
     }
   }
 `;
-//Display Conversation for a Single Match
-export const QUERY_CURRENT_MATCH_CONVO = gql`
-query CurrentMatchConvo($matchId: ID!) {
-  oneMatch(matchId: $matchId) {
-    messages {
-      _id
-      createdAt
-      messageText
-      user {
-        _id
-      }
-    }
-  }
-}
-  `;
+// //Display Conversation for a Single Match
+// export const QUERY_CURRENT_MATCH_CONVO = gql`
+//   query CurrentMatchConvo($matchId: ID!) {
+//     oneMatch(matchId: $matchId) {
+//       messages {
+//         _id
+//         createdAt
+//         messageText
+//         user {
+//           _id
+//         }
+//       }
+//     }
+//   }
+// `;
 export const QUERY_MATCH_MESSAGES = gql`
-  query matchMessages($matchId: ID!) {
-    oneMatch(matchId: $matchID) {
+  query OneMatch($matchId: ID!) {
+    oneMatch(matchId: $matchId) {
       user1 {
         _id
+        dogName
+        ownerName
       }
       user2 {
         _id
+        dogName
+        ownerName
       }
       messages {
-        user{
+        user {
           _id
-        } 
+        }
         messageText
+        createdAt
       }
     }
   }
 `;
 
 export const QUERY_DISPLAYABLE_USERS = gql`
-  query showableUsers {
+  query displayableUsers {
     getRandomUsers {
       _id
-      ownerName
-      dogName
-      image
-      breed
-      age
-      size
       about
+      age
+      breed
+      size
+      dogName
       hobbies
-      likes
+      image
+      likes {
+        _id
+      }
     }
   }
 `;
