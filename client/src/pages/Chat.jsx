@@ -11,7 +11,7 @@ export default function Chat() {
   // - Keep track of the active conversation
   const [activeConversation, setActiveConversation] = useState("");
   const loggedIn = Auth.loggedIn();
-
+  
   return (
     <div className="drawer md:drawer-open gap-4">
       {!loggedIn && window.location.assign("/")}

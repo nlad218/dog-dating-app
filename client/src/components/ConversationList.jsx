@@ -6,9 +6,6 @@ import { useEffect } from "react";
 export default function ConversationList({ active, set }) {
   const { data, loading, error } = useQuery(QUERY_SELF_MATCHES);
 
-  if (loading) return "loading...";
-  if (error) return `Error! ${error.message}`;
-
   const matches =
     data?.me.matches.map(({ _id, user1, user2 }) => {
       const selfId = Auth.getProfile()._id;
@@ -24,26 +21,30 @@ export default function ConversationList({ active, set }) {
       }
       return { _id, dogName, ownerName };
     }) || [];
-
+    // useEffect(() => {
+      set(matches[0]?._id);
+    // }, []);
   if (matches.length < 1) return <div>No matches yet!</div>;
 
-  useEffect(() => {
-    set(matches[0]._id);
-  }, []);
-
+  console.log(matches)
+  console.log(matches[0]._id)
+  console.log(matches[0].dogName)
+  console.log(active)
+  if (loading) return "loading...";
+  if (error) return `Error! ${error.message}`;
   return (
     <ul className="menu">
-      {matches.map(({ id: _id, dogName, ownerName }) => (
-        <li key={id} onClick={() => set(id)}>
+      {matches.map((match) => (
+        <li key={match._id} onClick={() => set(id)}>
           <div
             className={
-              id == active
+              match._id == active
                 ? "items-start flex flex-col active"
                 : "items-start flex flex-col"
             }
           >
             <div className="text-xl font-semibold">
-              {dogName} and {ownerName}
+              {match.dogName} and {match.ownerName}
             </div>
             {/* <div>This is an example message</div> */}
           </div>
