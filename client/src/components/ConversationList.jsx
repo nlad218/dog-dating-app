@@ -6,8 +6,6 @@ import { useEffect } from "react";
 export default function ConversationList({ active, setActive }) {
   const { data, loading, error } = useQuery(QUERY_SELF_MATCHES);
 
-  console.debug(Auth.getProfile());
-
   const matches =
     data?.me.matches.map(({ _id, user1, user2 }) => {
       const matchId = _id;
@@ -25,10 +23,6 @@ export default function ConversationList({ active, setActive }) {
       return { matchId, dogName, ownerName };
     }) || [];
 
-  // useEffect(() => {
-  //   if (active setActive(matches[0]?._id);
-  // }, []);
-
   if (loading) return "loading...";
   if (error) return `Error! ${error.message}`;
   if (matches.length < 1) return <div>No matches yet!</div>;
@@ -36,7 +30,13 @@ export default function ConversationList({ active, setActive }) {
   return (
     <ul className="menu">
       {matches.map(({ matchId, dogName, ownerName }) => (
-        <li key={matchId} onClick={() => setActive(matchId)}>
+        <li
+          key={matchId}
+          onClick={(event) => {
+            event.preventDefault();
+            setActive(matchId);
+          }}
+        >
           <div
             className={
               matchId == active
@@ -45,7 +45,7 @@ export default function ConversationList({ active, setActive }) {
             }
           >
             <div className="text-xl font-semibold">
-              {dogName} and {ownerName}
+              {ownerName} and {dogName}
             </div>
             {/* <div>This is an example message</div> */}
           </div>

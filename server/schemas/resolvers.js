@@ -1,52 +1,53 @@
 const { User, Match, Message } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
+const bcrypt = require("bcrypt");
 
 const resolvers = {
-  Query: {
-    // GET route: user, findOne
-    user: async (parent, { userId }) => {
-      const singleUser = await User.findOne({ _id: userId })
-        .populate("likes")
-        .populate("matches")
-        .populate("messages");
-      console.log(singleUser);
-      console.log(singleUser.likes[0].breed);
-      return singleUser;
-    },
-    // GET route: users, find
-    users: async () => {
-      return User.find()
-        .populate("likes")
-        .populate("matches")
+	Query: {
+		// GET route: user, findOne
+		user: async (parent, { userId }) => {
+			const singleUser = await User.findOne({ _id: userId })
+				.populate("likes")
+				.populate("matches")
+				.populate("messages");
+			console.log(singleUser);
+			console.log(singleUser.likes[0].breed);
+			return singleUser;
+		},
+		// GET route: users, find
+		users: async () => {
+			return User.find()
+				.populate("likes")
+				.populate("matches")
+				.populate("messages");
+		},
+		// // GET route: me, findOne
+		me: async (parent, args, { user }) => {
+			if (user) {
+				console.log(user);
+				return await User.findById({ _id: user._id })
+					.populate("hobbies")
+					.populate({
+						path: "matches",
+						populate: [{ path: "user1" }, { path: "user2" }],
+					});
+			}
+			throw new AuthenticationError();
+		},
 
-    },
-    // // GET route: me, findOne
-    me: async (parent, args, { user }) => {
-      if (user) {
-        console.log(user);
-        return User.findById({ _id: user._id })
-          .populate("hobbies")
-          .populate({
-            path: 'matches',
-            populate: [{path: "user1"}, {path: "user2"}]
-          })
-       }
-      throw new AuthenticationError();
-    },
-
-    // Get route: match, find one specific match
-    oneMatch: async (parent, { matchId }) => {
-      return Match.findOne({ _id: matchId })
-        .populate("user1")
-        .populate("user2")
-        .populate("messages");
-    },
+		// Get route: match, find one specific match
+		oneMatch: async (parent, { matchId }) => {
+			return Match.findOne({ _id: matchId })
+				.populate("user1")
+				.populate("user2")
+				.populate("messages");
+		},
 
 		// // GET route: purpose - find selected user's likes and return them
 		getLikes: async (parent, { userId }) => {
 			const userInfo = await User.findOne({ _id: userId }).populate("likes");
 			console.log(userInfo);
-			//const likesArray = userInfo.likes
+			return userInfo;
 		},
 		//filters already liked profiles and own profile
 		getRandomUsers: async (parent, args, { user }) => {
@@ -61,7 +62,6 @@ const resolvers = {
 				const temp = allUsers[i];
 				allUsers[i] = allUsers[j];
 				allUsers[j] = temp;
-				console.log(allUsers);
 			}
 			return allUsers;
 		},
@@ -144,18 +144,21 @@ const resolvers = {
 		},
 
 		// PUT: update user
-		updateUser: async (
-			parent,
-			{ userId, newOwnerName, newEmail, newPassword },
-			context
-		) => {
+		updateUser: async (parent, args, context) => {
 			if (context.user) {
+				const updateInfo = { ...args };
+				if (updateInfo.password) {
+					const saltRounds = 10;
+					updateInfo.password = await bcrypt.hash(
+						updateInfo.password,
+						saltRounds
+					);
+				}
 				const updatedUser = await User.findOneAndUpdate(
-					{ _id: userId, ownerName: context.user.ownerName },
-					{ ownerName: newOwnerName, email: newEmail, password: newPassword },
+					{ _id: context.user._id, ownerName: context.user.ownerName },
+					{ ...updateInfo },
 					{ new: true }
 				);
-
 				if (updatedUser) {
 					return {
 						message: "Account updated successfully.",

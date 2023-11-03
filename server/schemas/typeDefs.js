@@ -54,7 +54,7 @@ type Mutation {
   createMessage(messageText: String!, matchId: ID!): Message
   login(email: String!, password: String!): Auth
   logout: String
-  updateUser(ownerName: String!, newEmail: String!, newPassword: String!): User
+  updateUser(ownerName: String, email: String, password: String, dogName: String, breed: String, age: Int, size: String, about: String): User
 }
 `;
 
