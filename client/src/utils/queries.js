@@ -76,18 +76,19 @@ export const QUERY_MATCH_MESSAGES = gql`
 `;
 
 export const QUERY_DISPLAYABLE_USERS = gql`
-  query showableUsers {
+  query displayableUsers {
     getRandomUsers {
       _id
-      ownerName
-      dogName
-      image
-      breed
-      age
-      size
       about
+      age
+      breed
+      size
+      dogName
       hobbies
-      likes
+      image
+      likes {
+        _id
+      }
     }
   }
 `;
