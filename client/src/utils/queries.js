@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 export const QUERY_SELF_PROFILE = gql`
   query self {
     me {
+      _id
       ownerName
       email
       dogName
