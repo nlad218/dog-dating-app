@@ -21,8 +21,8 @@ export default function MainPage() {
   };
 
   return (
-    <div className="flex items-center mt-10">
-      <div className="card w-96 shadow-xl bg-primary">
+    <div className="flex items-center my-10">
+      <div className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10">
         <figure>
           <img
             src={profiles[0].image}
@@ -32,7 +32,7 @@ export default function MainPage() {
         </figure>
         <div className="card-body">
           <h2 className="card-title text-white text-4xl">
-            {profiles[0].dogName} - {profiles[0].age}
+            {profiles[0].dogName} - {profiles[0].age} yrs
           </h2>
           <h3 className="card-subtitle text-white">
             {profiles[0].gender} {profiles[0].breed}
