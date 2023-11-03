@@ -26,15 +26,19 @@ const resolvers = {
         console.log(user);
         return User.findById({ _id: user._id })
           .populate("hobbies")
-          .populate("matches");
-      }
+          .populate({
+            path: 'matches',
+            populate: [{path: "user1"}, {path: "user2"}]
+          })
+       }
       throw new AuthenticationError();
     },
 
     // Get route: match, find one specific match
     oneMatch: async (parent, { matchId }) => {
       return Match.findOne({ _id: matchId })
-        .populate("users")
+        .populate("user1")
+        .populate("user2")
         .populate("messages");
     },
 

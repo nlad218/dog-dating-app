@@ -25,9 +25,9 @@ export default function ConversationList({ active, setActive }) {
       return { matchId, dogName, ownerName };
     }) || [];
 
-  useEffect(() => {
-    setActive(matches[0]?._id);
-  }, []);
+  // useEffect(() => {
+  //   if (active setActive(matches[0]?._id);
+  // }, []);
 
   if (loading) return "loading...";
   if (error) return `Error! ${error.message}`;
@@ -36,7 +36,7 @@ export default function ConversationList({ active, setActive }) {
   return (
     <ul className="menu">
       {matches.map(({ matchId, dogName, ownerName }) => (
-        <li key={matchId} onClick={() => set(id)}>
+        <li key={matchId} onClick={() => setActive(matchId)}>
           <div
             className={
               matchId == active
@@ -45,7 +45,7 @@ export default function ConversationList({ active, setActive }) {
             }
           >
             <div className="text-xl font-semibold">
-              {match.dogName} and {match.ownerName}
+              {dogName} and {ownerName}
             </div>
             {/* <div>This is an example message</div> */}
           </div>
