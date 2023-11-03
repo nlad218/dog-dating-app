@@ -6,7 +6,7 @@ import React from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage } from "@cloudinary/react";
 import { fill } from "@cloudinary/url-gen/actions/resize";
-import {  UPDATE_USER } from "../utils/mutations";
+import { UPDATE_USER } from "../utils/mutations";
 
 export default function Profile() {
   const { error, loading, data } = useQuery(QUERY_SELF_PROFILE);
@@ -47,7 +47,7 @@ export default function Profile() {
   myImage.resize(fill().width(500).height(250));
 
   const handleLogout = () => {
-    Auth.logout(); 
+    Auth.logout();
     window.location.assign("/");
   };
 
@@ -63,21 +63,30 @@ export default function Profile() {
       {!loggedIn && window.location.assign("/")}
       <div className="card bg-primary">
         <div className="card-body text-white">
-          {/* <figure>{userData.image}</figure> */}
-          <AdvancedImage cldImg={myImage} className="block" />
-          <h2>{userData.ownerName}</h2>
-          <h3>{userData.dogName}</h3>
-          <h3>{userData.breed}</h3>
-          <h3>{userData.age}</h3>
-          <h3>{userData.size}</h3>
-          <h3>{userData.about}</h3>
-          <h3>{userData.dogName}</h3>
-          <button
-            onClick={() => widgetRef.current.open()}
-            className="border-8 border-red-400 block"
-          >
-            Click Here to Upload Image
-          </button>
+          <h2 className="text-center">Meet Pookie!{userData.dogName}</h2>
+          <div className="container mx-auto p-4 flex flex-wrap">
+            <div className="w-full md:w-1/2">
+              <AdvancedImage cldImg={myImage} className="w-full" />
+              <button
+                onClick={() => widgetRef.current.open()}
+                className="border-2 block my-3 p-1"
+              >
+                Click Here to Upload Image
+              </button>
+            </div>
+            <div className="w-full md:w-1/2 md:pl-4">
+              <div>
+                <h3 className="mb-2">Owner name: {userData.ownerName}</h3>
+                <h3 className="mb-2">Breed: {userData.breed}</h3>
+                <h3 className="mb-2">Size: {userData.size}</h3>
+                <h3 className="mb-2">Age: {userData.age}</h3>
+                <h3 className="mb-2">Hobbies: </h3>
+                <h3>About: {userData.about}</h3>
+                {/* <textarea className = "w-full"></textarea> */}
+              </div>
+            </div>
+            <div></div>
+          </div>
           <button
             onClick={handleLogout}
             className="border-8 border-red-400 block"
@@ -89,4 +98,3 @@ export default function Profile() {
     </div>
   );
 }
-//comment
