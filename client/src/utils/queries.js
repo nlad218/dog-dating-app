@@ -52,21 +52,24 @@ export const QUERY_SELF_MATCHES = gql`
 //   }
 // `;
 export const QUERY_MATCH_MESSAGES = gql`
-  query matchMessages($matchId: ID!) {
-    oneMatch(matchId: $matchID) {
+  query OneMatch($matchId: ID!) {
+    oneMatch(matchId: $matchId) {
       user1 {
         _id
+        dogName
+        ownerName
       }
       user2 {
         _id
+        dogName
+        ownerName
       }
       messages {
-        _id
-        createdAt
         user {
           _id
         }
         messageText
+        createdAt
       }
     }
   }
