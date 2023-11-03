@@ -1,5 +1,6 @@
 const { User, Match, Message } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
+const bcrypt = require("bcrypt");
 
 const resolvers = {
 	Query: {
@@ -143,18 +144,21 @@ const resolvers = {
 		},
 
 		// PUT: update user
-		updateUser: async (
-			parent,
-			{ userId, newOwnerName, newEmail, newPassword },
-			context
-		) => {
+		updateUser: async (parent, args, context) => {
 			if (context.user) {
+				const updateInfo = { ...args };
+				if (updateInfo.password) {
+					const saltRounds = 10;
+					updateInfo.password = await bcrypt.hash(
+						updateInfo.password,
+						saltRounds
+					);
+				}
 				const updatedUser = await User.findOneAndUpdate(
-					{ _id: userId, ownerName: context.user.ownerName },
-					{ ownerName: newOwnerName, email: newEmail, password: newPassword },
+					{ _id: context.user._id, ownerName: context.user.ownerName },
+					{ ...updateInfo },
 					{ new: true }
 				);
-
 				if (updatedUser) {
 					return {
 						message: "Account updated successfully.",
