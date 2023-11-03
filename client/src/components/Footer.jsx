@@ -5,4 +5,3 @@ export default function Footer({ children }) {
 		</div>
 	);
 }
-//comment
