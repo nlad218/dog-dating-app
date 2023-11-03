@@ -52,22 +52,24 @@ export default function Profile() {
   return (
     <div>
       {!loggedIn && window.location.assign("/")}
-      <div className="">
-        <figure>{userData.image}</figure>
-        <h2>{userData.ownerName}</h2>
-        <h3>{userData.dogName}</h3>
-        <h3>{userData.breed}</h3>
-        <h3>{userData.age}</h3>
-        <h3>{userData.size}</h3>
-        <h3>{userData.about}</h3>
-        <h3>{userData.dogName}</h3>
-        <button
+      <div className="card bg-primary">
+        <div className="card-body text-white">
+          <figure>{userData.image}</figure>
+          <h2>{userData.ownerName}</h2>
+          <h3>{userData.dogName}</h3>
+          <h3>{userData.breed}</h3>
+          <h3>{userData.age}</h3>
+          <h3>{userData.size}</h3>
+          <h3>{userData.about}</h3>
+          <h3>{userData.dogName}</h3>
+          <button
           onClick={() => widgetRef.current.open()}
           className="border-8 border-red-400 block"
         >
           Click Here to Upload Image
-        </button>
-        <AdvancedImage cldImg={myImage} className="block" />
+           </button>
+           <AdvancedImage cldImg={myImage} className="block" />
+        </div>
       </div>
     </div>
   );
