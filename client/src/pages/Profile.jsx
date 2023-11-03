@@ -11,12 +11,7 @@ export default function Profile() {
   const { error, loading, data } = useQuery(QUERY_SELF_PROFILE);
   const userData = data?.me || {};
   const loggedIn = Auth.loggedIn();
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>{error.message}</div>;
-  }
+
 
   const [imageId, setImageId] = useState("eimq5aiwwim0kdjdztmg");
   // Create a Cloudinary instance and set your cloud name.
@@ -46,11 +41,16 @@ export default function Profile() {
 
   // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
   const myImage = cld.image(imageId);
-
+  console.log(userData)
   // Resize to 250 x 250 pixels using the 'fill' crop mode.
   myImage.resize(fill().width(500).height(250));
 
-
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>{error.message}</div>;
+  }
   return (
     <div>
       {!loggedIn && window.location.assign("/")}
