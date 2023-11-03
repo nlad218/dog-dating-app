@@ -22,8 +22,16 @@ export const QUERY_SELF_MATCHES = gql`
     me {
       matches {
         _id
-        user1
-        user2
+        user1 {
+          _id
+          ownerName
+          dogName
+        }
+        user2 {
+          _id
+          ownerName
+          dogName
+        }
       }
     }
   }
@@ -32,10 +40,16 @@ export const QUERY_SELF_MATCHES = gql`
 export const QUERY_MATCH_MESSAGES = gql`
   query matchMessages($matchId: ID!) {
     oneMatch(matchId: $matchID) {
-      user1
-      user2
+      user1 {
+        _id
+      }
+      user2 {
+        _id
+      }
       messages {
-        user
+        user {
+          _id
+        }
         messageText
       }
     }
