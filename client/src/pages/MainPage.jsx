@@ -1,39 +1,39 @@
 import { useQuery } from "@apollo/client";
+import React, { useState } from "react";
 import { QUERY_DISPLAYABLE_USERS } from "../utils/queries";
 
 export default function MainPage() {
-	const { loading, data } = useQuery(QUERY_DISPLAYABLE_USERS);
-	console.log(data);
+	const [index, setIndex] = useState(0);
 
-	const profiles = [
-		{
-			dogName: "Duke",
-			gender: "Male",
-			image: "https://ebkc.org/wp-content/uploads/2019/07/americanbulldog4.jpg",
-			breed: "Bulldog",
-			age: 7,
-			size: "Medium",
-			about: "Drinks toilet water daily.",
-			hobbies: "Dragging ass on the floor.",
-		},
-	];
+	const { loading, data, error } = useQuery(QUERY_DISPLAYABLE_USERS);
+
+	if (loading) {
+		return <p>Loading...</p>;
+	}
+
+	if (error) {
+		console.error("Error fetching data:", error);
+		return <p>Error fetching data</p>;
+	}
+
+	const profiles = data.getRandomUsers;
 
 	return (
 		<div className="flex m-2">
 			<div className="card w-96 shadow-xl bg-primary">
 				<figure>
 					<img
-						src={profiles[0].image}
+						src={profiles[index].image}
 						alt="ProfilePic"
 						style={{ width: "100%", height: "100%", objectFit: "cover" }}
 					/>
 				</figure>
 				<div className="card-body">
 					<h2 className="card-title text-white text-4xl">
-						{profiles[0].dogName} - {profiles[0].age}
+						{profiles[index].dogName} - {profiles[index].age}
 					</h2>
 					<h3 className="card-subtitle text-white">
-						{profiles[0].gender} {profiles[0].breed}
+						{profiles[index].gender} {profiles[index].breed}
 					</h3>
 					<div className="collapse bg-primary mt-3" style={{ width: "50%" }}>
 						<input type="checkbox" />
@@ -41,9 +41,18 @@ export default function MainPage() {
 							More Details
 						</div>
 						<div className="collapse-content p-0">
-							<h4 className="text-white mb-2">Size: {profiles[0].size}</h4>
-							<h4 className="text-white mb-2">Bio: {profiles[0].about}</h4>
-							<h4 className="text-white">Hobbies: {profiles[0].hobbies}</h4>
+							<h4 className="text-white mb-2">Size: {profiles[index].size}</h4>
+							<h4 className="text-white mb-2">Bio: {profiles[index].about}</h4>
+							<h4 className="text-white">
+								Hobbies:
+								<ul>
+									{profiles[index].hobbies.map((hobby, index) => (
+										<li key={index}>
+											<h4>{hobby}</h4>
+										</li>
+									))}
+								</ul>
+							</h4>
 						</div>
 					</div>
 					<div className=" mt-3 card-actions justify-between">
