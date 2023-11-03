@@ -97,7 +97,7 @@ export default function Profile() {
             <div></div>
           </div>
           {/* <figure>{userData.image}</figure> */}
-          <AdvancedImage cldImg={myImage} className="block" />
+          {/* <AdvancedImage cldImg={myImage} className="block" />
           <h2>{userData.ownerName}</h2>
           <h3>{userData.dogName}</h3>
           <h3>{userData.breed}</h3>
@@ -110,7 +110,7 @@ export default function Profile() {
             className="border-8 border-red-400 block"
           >
             Click Here to Upload Image
-          </button>
+          </button> */}
           <button
             onClick={handleLogout}
             className="border-8 border-red-400 block"
