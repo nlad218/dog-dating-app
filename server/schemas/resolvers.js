@@ -1,7 +1,6 @@
 const { User, Match, Message } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
-
 const resolvers = {
   Query: {
     // GET route: user, findOne
@@ -27,14 +26,16 @@ const resolvers = {
         console.log(user);
         return User.findById({ _id: user._id })
           .populate("hobbies")
-          .populate("matches")
+          .populate("matches");
       }
-      throw new AuthenticationError
+      throw new AuthenticationError();
     },
 
     // Get route: match, find one specific match
     oneMatch: async (parent, { matchId }) => {
-      return Match.findOne({ _id: matchId }).populate("messages");
+      return Match.findOne({ _id: matchId })
+        .populate("users")
+        .populate("messages");
     },
 
     // // GET route: purpose - find selected user's likes and return them
@@ -81,7 +82,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    addToLikes: async (parent, {otherId}, {user}) => {
+    addToLikes: async (parent, { otherId }, { user }) => {
       //if not already liked, update user profile
       const updateMyProfile = await User.findOneAndUpdate(
         { _id: user._id },
@@ -90,7 +91,7 @@ const resolvers = {
       ).populate("likes");
       console.log("Added user to your likes list");
     },
-    createMatch: async (parent, {otherId}, {user}) => {
+    createMatch: async (parent, { otherId }, { user }) => {
       const newMatch = await Match.create({
         user1: user._id.toString(),
         user2: otherId.toString(),
@@ -103,7 +104,7 @@ const resolvers = {
         { _id: otherId },
         { $push: { matches: newMatch._id } }
       );
-      return newMatch
+      return newMatch;
     },
     // CREATE route: create user account - Maya
     createUser: async (parent, { ownerName, email, password }) => {
