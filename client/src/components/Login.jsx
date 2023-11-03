@@ -13,6 +13,8 @@ export default function LoginModal({ isOpen, onClose }) {
 	const [password, setPassword] = useState("");
 	const [name, setName] = useState("");
 	const [errorText, setErrorText] = useState(false);
+	const [dupeText, setDupeText] = useState(false);
+	const [invalidText, setInvalidText] = useState(false);
 
 	const passwordRegex =
 		/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -24,10 +26,15 @@ export default function LoginModal({ isOpen, onClose }) {
 		setPassword("");
 		setName("");
 		setErrorText(false);
+		setDupeText(false);
+		setInvalidText(false);
 	};
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
+
+		setInvalidText(false);
+
 		try {
 			const { data } = await login({
 				variables: {
@@ -38,11 +45,15 @@ export default function LoginModal({ isOpen, onClose }) {
 			Auth.login(data.login.token);
 		} catch (err) {
 			console.error(err);
+			setInvalidText(true);
 		}
 	};
 
 	const handleSignUp = async (e) => {
 		e.preventDefault();
+
+		setErrorText(false);
+		setDupeText(false);
 
 		if (passwordRegex.test(password) && emailRegex.test(email)) {
 			setErrorText(false);
@@ -57,6 +68,7 @@ export default function LoginModal({ isOpen, onClose }) {
 				Auth.signUp(data.createUser.token);
 			} catch (err) {
 				console.error(err);
+				setDupeText(true);
 			}
 		} else {
 			setErrorText(true);
@@ -77,12 +89,12 @@ export default function LoginModal({ isOpen, onClose }) {
 
 	return (
 		<div
-			className={`fixed inset-0 z-50 flex items-center justify-center overflow-auto ${
+			className={`fixed inset-0 z-50 flex items-center justify-center overflow-none ${
 				isOpen ? "block" : "hidden"
 			}`}
 		>
-			<div className="modal-container">
-				<div className="bg-primary w-96 rounded-lg shadow-lg p-4">
+			<div className="modal-container mx-2 sm:mx-0">
+				<div className="bg-primary w-full sm:w-96 rounded-lg shadow-lg p-4">
 					<div className="flex justify-between">
 						<button className="text-white-600 text-2xl" onClick={onClose}>
 							&times;
@@ -128,6 +140,13 @@ export default function LoginModal({ isOpen, onClose }) {
 					</div>
 					{activeTab === "login" && (
 						<div className="mt-4">
+							<h2
+								className={
+									invalidText === false ? "hidden" : "text-center text-red-700"
+								}
+							>
+								Invalid email or password!
+							</h2>
 							<form onSubmit={handleLogin}>
 								<div className="mb-4">
 									<label
@@ -179,7 +198,14 @@ export default function LoginModal({ isOpen, onClose }) {
 									errorText === false ? "hidden" : "text-center text-red-700"
 								}
 							>
-								Invalid email or password!
+								Password does not meet requirements!
+							</h2>
+							<h2
+								className={
+									dupeText === false ? "hidden" : "text-center text-red-700"
+								}
+							>
+								Email already in use!
 							</h2>
 							<form onSubmit={handleSignUp}>
 								<div className="mb-4">
