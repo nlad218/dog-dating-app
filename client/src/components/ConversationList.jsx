@@ -11,7 +11,7 @@ export default function ConversationList({ active, set }) {
 
   const matches =
     data?.me.matches.map(({ _id, user1, user2 }) => {
-      const selfId = Auth.getProfile();
+      const selfId = Auth.getProfile()._id;
       let dogName, ownerName;
       if (user1.id === selfId) {
         dogName = user2.dogName;
