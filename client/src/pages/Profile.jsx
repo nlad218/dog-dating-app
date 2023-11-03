@@ -11,8 +11,6 @@ export default function Profile() {
   const { error, loading, data } = useQuery(QUERY_SELF_PROFILE);
   const userData = data?.me || {};
   const loggedIn = Auth.loggedIn();
-
-
   const [imageId, setImageId] = useState("eimq5aiwwim0kdjdztmg");
   // Create a Cloudinary instance and set your cloud name.
   const cld = new Cloudinary({
