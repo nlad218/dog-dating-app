@@ -40,9 +40,9 @@ const resolvers = {
 
 		// // GET route: purpose - find selected user's likes and return them
 		getLikes: async (parent, { userId }) => {
-			const userInfo = await User.findOne({ _id: userId });
+			const userInfo = await User.findOne({ _id: userId }).populate("likes");
 			console.log(userInfo);
-			//const likesArray = userInfo.likes
+			return userInfo;
 		},
 		//filters already liked profiles and own profile
 		getRandomUsers: async (parent, args, { user }) => {
