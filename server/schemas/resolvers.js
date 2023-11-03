@@ -33,7 +33,9 @@ const resolvers = {
 
 		// Get route: match, find one specific match
 		oneMatch: async (parent, { matchId }) => {
-			return Match.findOne({ _id: matchId }).populate("messages");
+			return Match.findOne({ _id: matchId })
+				.populate("users")
+				.populate("messages");
 		},
 
 		// // GET route: purpose - find selected user's likes and return them
