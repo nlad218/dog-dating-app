@@ -70,14 +70,24 @@ export const LOGOUT = gql`
 
 export const UPDATE_USER = gql`
   mutation UpdateUser(
-    $ownerName: String!
-    $newEmail: String!
-    $newPassword: String!
+    $ownerName: String
+    $email: String
+    $password: String
+    $dogName: String
+    $breed: String
+    $age: Int
+    $size: String
+    $about: String
   ) {
     updateUser(
       ownerName: $ownerName
-      newEmail: $newEmail
-      newPassword: $newPassword
+      email: $email
+      password: $password
+      dogName: $dogName
+      breed: $breed
+      age: $age
+      size: $size
+      about: $about
     ) {
       ownerName
       email

@@ -7,6 +7,7 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage } from "@cloudinary/react";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import {  UPDATE_USER } from "../utils/mutations";
+import UpdateProfileModal from "../components/UpdateProfile";
 
 export default function Profile() {
   const { error, loading, data } = useQuery(QUERY_SELF_PROFILE);
@@ -14,6 +15,14 @@ export default function Profile() {
   const userData = data?.me || {};
   const loggedIn = Auth.loggedIn();
   const [imageId, setImageId] = useState("eimq5aiwwim0kdjdztmg");
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  }
+
+  const closeModal = () => {
+		setModalOpen(false);
+	};
 
   // Create a Cloudinary instance and set your cloud name.
   const cld = new Cloudinary({
@@ -71,7 +80,7 @@ export default function Profile() {
           <h3>{userData.age}</h3>
           <h3>{userData.size}</h3>
           <h3>{userData.about}</h3>
-          <h3>{userData.dogName}</h3>
+          <button className="btn" onClick={openModal}>Edit Profile</button>
           <button
             onClick={() => widgetRef.current.open()}
             className="border-8 border-red-400 block"
@@ -86,6 +95,7 @@ export default function Profile() {
           </button>
         </div>
       </div>
+      <UpdateProfileModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 }
