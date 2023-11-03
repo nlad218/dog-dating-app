@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 export default function Nav() {
 	const navLinks = [
 		{
-			name: "Main",
-			path: "/main",
+			name: "Home",
+			path: "/",
 		},
 		{
 			name: "Chat",
@@ -14,10 +14,6 @@ export default function Nav() {
 			name: "Profile",
 			path: "/profile",
 		},
-		{
-			name: "ExImgUpload",
-			path: "/imgupload",
-		}
 	];
 	return (
 		<nav className="flex flex-row justify-around gap-4 w-full text-2xl font-semibold">
@@ -29,4 +25,3 @@ export default function Nav() {
 		</nav>
 	);
 }
-//COmment

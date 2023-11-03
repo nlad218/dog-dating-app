@@ -22,10 +22,13 @@ const resolvers = {
     },
     // // GET route: me, findOne
     me: async (parent, args, { user }) => {
-      console.log(user);
-      return User.findById({ _id: user._id })
-        .populate("hobbies")
-        .populate("matches");
+      if (user) {
+        console.log(user);
+        return User.findById({ _id: user._id })
+          .populate("hobbies")
+          .populate("matches");
+      }
+      throw new AuthenticationError
     },
 
     // Get route: match, find one specific match

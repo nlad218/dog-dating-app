@@ -5,10 +5,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App.jsx";
 import LandingPage from "./pages/Home";
-import Main from "./pages/Main";
+import MainPage from "./pages/MainPage.jsx";
 import Chat from "./pages/Chat";
-import Profile from "./pages/Profile";
-import ExImgUpload from "./pages/ExImgUpload.jsx"
+import Profile from "./pages/Profile.jsx";
+
+import Auth from "./utils/auth.js";
 
 const router = createBrowserRouter([
 	{
@@ -16,13 +17,8 @@ const router = createBrowserRouter([
 		element: <App />,
 		children: [
 			{
-				// ALL non-users should be redirected to this page, no matter what
 				index: true,
-				element: <LandingPage />,
-			},
-			{
-				path: "/main",
-				element: <Main />,
+				element: Auth.loggedIn() ? <MainPage /> : <LandingPage />,
 			},
 			{
 				path: "/chat",
@@ -32,10 +28,6 @@ const router = createBrowserRouter([
 				path: "/profile",
 				element: <Profile />,
 			},
-			{
-				path: '/imgupload',
-				element: <ExImgUpload />
-			}
 		],
 	},
 ]);
