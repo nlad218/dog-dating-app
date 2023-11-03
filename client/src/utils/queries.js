@@ -36,21 +36,21 @@ export const QUERY_SELF_MATCHES = gql`
     }
   }
 `;
-//Display Conversation for a Single Match
-export const QUERY_CURRENT_MATCH_CONVO = gql`
-  query CurrentMatchConvo($matchId: ID!) {
-    oneMatch(matchId: $matchId) {
-      messages {
-        _id
-        createdAt
-        messageText
-        user {
-          _id
-        }
-      }
-    }
-  }
-`;
+// //Display Conversation for a Single Match
+// export const QUERY_CURRENT_MATCH_CONVO = gql`
+//   query CurrentMatchConvo($matchId: ID!) {
+//     oneMatch(matchId: $matchId) {
+//       messages {
+//         _id
+//         createdAt
+//         messageText
+//         user {
+//           _id
+//         }
+//       }
+//     }
+//   }
+// `;
 export const QUERY_MATCH_MESSAGES = gql`
   query matchMessages($matchId: ID!) {
     oneMatch(matchId: $matchID) {
@@ -61,6 +61,8 @@ export const QUERY_MATCH_MESSAGES = gql`
         _id
       }
       messages {
+        _id
+        createdAt
         user {
           _id
         }
