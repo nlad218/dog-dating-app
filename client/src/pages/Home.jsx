@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { TypeAnimation } from "react-type-animation";
 import LoginModal from "../components/Login";
 
 export default function LandingPage() {
@@ -72,7 +72,25 @@ export default function LandingPage() {
 				<div className="hero-overlay bg-opacity-60"></div>
 				<div className="hero-content text-center text-white">
 					<div className="max-w-md">
-						<h1 className="mb-5 text-5xl font-bold">Go for a walk?</h1>
+						<h1 className="mb-5 text-5xl font-bold">
+							<TypeAnimation
+								className="homeNameTitle"
+								sequence={[
+									// Same substring at the start will only be typed out once, initially
+									"Go for a Walk?",
+									2000, // wait 1s before replacing "Mice" with "Hamsters"
+									"Play Fetch?",
+									2000,
+									"Go Swimming?",
+									2000,
+									"LET'S MEET!",
+									4000,
+								]}
+								wrapper="span"
+								speed={50}
+								repeat={Infinity}
+							></TypeAnimation>
+						</h1>
 						<p className="mb-5">Find a best friend for man's best friend!</p>
 						<button className="btn btn-primary text-white" onClick={openModal}>
 							Login / Sign up
