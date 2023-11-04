@@ -11,7 +11,7 @@ export default function MainPage() {
 	const [addToLikes] = useMutation(ADD_TO_LIKES);
 	const [createMatch] = useMutation(CREATE_MATCH);
 
-	const { loading, data, error } = useQuery(QUERY_DISPLAYABLE_USERS);
+	const { loading, data, error, refetch } = useQuery(QUERY_DISPLAYABLE_USERS);
 
 	if (loading) {
 		return <p>Loading...</p>;
@@ -22,18 +22,24 @@ export default function MainPage() {
 		return <p>Error fetching data</p>;
 	}
 
+	console.log(data.getRandomUsers);
 	const profiles = data.getRandomUsers;
 
 	const leftSwipe = () => {
-		setIndex(
-			(prevIndex) => (prevIndex + 1 + profiles.length) % profiles.length
-		);
+		const newIndex = (index + 1) % profiles.length;
+		setIndex(newIndex);
+		console.log(index);
+
+		if (newIndex === 0) {
+			refetch();
+		}
 	};
 
 	const rightSwipe = () => {
 		addToLikes({
 			variables: { otherId: profiles[index]._id },
 		});
+		console.log(index);
 
 		for (let i = 0; i < profiles[index].likes.length; i++) {
 			if (profiles[index].likes[i]._id == Auth.getProfile().data._id) {
@@ -44,7 +50,12 @@ export default function MainPage() {
 			}
 		}
 
-		setIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+		const newIndex = (index + 1) % profiles.length;
+		setIndex(newIndex);
+
+		if (newIndex === 0) {
+			refetch();
+		}
 	};
 
 	const toggleDetails = () => {
