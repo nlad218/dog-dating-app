@@ -53,7 +53,7 @@ export default function Profile() {
   const myImage = cld.image(imageId);
   console.log(userData);
   // Resize to 250 x 250 pixels using the 'fill' crop mode.
-  myImage.resize(fill().width(500).height(250));
+  myImage.resize(fill().width(700).height(400));
 
   const handleLogout = () => {
     Auth.logout();
@@ -70,14 +70,22 @@ export default function Profile() {
   return (
     <div>
       {!loggedIn && window.location.assign("/")}
-      <div className="card bg-primary">
-        <div className="card-body text-white">
-          <h2 className="text-center">Meet {userData.dogName}!</h2>
+      <div className="card bg-primary p-4 md:p-16 lg:p-16 xl:p-20 mt-3">
+        {" "}
+        {/* Responsive padding */}
+        <div className="card-body text-black">
+          <h2 className="text-center text-xl font-semibold">Meet {userData.dogName}!</h2>
           <div className="container mx-auto p-4 flex flex-wrap">
-            <div className="w-full md:w-1/2 mb-3">
-              <AdvancedImage cldImg={myImage} className="w-full" />
+            <div className="w-full md:w-1/2  mb-3">
+              {/* {" "} */}
+              {/* Responsive width */}
+              <div className="border-2 border-white">
+                <AdvancedImage cldImg={myImage} className="w-full" />
+              </div>
             </div>
             <div className="w-full md:w-1/2 md:pl-5">
+              {/* {" "} */}
+              {/* Responsive width */}
               <div>
                 <h3 className="mb-2">Owner name: {userData.ownerName}</h3>
                 <h3 className="mb-2">Breed: {userData.breed}</h3>
@@ -85,7 +93,7 @@ export default function Profile() {
                 <h3 className="mb-2">Age: {userData.age}</h3>
                 <h3 className="mb-2">Hobbies: </h3>
                 <h3>About: {userData.about}</h3>
-                {/* <textarea className = "w-full"></textarea> */}
+                {/* <textarea className="w-full"></textarea> */}
               </div>
             </div>
             <div></div>
