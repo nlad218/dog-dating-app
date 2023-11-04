@@ -9,6 +9,7 @@ import { fill } from "@cloudinary/url-gen/actions/resize";
 import { UPDATE_USER } from "../utils/mutations";
 import UpdateProfileModal from "../components/UpdateProfile";
 
+
 export default function Profile() {
   const { error, loading, data } = useQuery(QUERY_SELF_PROFILE);
   const { update } = useMutation(UPDATE_USER);
@@ -23,7 +24,6 @@ export default function Profile() {
   const closeModal = () => {
     setModalOpen(false);
   };
-
   // Create a Cloudinary instance and set your cloud name.
   const cld = new Cloudinary({
     cloud: {
@@ -50,7 +50,7 @@ export default function Profile() {
   });
 
   // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
-  const myImage = cld.image(imageId);
+  const myImage = cld.image(userData.image);
   console.log(userData);
   // Resize to 250 x 250 pixels using the 'fill' crop mode.
   myImage.resize(fill().width(700).height(400));

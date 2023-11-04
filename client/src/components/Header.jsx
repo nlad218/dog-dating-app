@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Header({ children }) {
 	return (
+		
 		<header className="flex flex-row items-center justify-center md:justify-between p-4 sticky top-0 min-w-full bg-neutral text-primary-content rounded-b-xl z-10">
 			<Link
 				className="text-primary-content text-5xl md:text-4xl font-bold"
