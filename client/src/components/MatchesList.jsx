@@ -55,6 +55,7 @@ export default function MatchesList({ active, setActive, profileView, setProfile
             </div>
             {/* <div>This is an example message</div> */}
             <button 
+            className = "hover:underline"
             onClick={(event) => {
               event.preventDefault();
               event.stopPropagation();
@@ -62,6 +63,7 @@ export default function MatchesList({ active, setActive, profileView, setProfile
               setProfileView(true);
             }}>See Profile</button>
             <button 
+            className = "hover:underline"
             onClick={(event) => {
               event.preventDefault();
               event.stopPropagation();

@@ -41,7 +41,7 @@ export default function Nav() {
 					/>
 				</svg>
 			),
-			path: "/chat",
+			path: "/matches",
 		},
 		{
 			name: "Profile",
