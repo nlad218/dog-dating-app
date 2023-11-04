@@ -3,7 +3,7 @@ import { QUERY_SELF_MATCHES } from "../utils/queries";
 import {useEffect} from "react"
 import Auth from "../utils/auth";
 let doOnce = true;
-export default function ConversationList({ active, setActive }) {
+export default function ConversationList({ active, setActive, profileView, setProfileView }) {
   const { data, loading, error } = useQuery(QUERY_SELF_MATCHES);
 
   const matches =
@@ -42,10 +42,6 @@ export default function ConversationList({ active, setActive }) {
       {matches.map(({ matchId, dogName, ownerName }) => (
         <li
           key={matchId}
-          onClick={(event) => {
-            event.preventDefault();
-            setActive(matchId);
-          }}
         >
           <div
             className={
@@ -58,7 +54,22 @@ export default function ConversationList({ active, setActive }) {
               {ownerName} and {dogName}
             </div>
             {/* <div>This is an example message</div> */}
+            <button 
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              setActive(matchId)
+              setProfileView(true);
+            }}>See Profile</button>
+            <button 
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              setActive(matchId)
+              setProfileView(false);
+            }}>See Chat</button>
           </div>
+          
         </li>
       ))}
     </ul>

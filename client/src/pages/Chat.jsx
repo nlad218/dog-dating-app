@@ -1,6 +1,7 @@
 import { useState} from "react";
 import ConversationList from "../components/ConversationList";
 import ActiveConversation from "../components/ActiveConversation";
+import SingleMatchProfile from "../components/SingleMatchProfile";
 import Auth from "../utils/auth";
 export default function Chat() {
   // This page will need to:
@@ -10,6 +11,7 @@ export default function Chat() {
   // - Keep track of the active conversation
 
   const [activeConversation, setActiveConversation] = useState("");
+  const [profileView, setProfileView] = useState(false)
   const loggedIn = Auth.loggedIn();
 
   return (
@@ -18,7 +20,7 @@ export default function Chat() {
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
       <div className="drawer-content flex flex-col items-center justify-start min-h-fit max-h-full overflow-auto">
-        <ActiveConversation active={activeConversation}>
+        <ActiveConversation active={activeConversation} profileView = {profileView}>
           <label
             htmlFor="my-drawer"
             className="drawer-button bg-primary-focus rounded-full p-2 md:hidden"
@@ -37,6 +39,8 @@ export default function Chat() {
           <ConversationList
             active={activeConversation}
             setActive={setActiveConversation}
+            profileView = {profileView}
+            setProfileView = {setProfileView}
           />
         </div>
       </div>

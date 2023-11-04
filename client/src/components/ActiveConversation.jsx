@@ -3,10 +3,11 @@ import { QUERY_MATCH_MESSAGES} from "../utils/queries";
 import { useQuery, useMutation } from "@apollo/client";
 import { CREATE_MESSAGE } from "../utils/mutations"
 import Auth from "../utils/auth";
+import SingleMatchProfile from "../components/SingleMatchProfile"
 
 
 
-export default function ActiveConversation({ active, children }) {
+export default function ActiveConversation({ active, profileView, children }) {
   const [newMessage, setNewMessage] = useState("");
   const [createMessage] = useMutation(CREATE_MESSAGE)
   const messagesEndRef = useRef(null)
@@ -39,6 +40,7 @@ export default function ActiveConversation({ active, children }) {
 
   const selfId = Auth.getProfile().data._id;
   const messages = data?.oneMatch.messages || [];
+
   // console.log(data.oneMatch.user1.ownerName)
   // console.log(Auth.getProfile().data.ownerName)
   function handleSendMessage(event) {
@@ -49,16 +51,16 @@ export default function ActiveConversation({ active, children }) {
     })
     setNewMessage("");
   }
-  // console.log(data.oneMatch.user1._id);
-  console.log(selfId)
-  // console.log(data.oneMatch.user2.ownerName)
-  // console.log(data.oneMatch.user1.ownerName)
+
+  console.log(data.oneMatch)
+  console.log(profileView)
   return (
     <div className="w-full min-h-fit rounded-xl bg-base-200 shadow-xl overflow-auto" >
       <div className="text-2xl bg-primary text-primary-content font-semibold rounded-t-xl flex flex-row gap-4">
         <div className="p-2 ">{children}</div>
         {data.oneMatch.user1._id == selfId ? (<h1 className="p-2">{data.oneMatch.user2.ownerName}</h1>):(<h1 className="p-2">{data.oneMatch.user1.ownerName}</h1>) }
       </div>
+      {profileView ? (<SingleMatchProfile />):(<div>
       <div className="text-lg lg:text-2xl py-4 overflow-auto activeChat" key = "mapping" >
         {messages.map((message, index) => (
           <div
@@ -96,6 +98,8 @@ export default function ActiveConversation({ active, children }) {
           SEND
         </button>
       </div>
+      </div>)}
+      
     </div>
   );
 }
