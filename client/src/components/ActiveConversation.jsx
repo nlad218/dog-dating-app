@@ -4,6 +4,8 @@ import { useQuery, useMutation } from "@apollo/client";
 import { CREATE_MESSAGE } from "../utils/mutations"
 import Auth from "../utils/auth";
 
+
+
 export default function ActiveConversation({ active, children }) {
   const [newMessage, setNewMessage] = useState("");
   const [createMessage] = useMutation(CREATE_MESSAGE)
@@ -22,6 +24,7 @@ export default function ActiveConversation({ active, children }) {
   //     },
   //   });
   // })
+  
   let { data, loading, err } = useQuery(QUERY_MATCH_MESSAGES, {
     variables: {
       matchId: active,
@@ -46,14 +49,17 @@ export default function ActiveConversation({ active, children }) {
     })
     setNewMessage("");
   }
-
+  // console.log(data.oneMatch.user1._id);
+  console.log(selfId)
+  // console.log(data.oneMatch.user2.ownerName)
+  // console.log(data.oneMatch.user1.ownerName)
   return (
-    <div className="w-full min-h-fit rounded-xl bg-base-200 shadow-xl">
+    <div className="w-full min-h-fit rounded-xl bg-base-200 shadow-xl overflow-auto" >
       <div className="text-2xl bg-primary text-primary-content font-semibold rounded-t-xl flex flex-row gap-4">
         <div className="p-2 ">{children}</div>
         {data.oneMatch.user1._id == selfId ? (<h1 className="p-2">{data.oneMatch.user2.ownerName}</h1>):(<h1 className="p-2">{data.oneMatch.user1.ownerName}</h1>) }
       </div>
-      <div className="text-lg lg:text-2xl py-4" key = "mapping">
+      <div className="text-lg lg:text-2xl py-4 overflow-auto activeChat" key = "mapping" >
         {messages.map((message, index) => (
           <div
             className={
@@ -61,20 +67,22 @@ export default function ActiveConversation({ active, children }) {
             }
             key={index}
           >
-            <div
+          <div
               className={
                 message.user._id === selfId
                   ? "chat-bubble chat-bubble-primary"
                   : "chat-bubble"
               }
               key = {message._id}
+              ref = {messagesEndRef}
             >
               {message.messageText}
             </div>
+
           </div>
         ))}
       </div>
-      <div className="p-2 join w-full" ref = {messagesEndRef}>
+      <div className="p-2 join w-full" >
         <input
           className="join-item w-full p-2 text-lg input input-primary"
           type="text"

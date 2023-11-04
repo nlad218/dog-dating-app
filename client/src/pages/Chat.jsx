@@ -13,11 +13,11 @@ export default function Chat() {
   const loggedIn = Auth.loggedIn();
 
   return (
-    <div className="drawer md:drawer-open gap-4">
+    <div className="drawer md:drawer-open gap-4 h-screen">
       {!loggedIn && window.location.assign("/")}
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
-      <div className="drawer-content flex flex-col items-center justify-start min-h-fit max-h-full">
+      <div className="drawer-content flex flex-col items-center justify-start min-h-fit max-h-full overflow-auto">
         <ActiveConversation active={activeConversation}>
           <label
             htmlFor="my-drawer"
