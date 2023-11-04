@@ -14,7 +14,11 @@ import Nav from "./components/Nav";
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
-
+const styles = {
+  activeConv: {
+    border: ".2rem solid red",
+  }
+}
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("id_token");
   return {
@@ -32,7 +36,7 @@ const client = new ApolloClient({
 
 export default function App() {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={client} >
       <Header>
         <Nav />
       </Header>
