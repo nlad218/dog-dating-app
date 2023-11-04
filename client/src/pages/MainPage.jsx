@@ -1,17 +1,45 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_DISPLAYABLE_USERS } from "../utils/queries";
 import { ADD_TO_LIKES, CREATE_MATCH } from "../utils/mutations";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { AdvancedImage } from "@cloudinary/react";
 import Auth from "../utils/auth";
 
 export default function MainPage() {
 	const [index, setIndex] = useState(0);
 	const [showDetails, setShowDetails] = useState(false);
+	const [imageId, setImageId] = useState("");
 
 	const [addToLikes] = useMutation(ADD_TO_LIKES);
 	const [createMatch] = useMutation(CREATE_MATCH);
 
-	const { loading, data, error } = useQuery(QUERY_DISPLAYABLE_USERS);
+	const cld = new Cloudinary({
+		cloud: {
+			cloudName: "dkxtk2v4z",
+		},
+	});
+
+	const cloudinaryRef = useRef();
+	const widgetRef = useRef();
+	useEffect(() => {
+		cloudinaryRef.current = window.cloudinary;
+		widgetRef.current = cloudinaryRef.current.createUploadWidget(
+			{
+				cloudName: "dkxtk2v4z",
+				uploadPreset: "dogprofile_test",
+			},
+			function (error, result) {
+				console.log(result.info.public_id);
+				if (result.info.public_id) {
+					setImageId(result.info.public_id);
+				}
+			}
+		);
+	});
+
+	const { loading, data, error, refetch } = useQuery(QUERY_DISPLAYABLE_USERS);
 
 	if (loading) {
 		return <p>Loading...</p>;
@@ -25,9 +53,11 @@ export default function MainPage() {
 	const profiles = data.getRandomUsers;
 
 	const leftSwipe = () => {
-		setIndex(
-			(prevIndex) => (prevIndex + 1 + profiles.length) % profiles.length
-		);
+		const newIndex = (index + 1) % profiles.length;
+		setIndex(newIndex);
+		if (newIndex === 0) {
+			refetch();
+		}
 	};
 
 	const rightSwipe = () => {
@@ -44,22 +74,28 @@ export default function MainPage() {
 			}
 		}
 
-		setIndex((prevIndex) => (prevIndex + 1) % profiles.length);
+		const newIndex = (index + 1) % profiles.length;
+		setIndex(newIndex);
+
+		if (newIndex === 0) {
+			refetch();
+		}
 	};
 
 	const toggleDetails = () => {
 		setShowDetails(!showDetails);
 	};
 
+	const myImage = cld.image(profiles[index].image);
+
 	return (
 		<div className="flex items-center my-10">
 			<div className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10">
-				<figure>
-					<img
-						src={profiles[index].image}
-						alt="ProfilePic"
-						style={{ width: "100%", height: "100%", objectFit: "cover" }}
-					/>
+				<figure
+					className="object-contain"
+					style={{ maxWidth: 400, maxHeight: 350 }}
+				>
+					<AdvancedImage cldImg={myImage} />
 				</figure>
 				<div className="card-body">
 					<h2 className="card-title text-white text-4xl">
