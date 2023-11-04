@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { QUERY_SELF_MATCHES } from "../utils/queries";
+import {useEffect} from "react"
 import Auth from "../utils/auth";
-import { useEffect } from "react";
-
+let doOnce = true;
 export default function ConversationList({ active, setActive }) {
   const { data, loading, error } = useQuery(QUERY_SELF_MATCHES);
 
@@ -23,9 +23,19 @@ export default function ConversationList({ active, setActive }) {
       return { matchId, dogName, ownerName };
     }) || [];
 
+  //TODO: Getting a "cannot udpate a compoennet while rendering a different componenet error"
+  useEffect(() => {
+    if (data && doOnce) {
+  setActive(data?.me.matches[0]._id)
+  doOnce = !doOnce;
+}
+})
   if (loading) return "loading...";
   if (error) return `Error! ${error.message}`;
   if (matches.length < 1) return <div>No matches yet!</div>;
+
+
+
 
   return (
     <ul className="menu">
