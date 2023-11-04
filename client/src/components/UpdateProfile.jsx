@@ -3,7 +3,6 @@ import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-
 export default function UpdateProfileModal({ isOpen, onClose }) {
   const [update] = useMutation(UPDATE_USER);
   const [activeTab, setActiveTab] = useState("owner");
@@ -16,20 +15,20 @@ export default function UpdateProfileModal({ isOpen, onClose }) {
   const handleSaveProfile = async (e) => {
     e.preventDefault();
     try {
-      const sendData = {}
-      Object.entries(newUserData).forEach(([key, value])=> {
+      const sendData = {};
+      Object.entries(newUserData).forEach(([key, value]) => {
         if (value) {
-            sendData[key]=value
+          sendData[key] = value;
         }
-      })
+      });
       const { data } = await update({
         variables: {
           ownerName: Auth.getProfile().data.ownerName,
-          ...sendData
+          ...sendData,
         },
       });
-      
-      setNewUserData({})
+
+      setNewUserData({});
 
       onClose(); // Close the modal
     } catch (error) {
@@ -38,11 +37,11 @@ export default function UpdateProfileModal({ isOpen, onClose }) {
   };
 
   const handleInputChange = (e) => {
-    const {name, value} = e.target
-    const newData = {...newUserData}
-    newData[name] = name === "age" ? parseInt(value) : value.trim()
-    setNewUserData(newData)
-  }
+    const { name, value } = e.target;
+    const newData = { ...newUserData };
+    newData[name] = name === "age" ? parseInt(value) : value.trim();
+    setNewUserData(newData);
+  };
 
   return (
     <div
@@ -115,7 +114,7 @@ export default function UpdateProfileModal({ isOpen, onClose }) {
           )}
           {activeTab === "pup" && (
             <form onSubmit={handleSaveProfile}>
-              <input 
+              <input
                 type="text"
                 placeholder="New Dog Name"
                 name="dogName"
@@ -127,36 +126,39 @@ export default function UpdateProfileModal({ isOpen, onClose }) {
                 placeholder="New Breed"
                 name="breed"
                 value={newUserData.breed || ""}
-                onChange={handleInputChange
-                }
+                onChange={handleInputChange}
               />
               <input
                 type="number"
                 placeholder="New Age"
                 name="age"
                 value={newUserData.age || ""}
-                onChange={handleInputChange
-                }
+                onChange={handleInputChange}
               />
               <input
                 type="text"
                 placeholder="New Size"
                 name="size"
                 value={newUserData.size || ""}
-                onChange={handleInputChange
-                }
+                onChange={handleInputChange}
               />
               <input
                 type="text"
                 placeholder="New About"
                 name="about"
                 value={newUserData.about || ""}
-                onChange={handleInputChange
-                }
+                onChange={handleInputChange}
               />
             </form>
           )}
-          <button onClick={handleSaveProfile}>Save Profile</button>
+          <div className="flex items-center justify-center">
+            <button
+              className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              onClick={handleSaveProfile}
+            >
+              Save Profile
+            </button>
+          </div>
         </div>
       </div>
     </div>

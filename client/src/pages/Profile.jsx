@@ -53,7 +53,7 @@ export default function Profile() {
   const myImage = cld.image(imageId);
   console.log(userData);
   // Resize to 250 x 250 pixels using the 'fill' crop mode.
-  myImage.resize(fill().width(500).height(250));
+  myImage.resize(fill().width(700).height(400));
 
   const handleLogout = () => {
     Auth.logout();
@@ -70,36 +70,27 @@ export default function Profile() {
   return (
     <div>
       {!loggedIn && window.location.assign("/")}
-      <div className="card bg-primary">
+      <div className="card bg-primary p-4 md:p-16 lg:p-16 xl:p-20 mt-3">
         <div className="card-body text-white">
-          <h2 className="text-center">Meet {userData.dogName}!</h2>
-          <div className="container mx-auto p-4 flex flex-wrap">
-            <div className="w-full md:w-1/2 mb-3">
-              <AdvancedImage cldImg={myImage} className="w-full" />
-            </div>
-            <div className="w-full md:w-1/2 md:pl-5">
-              <div>
-                <h3 className="mb-2">Owner name: {userData.ownerName}</h3>
-                <h3 className="mb-2">Breed: {userData.breed}</h3>
-                <h3 className="mb-2">Size: {userData.size}</h3>
-                <h3 className="mb-2">Age: {userData.age}</h3>
-                <h3 className="mb-2">Hobbies: </h3>
-                <h3>About: {userData.about}</h3>
-                {/* <textarea className = "w-full"></textarea> */}
-              </div>
-            </div>
-            <div></div>
-          </div>
+          {/* <figure>{userData.image}</figure> */}
+          <AdvancedImage cldImg={myImage} className="block" />
+          <h2className="mb-2">Owner Name: {userData.ownerName}</h2>
+          <h3className="mb-2">{userData.dogName}</h3>
+          <h3className="mb-2">Breed: {userData.breed}</h3>
+          <h3className="mb-2">Age: {userData.age}</h3>
+          <h3 className="mb-2">Size: {userData.size}</h3>
+          <h3>About: {userData.about}</h3>
+          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={openModal}>Edit Profile</button>
           <button
             onClick={() => widgetRef.current.open()}
-            className="btn border-8 block"
+            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           >
             Click Here to Upload Image
           </button>
-          <button className="btn" onClick={openModal}>
-            Edit Profile
-          </button>
-          <button onClick={handleLogout} className="btn border-8 block">
+          <button
+            onClick={handleLogout}
+            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+          >
             Logout
           </button>
         </div>
