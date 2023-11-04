@@ -24,7 +24,7 @@ export default function Nav() {
 			path: "/",
 		},
 		{
-			name: "Chat",
+			name: "Matches",
 			icon: (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ export default function Nav() {
 					/>
 				</svg>
 			),
-			path: "/chat",
+			path: "/matches",
 		},
 		{
 			name: "Profile",

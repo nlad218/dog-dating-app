@@ -17,6 +17,22 @@ export const QUERY_SELF_PROFILE = gql`
   }
 `;
 //Matches for ConversationList.jsx
+// {
+//   "data": {
+//     "oneMatch": {
+//       "user1": {
+//         "dogName": "Piper",
+//         "ownerName": "Nick",
+//         "_id": "654505ae143c66553e09efa4"
+//       },
+//       "user2": {
+//         "dogName": "Pookie",
+//         "ownerName": "Maya",
+//         "_id": "654505ae143c66553e09efa5"
+//       }
+//     }
+//   }
+// }
 export const QUERY_SELF_MATCHES = gql`
   query selfMatches {
     me {
@@ -58,11 +74,23 @@ export const QUERY_MATCH_MESSAGES = gql`
         _id
         dogName
         ownerName
+        image
+        breed
+        age
+        size
+        about
+        hobbies
       }
       user2 {
         _id
         dogName
         ownerName
+        image
+        breed
+        age
+        size
+        about
+        hobbies
       }
       messages {
         user {

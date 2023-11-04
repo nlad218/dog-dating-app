@@ -18,8 +18,14 @@ const resolvers = {
 		users: async () => {
 			return User.find()
 				.populate("likes")
-				.populate("matches")
-				.populate("messages");
+				.populate({
+					path: "matches",
+					populate: [
+						{ path: "messages" },
+						{ path: "user2" },
+						{ path: "messages" },
+					],
+				});
 		},
 		// // GET route: me, findOne
 		me: async (parent, args, { user }) => {
@@ -51,11 +57,21 @@ const resolvers = {
 		},
 		//filters already liked profiles and own profile
 		getRandomUsers: async (parent, args, { user }) => {
-			let skipTheseIds = user.likes;
+			let res = await User.findOne({ _id: user._id });
+
+			let skipTheseIds = res.likes;
+
+			let ids = [];
+
 			skipTheseIds.push(user._id);
-			let allUsers = await User.find({ _id: { $nin: skipTheseIds } }).populate(
-				"likes"
-			);
+			skipTheseIds.map((index) => {
+				ids.push(index.toString());
+			});
+
+			let allUsers = await User.find({ _id: { $nin: ids } }).populate({
+				path: "likes",
+				model: "User",
+			});
 			//fisher-yates sort
 			for (let i = allUsers.length - 1; i > 0; i--) {
 				const j = Math.floor(Math.random() * (i + 1));

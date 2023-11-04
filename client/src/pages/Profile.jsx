@@ -6,7 +6,7 @@ import React from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage } from "@cloudinary/react";
 import { fill } from "@cloudinary/url-gen/actions/resize";
-import {  UPDATE_USER } from "../utils/mutations";
+import { UPDATE_USER } from "../utils/mutations";
 import UpdateProfileModal from "../components/UpdateProfile";
 
 export default function Profile() {
@@ -18,11 +18,11 @@ export default function Profile() {
   const [isModalOpen, setModalOpen] = useState(false);
   const openModal = () => {
     setModalOpen(true);
-  }
+  };
 
   const closeModal = () => {
-		setModalOpen(false);
-	};
+    setModalOpen(false);
+  };
 
   // Create a Cloudinary instance and set your cloud name.
   const cld = new Cloudinary({
@@ -53,10 +53,10 @@ export default function Profile() {
   const myImage = cld.image(imageId);
   console.log(userData);
   // Resize to 250 x 250 pixels using the 'fill' crop mode.
-  myImage.resize(fill().width(500).height(250));
+  myImage.resize(fill().width(700).height(400));
 
   const handleLogout = () => {
-    Auth.logout(); 
+    Auth.logout();
     window.location.assign("/");
   };
 
@@ -70,16 +70,16 @@ export default function Profile() {
   return (
     <div>
       {!loggedIn && window.location.assign("/")}
-      <div className="card bg-primary">
+      <div className="card bg-primary p-4 md:p-16 lg:p-16 xl:p-20 mt-3">
         <div className="card-body text-white">
           {/* <figure>{userData.image}</figure> */}
           <AdvancedImage cldImg={myImage} className="block" />
-          <h2>{userData.ownerName}</h2>
-          <h3>{userData.dogName}</h3>
-          <h3>{userData.breed}</h3>
-          <h3>{userData.age}</h3>
-          <h3>{userData.size}</h3>
-          <h3>{userData.about}</h3>
+          <h2 className="mb-2">Owner Name: {userData.ownerName}</h2>
+          <h3 className="mb-2">{userData.dogName}</h3>
+          <h3 className="mb-2">Breed: {userData.breed}</h3>
+          <h3 className="mb-2">Age: {userData.age}</h3>
+          <h3 className="mb-2">Size: {userData.size}</h3>
+          <h3>About: {userData.about}</h3>
           <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={openModal}>Edit Profile</button>
           <button
             onClick={() => widgetRef.current.open()}
@@ -99,4 +99,3 @@ export default function Profile() {
     </div>
   );
 }
-//comment
