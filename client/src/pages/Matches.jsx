@@ -1,6 +1,6 @@
-import { useState} from "react";
-import ConversationList from "../components/ConversationList";
-import ActiveConversation from "../components/ActiveConversation";
+import { useState } from "react";
+import MatchesList from "../components/MatchesList";
+import ActiveMatch from "../components/ActiveMatch";
 import SingleMatchProfile from "../components/SingleMatchProfile";
 import Auth from "../utils/auth";
 export default function Chat() {
@@ -11,7 +11,7 @@ export default function Chat() {
   // - Keep track of the active conversation
 
   const [activeConversation, setActiveConversation] = useState("");
-  const [profileView, setProfileView] = useState(false)
+  const [profileView, setProfileView] = useState(false);
   const loggedIn = Auth.loggedIn();
 
   return (
@@ -20,14 +20,14 @@ export default function Chat() {
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
       <div className="drawer-content flex flex-col items-center justify-start min-h-fit max-h-full overflow-auto">
-        <ActiveConversation active={activeConversation} profileView = {profileView}>
+        <ActiveMatch active={activeConversation} profileView={profileView}>
           <label
             htmlFor="my-drawer"
             className="drawer-button bg-primary-focus rounded-full p-2 md:hidden"
           >
             &lt;
           </label>
-        </ActiveConversation>
+        </ActiveMatch>
       </div>
       <div className="drawer-side max-md:z-50">
         <label
@@ -36,11 +36,11 @@ export default function Chat() {
           className="drawer-overlay"
         ></label>
         <div className="p-4 w-80 max-md:min-h-full md:min-h-fit max-h-full bg-base-200 text-base-content rounded-r-xl md:rounded-l-xl md:shadow-xl">
-          <ConversationList
+          <MatchesList
             active={activeConversation}
             setActive={setActiveConversation}
-            profileView = {profileView}
-            setProfileView = {setProfileView}
+            profileView={profileView}
+            setProfileView={setProfileView}
           />
         </div>
       </div>

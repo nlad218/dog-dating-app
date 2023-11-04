@@ -3,7 +3,7 @@ import { QUERY_SELF_MATCHES } from "../utils/queries";
 import {useEffect} from "react"
 import Auth from "../utils/auth";
 let doOnce = true;
-export default function ConversationList({ active, setActive, profileView, setProfileView }) {
+export default function MatchesList({ active, setActive, profileView, setProfileView }) {
   const { data, loading, error } = useQuery(QUERY_SELF_MATCHES);
 
   const matches =
