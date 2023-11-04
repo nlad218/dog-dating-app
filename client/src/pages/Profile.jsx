@@ -74,10 +74,10 @@ export default function Profile() {
         <div className="card-body text-white">
           {/* <figure>{userData.image}</figure> */}
           <AdvancedImage cldImg={myImage} className="block" />
-          <h2className="mb-2">Owner Name: {userData.ownerName}</h2>
-          <h3className="mb-2">{userData.dogName}</h3>
-          <h3className="mb-2">Breed: {userData.breed}</h3>
-          <h3className="mb-2">Age: {userData.age}</h3>
+          <h2 className="mb-2">Owner Name: {userData.ownerName}</h2>
+          <h3 className="mb-2">{userData.dogName}</h3>
+          <h3 className="mb-2">Breed: {userData.breed}</h3>
+          <h3 className="mb-2">Age: {userData.age}</h3>
           <h3 className="mb-2">Size: {userData.size}</h3>
           <h3>About: {userData.about}</h3>
           <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={openModal}>Edit Profile</button>
