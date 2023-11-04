@@ -30,7 +30,14 @@ export default function ActiveMatch({ active, profileView, children }) {
 
   const selfId = Auth.getProfile().data._id;
   const messages = data?.oneMatch.messages || [];
-
+  let otherUser = ""
+  const user1 = data.oneMatch.user1
+  const user2 = data.oneMatch.user2
+  if(user2._id == selfId) {
+      otherUser = user1 ;
+  } else {
+      otherUser = user2;
+  }
   // console.log(data.oneMatch.user1.ownerName)
   // console.log(Auth.getProfile().data.ownerName)
   function handleSendMessage(event) {
@@ -41,9 +48,7 @@ export default function ActiveMatch({ active, profileView, children }) {
     });
     setNewMessage("");
   }
-
-  console.log(data.oneMatch);
-  console.log(profileView);
+  // console.log(otherUser)
   return (
     <div className="w-full min-h-fit rounded-xl bg-base-200 shadow-xl overflow-auto">
       <div className="text-2xl bg-primary text-primary-content font-semibold rounded-t-xl flex flex-row gap-4">
@@ -55,7 +60,7 @@ export default function ActiveMatch({ active, profileView, children }) {
         )}
       </div>
       {profileView ? (
-        <SingleMatchProfile />
+        <SingleMatchProfile otherUser = {otherUser} />
       ) : (
         <div>
           <div
