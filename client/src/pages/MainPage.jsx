@@ -3,7 +3,6 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_DISPLAYABLE_USERS } from "../utils/queries";
 import { ADD_TO_LIKES, CREATE_MATCH } from "../utils/mutations";
 import { Cloudinary } from "@cloudinary/url-gen";
-import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 import Auth from "../utils/auth";
 
@@ -90,31 +89,34 @@ export default function MainPage() {
 
 	return (
 		<div className="flex items-center my-10">
-			<div className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10">
+			<div
+				style={{ border: "2px solid #000", borderRadius: "0 0 10px 10px" }}
+				className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10"
+			>
 				<figure
 					className="object-contain"
-					style={{ maxWidth: 400, maxHeight: 350 }}
+					style={{ maxWidth: 500, maxHeight: 350 }}
 				>
 					<AdvancedImage cldImg={myImage} />
 				</figure>
 				<div className="card-body">
-					<h2 className="card-title text-white text-4xl">
+					<h2 className="card-title text-black text-4xl">
 						{profiles[index].dogName} - {profiles[index].age} yrs
 					</h2>
-					<h3 className="card-subtitle text-white">
+					<h3 className="card-subtitle text-black">
 						{profiles[index].gender} {profiles[index].breed}
 					</h3>
 					<div className="mt-3">
 						<button
 							onClick={toggleDetails}
-							className="md:hidden text-white text-sm font-medium p-0 cursor-pointer"
+							className="md:hidden text-black text-sm font-medium p-0 cursor-pointer"
 						>
 							More Details
 						</button>
 						<div className={`md:block ${showDetails ? "block" : "hidden"}`}>
-							<h4 className="text-white mb-2">Size: {profiles[index].size}</h4>
-							<h4 className="text-white mb-2">Bio: {profiles[index].about}</h4>
-							<h4 className="text-white mb-2">
+							<h4 className="text-black mb-2">Size: {profiles[index].size}</h4>
+							<h4 className="text-black mb-2">Bio: {profiles[index].about}</h4>
+							<h4 className="text-black mb-2">
 								Hobbies:
 								<ul>
 									{profiles[index].hobbies.map((hobby, index) => (
