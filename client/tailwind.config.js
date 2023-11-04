@@ -4,35 +4,27 @@ export default {
 	plugins: [require("@tailwindcss/typography"), require("daisyui")],
 	daisyui: {
 		themes: [
-			"dark",
-			// "dark",
-			// "cupcake",
-			// "bumblebee",
-			// "emerald",
-			// "corporate",
-			// "synthwave",
-			// "retro",
-			// "cyberpunk",
-			// "valentine",
-			// "halloween",
-			// "garden",
-			// "forest",
-			// "aqua",
-			// "lofi",
-			// "pastel",
-			// "fantasy",
-			// "wireframe",
-			// "black",
-			// "luxury",
-			// "dracula",
-			// "cmyk",
-			// "autumn",
-			// "business",
-			// "acid",
-			// "lemonade",
-			// "night",
-			// "coffee",
-			// "winter",
+			{
+				mytheme: {
+					primary: "#fda94a",
+
+					secondary: "#fda94a",
+
+					accent: "#b6e0ec",
+
+					neutral: "#ff8802",
+
+					"base-100": "#b6e0ec",
+
+					info: "#04abab",
+
+					success: "#36d399",
+
+					warning: "#fbbd23",
+
+					error: "#f87272",
+				},
+			},
 		],
 	},
 };
