@@ -74,11 +74,23 @@ export const QUERY_MATCH_MESSAGES = gql`
         _id
         dogName
         ownerName
+        image
+        breed
+        age
+        size
+        about
+        hobbies
       }
       user2 {
         _id
         dogName
         ownerName
+        image
+        breed
+        age
+        size
+        about
+        hobbies
       }
       messages {
         user {
