@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TypeAnimation } from 'react-type-animation';
+import { TypeAnimation } from "react-type-animation";
 import LoginModal from "../components/Login";
 
 export default function LandingPage() {
@@ -34,7 +34,7 @@ export default function LandingPage() {
 	function ReviewCards({ name, review }) {
 		return (
 			<div className="p-4 w-full md:w-4/12">
-				<div className="rounded-lg shadow-lg bg-neutral">
+				<div className="rounded-lg shadow-lg bg-primary">
 					<div className="p-4">
 						<div className="flex justify-between items-center">
 							<h3 className="text-xl font-semibold">{name}</h3>
@@ -69,29 +69,30 @@ export default function LandingPage() {
 						"url(https://img.freepik.com/premium-photo/group-dogs-are-sitting-together-park_902338-22817.jpg)",
 				}}
 			>
-				<div className="hero-overlay bg-opacity-10"></div>
-				<div className="hero-content text-center text-neutral-content">
+				<div className="hero-overlay bg-opacity-60"></div>
+				<div className="hero-content text-center text-white">
 					<div className="max-w-md">
 						<h1 className="mb-5 text-5xl font-bold">
-						<TypeAnimation
-                    className = "homeNameTitle"
-                    sequence={[
-                        // Same substring at the start will only be typed out once, initially
-                        'Go for a Walk?',
-                        2000, // wait 1s before replacing "Mice" with "Hamsters"
-                        'Play Fetch?',
-                        2000,
-						'Go Swimming?',
-						2000,
-						"LET'S MEET!",
-						4000
-                      ]}
-                      wrapper="span"
-                      speed={50}
-                      repeat={Infinity}></TypeAnimation></h1>
+							<TypeAnimation
+								className="homeNameTitle"
+								sequence={[
+									// Same substring at the start will only be typed out once, initially
+									"Go for a Walk?",
+									2000, // wait 1s before replacing "Mice" with "Hamsters"
+									"Play Fetch?",
+									2000,
+									"Go Swimming?",
+									2000,
+									"LET'S MEET!",
+									4000,
+								]}
+								wrapper="span"
+								speed={50}
+								repeat={Infinity}
+							></TypeAnimation>
+						</h1>
 						<p className="mb-5">Find a best friend for man's best friend!</p>
-						
-						<button className="btn btn-primary" onClick={openModal}>
+						<button className="btn btn-primary text-white" onClick={openModal}>
 							Login / Sign up
 						</button>
 					</div>
@@ -106,4 +107,3 @@ export default function LandingPage() {
 		</div>
 	);
 }
-//comment

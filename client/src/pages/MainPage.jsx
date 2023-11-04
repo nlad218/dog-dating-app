@@ -3,7 +3,6 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_DISPLAYABLE_USERS } from "../utils/queries";
 import { ADD_TO_LIKES, CREATE_MATCH } from "../utils/mutations";
 import { Cloudinary } from "@cloudinary/url-gen";
-import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 import Auth from "../utils/auth";
 
@@ -31,7 +30,6 @@ export default function MainPage() {
 				uploadPreset: "dogprofile_test",
 			},
 			function (error, result) {
-				console.log(result.info.public_id);
 				if (result.info.public_id) {
 					setImageId(result.info.public_id);
 				}
@@ -90,11 +88,11 @@ export default function MainPage() {
 
 	return (
 		<div className="flex items-center my-10">
-			<div className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10">
-				<figure
-					className="object-contain"
-					style={{ maxWidth: 400, maxHeight: 350 }}
-				>
+			<div
+				className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10"
+				style={{ maxWidth: 450, maxHeight: 525 }}
+			>
+				<figure>
 					<AdvancedImage cldImg={myImage} />
 				</figure>
 				<div className="card-body">
