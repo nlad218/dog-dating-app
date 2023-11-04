@@ -92,7 +92,7 @@ export default function MainPage() {
 				className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10"
 				style={{ maxWidth: 450, maxHeight: 525 }}
 			>
-				<figure className="object-contain">
+				<figure>
 					<AdvancedImage cldImg={myImage} />
 				</figure>
 				<div className="card-body">
