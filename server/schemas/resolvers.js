@@ -19,10 +19,13 @@ const resolvers = {
 			return User.find()
 				.populate("likes")
 				.populate({
-          path: "matches",
-          populate: [{path: "messages"}, {path: "user2"}, {path: "messages"}]
-      })
-
+					path: "matches",
+					populate: [
+						{ path: "messages" },
+						{ path: "user2" },
+						{ path: "messages" },
+					],
+				});
 		},
 		// // GET route: me, findOne
 		me: async (parent, args, { user }) => {
@@ -69,7 +72,6 @@ const resolvers = {
 				path: "likes",
 				model: "User",
 			});
-			console.log(allUsers);
 			//fisher-yates sort
 			for (let i = allUsers.length - 1; i > 0; i--) {
 				const j = Math.floor(Math.random() * (i + 1));

@@ -1,15 +1,43 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_DISPLAYABLE_USERS } from "../utils/queries";
 import { ADD_TO_LIKES, CREATE_MATCH } from "../utils/mutations";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { AdvancedImage } from "@cloudinary/react";
 import Auth from "../utils/auth";
 
 export default function MainPage() {
 	const [index, setIndex] = useState(0);
 	const [showDetails, setShowDetails] = useState(false);
+	const [imageId, setImageId] = useState("");
 
 	const [addToLikes] = useMutation(ADD_TO_LIKES);
 	const [createMatch] = useMutation(CREATE_MATCH);
+
+	const cld = new Cloudinary({
+		cloud: {
+			cloudName: "dkxtk2v4z",
+		},
+	});
+
+	const cloudinaryRef = useRef();
+	const widgetRef = useRef();
+	useEffect(() => {
+		cloudinaryRef.current = window.cloudinary;
+		widgetRef.current = cloudinaryRef.current.createUploadWidget(
+			{
+				cloudName: "dkxtk2v4z",
+				uploadPreset: "dogprofile_test",
+			},
+			function (error, result) {
+				console.log(result.info.public_id);
+				if (result.info.public_id) {
+					setImageId(result.info.public_id);
+				}
+			}
+		);
+	});
 
 	const { loading, data, error, refetch } = useQuery(QUERY_DISPLAYABLE_USERS);
 
@@ -22,14 +50,11 @@ export default function MainPage() {
 		return <p>Error fetching data</p>;
 	}
 
-	console.log(data.getRandomUsers);
 	const profiles = data.getRandomUsers;
 
 	const leftSwipe = () => {
 		const newIndex = (index + 1) % profiles.length;
 		setIndex(newIndex);
-		console.log(index);
-
 		if (newIndex === 0) {
 			refetch();
 		}
@@ -39,7 +64,6 @@ export default function MainPage() {
 		addToLikes({
 			variables: { otherId: profiles[index]._id },
 		});
-		console.log(index);
 
 		for (let i = 0; i < profiles[index].likes.length; i++) {
 			if (profiles[index].likes[i]._id == Auth.getProfile().data._id) {
@@ -62,15 +86,16 @@ export default function MainPage() {
 		setShowDetails(!showDetails);
 	};
 
+	const myImage = cld.image(profiles[index].image);
+
 	return (
 		<div className="flex items-center my-10">
 			<div className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10">
-				<figure>
-					<img
-						src={profiles[index].image}
-						alt="ProfilePic"
-						style={{ width: "100%", height: "100%", objectFit: "cover" }}
-					/>
+				<figure
+					className="object-contain"
+					style={{ maxWidth: 400, maxHeight: 350 }}
+				>
+					<AdvancedImage cldImg={myImage} />
 				</figure>
 				<div className="card-body">
 					<h2 className="card-title text-white text-4xl">
