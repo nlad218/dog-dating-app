@@ -18,8 +18,11 @@ const resolvers = {
 		users: async () => {
 			return User.find()
 				.populate("likes")
-				.populate("matches")
-				.populate("messages");
+				.populate({
+          path: "matches",
+          populate: [{path: "messages"}, {path: "user2"}, {path: "messages"}]
+      })
+
 		},
 		// // GET route: me, findOne
 		me: async (parent, args, { user }) => {
