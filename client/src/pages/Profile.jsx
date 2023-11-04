@@ -80,16 +80,16 @@ export default function Profile() {
           <h3>{userData.age}</h3>
           <h3>{userData.size}</h3>
           <h3>{userData.about}</h3>
-          <button className="btn" onClick={openModal}>Edit Profile</button>
+          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={openModal}>Edit Profile</button>
           <button
             onClick={() => widgetRef.current.open()}
-            className="border-8 border-red-400 block"
+            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           >
             Click Here to Upload Image
           </button>
           <button
             onClick={handleLogout}
-            className="border-8 border-red-400 block"
+            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           >
             Logout
           </button>
