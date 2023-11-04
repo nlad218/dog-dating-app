@@ -94,30 +94,30 @@ export default function LoginModal({ isOpen, onClose }) {
 			}`}
 		>
 			<div className="modal-container mx-2 sm:mx-0">
-				<div className="bg-primary w-full sm:w-96 rounded-lg shadow-lg p-4">
+				<div className="bg-base-100 w-full sm:w-96 rounded-lg shadow-lg p-4">
 					<div className="flex justify-between">
-						<button className="text-white-600 text-2xl" onClick={onClose}>
+						<button className="text-black-600 text-2xl" onClick={onClose}>
 							&times;
 						</button>
 					</div>
 					<div className="mt-4">
 						{activeTab === "login" && (
-							<h1 className="mb-3 text-white-700 text-center text-2xl">
+							<h1 className="mb-3 text-black-700 text-center text-2xl">
 								Welcome Back!
 							</h1>
 						)}
 						{activeTab === "signup" && (
-							<h1 className="mb-3 text-white-700 text-center text-2xl">
+							<h1 className="mb-3 text-black-700 text-center text-2xl">
 								Join Now!
 							</h1>
 						)}
 						<ul className="flex justify-around">
 							<li>
 								<button
-									className={` text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline${
+									className={` text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline${
 										activeTab === "login"
-											? "text-secondary bg-secondary"
-											: "text-accent bg-blue-600 hover:bg-blue-700"
+											? "text-white bg-info"
+											: "text-white bg-primary hover:bg-info hover:text-white"
 									}`}
 									onClick={() => handleTabClick("login")}
 								>
@@ -126,10 +126,10 @@ export default function LoginModal({ isOpen, onClose }) {
 							</li>
 							<li>
 								<button
-									className={` text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline${
+									className={` text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline${
 										activeTab === "signup"
-											? "text-secondary bg-secondary"
-											: "text-accent bg-blue-600 hover:bg-blue-700"
+											? "text-white bg-info"
+											: "text-white bg-primary hover:bg-info hover:text-white"
 									}`}
 									onClick={() => handleTabClick("signup")}
 								>
@@ -150,13 +150,13 @@ export default function LoginModal({ isOpen, onClose }) {
 							<form onSubmit={handleLogin}>
 								<div className="mb-4">
 									<label
-										className="block text-white-700 text-sm font-bold mb-2"
+										className="block text-black-700 text-sm font-bold mb-2"
 										htmlFor="LoginEmail"
 									>
 										Email
 									</label>
 									<input
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-white-700 leading-tight focus:outline-none focus:shadow-outline"
+										className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
 										id="LoginEmail"
 										type="email"
 										placeholder="Email"
@@ -166,13 +166,13 @@ export default function LoginModal({ isOpen, onClose }) {
 								</div>
 								<div className="mb-4">
 									<label
-										className="block text-white-700 text-sm font-bold mb-2"
+										className="block text-black-700 text-sm font-bold mb-2"
 										htmlFor="LoginPassword"
 									>
 										Password
 									</label>
 									<input
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-white-700 leading-tight focus:outline-none focus:shadow-outline"
+										className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
 										id="LoginPassword"
 										type="password"
 										placeholder="Password"
@@ -182,7 +182,7 @@ export default function LoginModal({ isOpen, onClose }) {
 								</div>
 								<div className="flex items-center justify-center">
 									<button
-										className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded focus-outline-none focus-shadow-outline"
+										className="bg-primary hover:bg-info text-black hover:text-white font-bold py-2 px-4 rounded focus-outline-none focus-shadow-outline"
 										type="submit"
 									>
 										Log In
@@ -210,13 +210,13 @@ export default function LoginModal({ isOpen, onClose }) {
 							<form onSubmit={handleSignUp}>
 								<div className="mb-4">
 									<label
-										className="block text-white-700 text-sm font-bold mb-2"
+										className="block text-black-700 text-sm font-bold mb-2"
 										htmlFor="SignUpEmail"
 									>
 										Email
 									</label>
 									<input
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-white-700 leading-tight focus:outline-none focus:shadow-outline"
+										className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
 										id="SignUpEmail"
 										type="email"
 										placeholder="Email"
@@ -226,13 +226,13 @@ export default function LoginModal({ isOpen, onClose }) {
 								</div>
 								<div className="mb-4">
 									<label
-										className="block text-white-700 text-sm font-bold mb-2"
+										className="block text-black-700 text-sm font-bold mb-2"
 										htmlFor="name"
 									>
 										Name
 									</label>
 									<input
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-white-700 leading-tight focus:outline-none focus:shadow-outline"
+										className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
 										id="name"
 										type="text"
 										placeholder="Name"
@@ -242,7 +242,7 @@ export default function LoginModal({ isOpen, onClose }) {
 								</div>
 								<div className="mb-4">
 									<label
-										className="text-white-700 text-sm font-bold mb-2 flex items-center"
+										className="text-black-700 text-sm font-bold mb-2 flex items-center"
 										htmlFor="SignUpPassword"
 									>
 										Password
@@ -267,7 +267,7 @@ export default function LoginModal({ isOpen, onClose }) {
 										</div>
 									</label>
 									<input
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-white-700 leading-tight focus:outline-none focus:shadow-outline"
+										className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
 										id="SignUpPassword"
 										type="password"
 										placeholder="Password"
@@ -277,7 +277,7 @@ export default function LoginModal({ isOpen, onClose }) {
 								</div>
 								<div className="flex items-center justify-center">
 									<button
-										className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+										className="bg-primary hover:bg-info text-black hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 										type="submit"
 									>
 										Sign Up
