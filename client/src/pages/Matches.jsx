@@ -17,7 +17,16 @@ export default function Chat() {
 
 	return (
 		<>
-			<div className="drawer md:drawer-open gap-4">
+			<div
+				className="drawer md:drawer-open"
+				style={{
+					paddingRight: "1rem",
+					paddingLeft: "1rem",
+					paddingBottom: "4rem",
+					marginBottom: "2rem",
+					marginTop: "1rem",
+				}}
+			>
 				{!loggedIn && window.location.assign("/")}
 				<input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
@@ -36,8 +45,10 @@ export default function Chat() {
 						htmlFor="my-drawer"
 						aria-label="close sidebar"
 						className="drawer-overlay"
-					></label>
-					<div className="p-4 w-80 max-md:min-h-full md:min-h-fit max-h-screen bg-base-200 text-base-content rounded-r-xl md:rounded-l-xl md:shadow-xl">
+					>
+						&lt;
+					</label>
+					<div className="p-4 w-60 max-md:min-h-full md:min-h-fit max-h-screen bg-base-200 text-base-content rounded-r-xl md:rounded-l-xl md:shadow-xl">
 						<MatchesList
 							active={activeConversation}
 							setActive={setActiveConversation}
