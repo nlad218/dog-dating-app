@@ -18,7 +18,6 @@ export default function Profile() {
 		}
 	} );
 	const [update] = useMutation(UPDATE_USER);
-	const [deleteUser] = useMutation(DELETE_USER);
 	const [userData1, setNewUserData1] = useState({})
 	const userData = data?.me || {};
 	const loggedIn = Auth.loggedIn();
