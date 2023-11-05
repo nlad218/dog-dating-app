@@ -51,6 +51,7 @@ export default function ActiveMatch({ active, profileView, children }) {
   }
   // console.log(otherUser)
   return (
+    
     <div className="w-full min-h-fit rounded-xl bg-base-200 shadow-xl overflow-auto">
       <div className="text-2xl bg-primary text-primary-content font-semibold rounded-t-xl flex flex-row gap-4">
         <div className="p-2 ">{children}</div>
