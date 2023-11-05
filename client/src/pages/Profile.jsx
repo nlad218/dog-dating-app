@@ -91,7 +91,7 @@ export default function Profile() {
 		>
 			{!loggedIn && window.location.assign("/")}
 			<div className="card bg-primary md:p-16 lg:p-16 xl:p-20 mt-3 border-2 border-black">
-				<div className="card-body text-white">
+				<div className="card-body text-white text-center">
 					{/* <figure>{userData.image}</figure> */}
 					<AdvancedImage cldImg={myImage} className="block" />
 					<h2 className="mb-2 text-black">Owner Name: {userData1.ownerName}</h2>
