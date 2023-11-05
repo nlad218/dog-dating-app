@@ -74,7 +74,7 @@ export default function Profile() {
   };
 
   const [deleteProfile] = useMutation(DELETE_USER);
-
+  
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete your profile? This action cannot be undone."
@@ -163,4 +163,5 @@ export default function Profile() {
       />
     </div>
   );
+
 }

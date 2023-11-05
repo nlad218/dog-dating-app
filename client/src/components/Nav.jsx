@@ -95,7 +95,7 @@ export default function Nav() {
 				{navLinks.map(({ name, icon, path }, index) =>
 					isLoggedIn ? (
 						<Link to={path} key={index}>
-							<div className="md:hidden text-black hover:text-primary mr-5 ml-5">
+							<div className="md:hidden text-black hover:text-primary mr-10 ml-10">
 								{icon}
 							</div>
 							<div className="hidden md:block hover:text-primary">{name}</div>
