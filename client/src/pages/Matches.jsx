@@ -3,6 +3,11 @@ import MatchesList from "../components/MatchesList";
 import ActiveMatch from "../components/ActiveMatch";
 import SingleMatchProfile from "../components/SingleMatchProfile";
 import Auth from "../utils/auth";
+const styles = {
+  bordering: {
+    border: ".2rem solid red"
+  }
+}
 export default function Chat() {
   // This page will need to:
   // - Query the server for the user's connections
@@ -15,11 +20,12 @@ export default function Chat() {
   const loggedIn = Auth.loggedIn();
 
   return (
-    <div className="drawer md:drawer-open gap-4 h-screen">
+    <>
+    <div className="drawer md:drawer-open gap-4">
       {!loggedIn && window.location.assign("/")}
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
-      <div className="drawer-content flex flex-col items-center justify-start min-h-fit max-h-full overflow-auto">
+      <div className="drawer-content flex flex-col items-center justify-start min-h-fit h-screen">
         <ActiveMatch active={activeConversation} profileView={profileView}>
           <label
             htmlFor="my-drawer"
@@ -35,7 +41,7 @@ export default function Chat() {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="p-4 w-80 max-md:min-h-full md:min-h-fit max-h-full bg-base-200 text-base-content rounded-r-xl md:rounded-l-xl md:shadow-xl">
+        <div className="p-4 w-80 max-md:min-h-full md:min-h-fit max-h-screen bg-base-200 text-base-content rounded-r-xl md:rounded-l-xl md:shadow-xl">
           <MatchesList
             active={activeConversation}
             setActive={setActiveConversation}
@@ -45,5 +51,7 @@ export default function Chat() {
         </div>
       </div>
     </div>
+  
+    </>
   );
 }

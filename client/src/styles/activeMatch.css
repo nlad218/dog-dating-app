@@ -1,0 +1,14 @@
+
+  .heightSet {
+    height: 65vh;
+  }
+  @media (width>2500px) {
+    .heightSet {
+        height: 85vh;
+    }
+  }
+  @media (width>1400px){
+    .heightSet {
+        height: 70vh;
+    }
+  }
