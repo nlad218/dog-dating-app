@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import LoginModal from "../components/Login";
 import HomeCarousel from "../components/HomeCarousel";
+
 export default function LandingPage() {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [isCarouselOpen, setCarouselOpen] = useState(false);
@@ -103,7 +104,7 @@ export default function LandingPage() {
 							htmlFor="my_modal_login"
 							className="btn btn-primary text-white mb-3 w-48"
 						>
-							Login
+							Login / Sign Up
 						</label>
 						<input
 							type="checkbox"
@@ -111,7 +112,7 @@ export default function LandingPage() {
 							className="modal-toggle"
 						/>
 						<div className="modal flex flex-col justify-center items-center">
-							<LoginModal />
+							<LoginModal isOpen={isModalOpen} onClose={closeModal} />
 						</div>
 						{/* PREVIEW WEBSITE MODAL */}
 						<label htmlFor="my_modal_prev" className="btn w-48">
