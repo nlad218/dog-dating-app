@@ -40,11 +40,10 @@ export default function Profile() {
 				cloudName: "dkxtk2v4z",
 				uploadPreset: "dogprofile_test",
 			},
-			function (error, result) {
+			async function (error, result) {
 				if (result.info.public_id) {
 					setImageId(result.info.public_id);
-					console.log(result.info);
-					update({
+					const {updatedData} = await update({
 						variables: {
 							image: result.info.public_id,
 						},

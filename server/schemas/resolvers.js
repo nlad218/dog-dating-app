@@ -10,8 +10,6 @@ const resolvers = {
 				.populate("likes")
 				.populate("matches")
 				.populate("messages");
-			console.log(singleUser);
-			console.log(singleUser.likes[0].breed);
 			return singleUser;
 		},
 		// GET route: users, find
@@ -30,7 +28,6 @@ const resolvers = {
 		// // GET route: me, findOne
 		me: async (parent, args, { user }) => {
 			if (user) {
-				console.log(user);
 				return await User.findById({ _id: user._id })
 					.populate("hobbies")
 					.populate({
