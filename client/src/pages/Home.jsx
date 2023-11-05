@@ -4,7 +4,7 @@ import LoginModal from "../components/Login";
 import HomeCarousel from "../components/HomeCarousel";
 export default function LandingPage() {
 	const [isModalOpen, setModalOpen] = useState(false);
-	const [isCarouselOpen, setCarouselOpen] = useState(false)
+	const [isCarouselOpen, setCarouselOpen] = useState(false);
 	const openModal = () => {
 		setModalOpen(true);
 	};
@@ -68,7 +68,6 @@ export default function LandingPage() {
 
 	return (
 		<div>
-
 			<div
 				className="hero min-h-screen"
 				style={{
@@ -100,21 +99,38 @@ export default function LandingPage() {
 						</h1>
 						<p className="mb-5">Find a best friend for man's best friend!</p>
 						{/* LOGIN MODAL */}
-						<label htmlFor="my_modal_login" className="btn btn-primary text-white mb-3 w-48">Login</label>
-						<input type="checkbox" id="my_modal_login" className="modal-toggle" />
+						<label
+							htmlFor="my_modal_login"
+							className="btn btn-primary text-white mb-3 w-48"
+						>
+							Login
+						</label>
+						<input
+							type="checkbox"
+							id="my_modal_login"
+							className="modal-toggle"
+						/>
 						<div className="modal flex flex-col justify-center items-center">
 							<LoginModal />
 						</div>
 						{/* PREVIEW WEBSITE MODAL */}
-						<label htmlFor="my_modal_prev" className="btn w-48">Preview Site</label>
-						<input type="checkbox" id="my_modal_prev" className="modal-toggle" />
+						<label htmlFor="my_modal_prev" className="btn w-48">
+							Preview Site
+						</label>
+						<input
+							type="checkbox"
+							id="my_modal_prev"
+							className="modal-toggle"
+						/>
 						<div className="modal">
-						<div className="modal-box flex flex-col justify-center items-center">
-							<HomeCarousel />
-							<div className="modal-action">
-							<label htmlFor="my_modal_prev" className="btn">Close!</label>
+							<div className="modal-box flex flex-col justify-center items-center">
+								<HomeCarousel />
+								<div className="modal-action">
+									<label htmlFor="my_modal_prev" className="btn">
+										Close!
+									</label>
+								</div>
 							</div>
-						</div>
 						</div>
 					</div>
 				</div>
@@ -124,7 +140,6 @@ export default function LandingPage() {
 					<ReviewCards key={index} name={review.name} review={review.review} />
 				))}
 			</div>
-			<LoginModal isOpen={isModalOpen} onClose={closeModal} />
 		</div>
 	);
 }
