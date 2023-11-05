@@ -10,12 +10,18 @@ import { UPDATE_USER } from "../utils/mutations";
 import UpdateProfileModal from "../components/UpdateProfile";
 
 export default function Profile() {
-	const { error, loading, data } = useQuery(QUERY_SELF_PROFILE);
+	const [imageId, setImageId] = useState("eimq5aiwwim0kdjdztmg");
+	const { error, loading, data } = useQuery(QUERY_SELF_PROFILE,{
+		onCompleted: (data) => setImageId(data.me.image)
+	} );
 	const [update] = useMutation(UPDATE_USER);
 	const userData = data?.me || {};
 	const loggedIn = Auth.loggedIn();
-	const [imageId, setImageId] = useState("eimq5aiwwim0kdjdztmg");
 	const [isModalOpen, setModalOpen] = useState(false);
+	// useEffect(() => {
+	// 	setImageId(data)
+	// 	console.log(data.me.image)
+	// }, [data])
 	const openModal = () => {
 		setModalOpen(true);
 	};
