@@ -11,7 +11,7 @@ import UpdateProfileModal from "../components/UpdateProfile";
 
 export default function Profile() {
 	const { error, loading, data } = useQuery(QUERY_SELF_PROFILE);
-	const { update } = useMutation(UPDATE_USER);
+	const [update] = useMutation(UPDATE_USER);
 	const userData = data?.me || {};
 	const loggedIn = Auth.loggedIn();
 	const [imageId, setImageId] = useState("eimq5aiwwim0kdjdztmg");
@@ -43,13 +43,19 @@ export default function Profile() {
 			function (error, result) {
 				if (result.info.public_id) {
 					setImageId(result.info.public_id);
+					console.log(result.info);
+					update({
+						variables: {
+							image: result.info.public_id,
+						},
+					});
 				}
 			}
 		);
 	});
 
 	// Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
-	const myImage = cld.image(userData.image);
+	const myImage = cld.image(imageId);
 	// Resize to 250 x 250 pixels using the 'fill' crop mode.
 	myImage.resize(fill().width(700).height(400));
 

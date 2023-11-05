@@ -170,6 +170,7 @@ const resolvers = {
 						saltRounds
 					);
 				}
+				updateInfo.image = args.image;
 				const updatedUser = await User.findOneAndUpdate(
 					{ _id: context.user._id, ownerName: context.user.ownerName },
 					{ ...updateInfo },
