@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { CREATE_MESSAGE } from "../utils/mutations";
 import Auth from "../utils/auth";
 import SingleMatchProfile from "./SingleMatchProfile";
+import "../styles/activeMatch.css"
 
 export default function ActiveMatch({ active, profileView, children }) {
   const [newMessage, setNewMessage] = useState("");
@@ -50,6 +51,7 @@ export default function ActiveMatch({ active, profileView, children }) {
   }
   // console.log(otherUser)
   return (
+    
     <div className="w-full min-h-fit rounded-xl bg-base-200 shadow-xl overflow-auto">
       <div className="text-2xl bg-primary text-primary-content font-semibold rounded-t-xl flex flex-row gap-4">
         <div className="p-2 ">{children}</div>
@@ -63,8 +65,9 @@ export default function ActiveMatch({ active, profileView, children }) {
         <SingleMatchProfile otherUser = {otherUser} />
       ) : (
         <div>
+          <div className = "h-96 overflow-auto heightSet">
           <div
-            className="text-lg lg:text-2xl py-4 overflow-auto activeChat"
+            className="text-lg lg:text-2xl py-4 activeChat heightSet "
             key="mapping"
           >
             {messages.map((message, index) => (
@@ -89,6 +92,7 @@ export default function ActiveMatch({ active, profileView, children }) {
                 </div>
               </div>
             ))}
+          </div>
           </div>
           <div className="p-2 join w-full">
             <input

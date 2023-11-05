@@ -10,6 +10,7 @@ export default function MainPage() {
 	const [index, setIndex] = useState(0);
 	const [showDetails, setShowDetails] = useState(false);
 	const [imageId, setImageId] = useState("");
+	const [isMatched, setIsMatched] = useState(false);
 
 	const [addToLikes] = useMutation(ADD_TO_LIKES);
 	const [createMatch] = useMutation(CREATE_MATCH);
@@ -69,6 +70,11 @@ export default function MainPage() {
 				createMatch({
 					variables: { otherId: profiles[index]._id },
 				});
+				setIsMatched(true);
+
+				setTimeout(() => {
+					setIsMatched(false);
+				}, 2000);
 			}
 		}
 
@@ -87,9 +93,9 @@ export default function MainPage() {
 	const myImage = cld.image(profiles[index].image);
 
 	return (
-		<div className="flex items-center my-10">
+		<div className="flex items-center mb-10 mt-5">
 			<div
-				className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10"
+				className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10 border-2 border-black"
 				style={{ maxWidth: 450, maxHeight: 525 }}
 			>
 				<figure>
@@ -162,6 +168,13 @@ export default function MainPage() {
 					</div>
 				</div>
 			</div>
+			{isMatched && (
+				<div className="toast toast-center toast-middle">
+					<div className="alert alert-success">
+						<span>New Match!</span>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

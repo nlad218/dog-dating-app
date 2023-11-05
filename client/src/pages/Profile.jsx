@@ -10,92 +10,107 @@ import { UPDATE_USER } from "../utils/mutations";
 import UpdateProfileModal from "../components/UpdateProfile";
 
 export default function Profile() {
-  const { error, loading, data } = useQuery(QUERY_SELF_PROFILE);
-  const { update } = useMutation(UPDATE_USER);
-  const userData = data?.me || {};
-  const loggedIn = Auth.loggedIn();
-  const [imageId, setImageId] = useState("eimq5aiwwim0kdjdztmg");
-  const [isModalOpen, setModalOpen] = useState(false);
-  const openModal = () => {
-    setModalOpen(true);
-  };
+	const { error, loading, data } = useQuery(QUERY_SELF_PROFILE);
+	const [update] = useMutation(UPDATE_USER);
+	const userData = data?.me || {};
+	const loggedIn = Auth.loggedIn();
+	const [imageId, setImageId] = useState("eimq5aiwwim0kdjdztmg");
+	const [isModalOpen, setModalOpen] = useState(false);
+	const openModal = () => {
+		setModalOpen(true);
+	};
 
-  const closeModal = () => {
-    setModalOpen(false);
-  };
+	const closeModal = () => {
+		setModalOpen(false);
+	};
 
-  // Create a Cloudinary instance and set your cloud name.
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: "dkxtk2v4z",
-    },
-  });
-  const cloudinaryRef = useRef();
-  const widgetRef = useRef();
-  useEffect(() => {
-    cloudinaryRef.current = window.cloudinary;
-    // console.log(cloudinaryRef.current);
-    widgetRef.current = cloudinaryRef.current.createUploadWidget(
-      {
-        cloudName: "dkxtk2v4z",
-        uploadPreset: "dogprofile_test",
-      },
-      function (error, result) {
-        console.log(result.info.public_id);
-        if (result.info.public_id) {
-          setImageId(result.info.public_id);
-        }
-      }
-    );
-  });
+	// Create a Cloudinary instance and set your cloud name.
+	const cld = new Cloudinary({
+		cloud: {
+			cloudName: "dkxtk2v4z",
+		},
+	});
+	const cloudinaryRef = useRef();
+	const widgetRef = useRef();
+	useEffect(() => {
+		cloudinaryRef.current = window.cloudinary;
+		// console.log(cloudinaryRef.current);
+		widgetRef.current = cloudinaryRef.current.createUploadWidget(
+			{
+				cloudName: "dkxtk2v4z",
+				uploadPreset: "dogprofile_test",
+			},
+			async function (error, result) {
+				if (result.info.public_id) {
+					setImageId(result.info.public_id);
+					const { updatedData } = await update({
+						variables: {
+							image: result.info.public_id,
+						},
+					});
+				}
+			}
+		);
+	});
 
-  // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
-  const myImage = cld.image(imageId);
-  console.log(userData);
-  // Resize to 250 x 250 pixels using the 'fill' crop mode.
-  myImage.resize(fill().width(700).height(400));
+	// Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
+	const myImage = cld.image(imageId);
+	// Resize to 250 x 250 pixels using the 'fill' crop mode.
+	myImage.resize(fill().width(700).height(400));
 
-  const handleLogout = () => {
-    Auth.logout();
-    window.location.assign("/");
-  };
+	const handleLogout = () => {
+		Auth.logout();
+		window.location.assign("/");
+	};
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>{error.message}</div>;
-  }
+	if (loading) {
+		return <div>Loading...</div>;
+	}
+	if (error) {
+		return <div>{error.message}</div>;
+	}
 
-  return (
-    <div>
-      {!loggedIn && window.location.assign("/")}
-      <div className="card bg-primary p-4 md:p-16 lg:p-16 xl:p-20 mt-3">
-        <div className="card-body text-white">
-          {/* <figure>{userData.image}</figure> */}
-          <AdvancedImage cldImg={myImage} className="block" />
-          <h2 className="mb-2">Owner Name: {userData.ownerName}</h2>
-          <h3 className="mb-2">{userData.dogName}</h3>
-          <h3 className="mb-2">Breed: {userData.breed}</h3>
-          <h3 className="mb-2">Age: {userData.age}</h3>
-          <h3 className="mb-2">Size: {userData.size}</h3>
-          <h3>About: {userData.about}</h3>
-          <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={openModal}>Edit Profile</button>
-          <button
-            onClick={() => widgetRef.current.open()}
-            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          >
-            Click Here to Upload Image
-          </button>
-          <button
-            onClick={handleLogout}
-            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          >
-            Logout
-          </button>
-        </div>
-      </div>
-      <UpdateProfileModal isOpen={isModalOpen} onClose={closeModal} />
-    </div>
-  );
+	return (
+		<div
+			style={{
+				paddingRight: "1rem",
+				paddingLeft: "1rem",
+				paddingBottom: "4rem",
+				marginBottom: "2rem",
+			}}
+		>
+			{!loggedIn && window.location.assign("/")}
+			<div className="card bg-primary md:p-16 lg:p-16 xl:p-20 mt-3 border-2 border-black">
+				<div className="card-body text-white">
+					{/* <figure>{userData.image}</figure> */}
+					<AdvancedImage cldImg={myImage} className="block" />
+					<h2 className="mb-2 text-black">Owner Name: {userData.ownerName}</h2>
+					<h3 className="mb-2 text-black">Dog Name: {userData.dogName}</h3>
+					<h3 className="mb-2 text-black">Breed: {userData.breed}</h3>
+					<h3 className="mb-2 text-black">Age: {userData.age} years old</h3>
+					<h3 className="mb-2 text-black">Size: {userData.size}</h3>
+					<h3 className="text-black">About: {userData.about}</h3>
+					<button
+						className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border-2 border-black rounded shadow"
+						onClick={openModal}
+					>
+						Edit Profile
+					</button>
+					<button
+						onClick={() => widgetRef.current.open()}
+						className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border-2 border-black rounded shadow"
+					>
+						Click Here to Upload Image
+					</button>
+					<button
+						onClick={handleLogout}
+						className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border-2 border-black rounded shadow"
+					>
+						Logout
+					</button>
+				</div>
+			</div>
+			<UpdateProfileModal isOpen={isModalOpen} onClose={closeModal} />
+		</div>
+	);
 }

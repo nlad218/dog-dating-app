@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
+import React, { useState } from "react";
 
 export default function Nav() {
+	const [showAlert, setShowAlert] = useState(false);
+
 	const navLinks = [
 		{
 			name: "Home",
@@ -64,14 +68,59 @@ export default function Nav() {
 			path: "/profile",
 		},
 	];
+
+	const isLoggedIn = Auth.loggedIn();
+
 	return (
-		<nav className="flex flex-row justify-around gap-4 w-full text-2xl font-semibold">
-			{navLinks.map(({ name, icon, path }, index) => (
-				<Link to={path} key={index}>
-					<div className="md:hidden text-black">{icon}</div>
-					<div className="hidden md:block">{name}</div>
-				</Link>
-			))}
-		</nav>
+		<div>
+			{showAlert && (
+				<div className="fixed text-center top-20 left-0 right-0 mx-auto w-64 alert alert-error">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="stroke-current shrink-0 h-6 w-6"
+						fill="none"
+						viewBox="0 0 24 24"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeWidth="2"
+							d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+						/>
+					</svg>
+					<span>Login required!</span>
+				</div>
+			)}
+			<nav className="flex flex-row justify-around gap-4 w-full text-2xl font-semibold">
+				{navLinks.map(({ name, icon, path }, index) =>
+					isLoggedIn ? (
+						<Link to={path} key={index}>
+							<div className="md:hidden text-black hover:text-primary mr-5 ml-5">
+								{icon}
+							</div>
+							<div className="hidden md:block hover:text-primary">{name}</div>
+						</Link>
+					) : (
+						<div
+							key={index}
+							onClick={(e) => {
+								e.preventDefault();
+
+								setShowAlert(true);
+
+								setTimeout(() => {
+									setShowAlert(false);
+								}, 2000);
+							}}
+						>
+							<div className="md:hidden text-black hover:text-primary mr-5 ml-5">
+								{icon}
+							</div>
+							<div className="hidden md:block hover:text-primary">{name}</div>
+						</div>
+					)
+				)}
+			</nav>
+		</div>
 	);
 }

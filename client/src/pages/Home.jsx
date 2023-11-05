@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import LoginModal from "../components/Login";
+import HomeCarousel from "../components/HomeCarousel";
 
 export default function LandingPage() {
 	const [isModalOpen, setModalOpen] = useState(false);
-
+	const [isCarouselOpen, setCarouselOpen] = useState(false);
 	const openModal = () => {
 		setModalOpen(true);
 	};
@@ -12,7 +13,13 @@ export default function LandingPage() {
 	const closeModal = () => {
 		setModalOpen(false);
 	};
+	const openCarousel = () => {
+		setCarouselOpen(true);
+	};
 
+	const closeCarousel = () => {
+		setCarouselOpen(false);
+	};
 	const reviews = [
 		{
 			name: "Josh K.",
@@ -61,7 +68,7 @@ export default function LandingPage() {
 	}
 
 	return (
-		<div>
+		<div className="mb-10">
 			<div
 				className="hero min-h-screen"
 				style={{
@@ -70,8 +77,8 @@ export default function LandingPage() {
 				}}
 			>
 				<div className="hero-overlay bg-opacity-60"></div>
-				<div className="hero-content text-center text-white">
-					<div className="max-w-md">
+				<div className="hero-content text-center text-white flex flex-col items-center justify-center">
+					<div className="max-w-md flex flex-col items-center">
 						<h1 className="mb-5 text-5xl font-bold">
 							<TypeAnimation
 								className="homeNameTitle"
@@ -92,18 +99,48 @@ export default function LandingPage() {
 							></TypeAnimation>
 						</h1>
 						<p className="mb-5">Find a best friend for man's best friend!</p>
-						<button className="btn btn-primary text-white" onClick={openModal}>
-							Login / Sign up
-						</button>
+						{/* LOGIN MODAL */}
+						<label
+							htmlFor="my_modal_login"
+							className="btn btn-primary text-white mb-3 w-48"
+						>
+							Login / Sign Up
+						</label>
+						<input
+							type="checkbox"
+							id="my_modal_login"
+							className="modal-toggle"
+						/>
+						<div className="modal flex flex-col justify-center items-center">
+							<LoginModal isOpen={isModalOpen} onClose={closeModal} />
+						</div>
+						{/* PREVIEW WEBSITE MODAL */}
+						<label htmlFor="my_modal_prev" className="btn w-48">
+							Preview Site
+						</label>
+						<input
+							type="checkbox"
+							id="my_modal_prev"
+							className="modal-toggle"
+						/>
+						<div className="modal">
+							<div className="modal-box flex flex-col justify-center items-center">
+								<HomeCarousel />
+								<div className="modal-action">
+									<label htmlFor="my_modal_prev" className="btn">
+										Close!
+									</label>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div className="grid md:flex">
+			<div className="grid md:flex mb-2">
 				{reviews.map((review, index) => (
 					<ReviewCards key={index} name={review.name} review={review.review} />
 				))}
 			</div>
-			<LoginModal isOpen={isModalOpen} onClose={closeModal} />
 		</div>
 	);
 }
