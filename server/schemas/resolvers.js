@@ -131,11 +131,10 @@ const resolvers = {
 		},
 
 		// DELETE route: delete user account
-		deleteUser: async (parent, { userId }, context) => {
+		deleteUser: async (parent, { userId }, {user}) => {
 			if (context.user) {
 				const user = await User.findOneAndRemove({
-					_id: userId,
-					ownerName: context.user.ownerName,
+					_id: user._id,
 				});
 
 				return { message: "Account deleted successfully." };
