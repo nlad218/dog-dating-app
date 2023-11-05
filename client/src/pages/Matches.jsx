@@ -30,7 +30,7 @@ export default function Chat() {
 				{!loggedIn && window.location.assign("/")}
 				<input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
-				<div className="drawer-content flex flex-col items-center justify-start">
+				<div className="drawer-content flex flex-col items-center justify-start ml-4">
 					<ActiveMatch active={activeConversation} profileView={profileView}>
 						<label
 							htmlFor="my-drawer"
@@ -40,11 +40,11 @@ export default function Chat() {
 						</label>
 					</ActiveMatch>
 				</div>
-				<div className="drawer-side max-md:z-50">
+				<div className="drawer-side h-full max-md:z-50">
 					<label
 						htmlFor="my-drawer"
 						aria-label="close sidebar"
-						className="drawer-overlay"
+						className="drawer-overlay md:hidden"
 					>
 						&lt;
 					</label>

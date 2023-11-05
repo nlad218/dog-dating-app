@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Auth from "../utils/auth";
 import sadDog from "../assets/saddog.avif"
 let doOnce = true;
+let swalOnce = true;
 export default function MatchesList({
 	active,
 	setActive,
@@ -11,7 +12,31 @@ export default function MatchesList({
 	setProfileView,
 }) {
 	const { data, loading, error } = useQuery(QUERY_SELF_MATCHES, {
-    pollInterval:500
+    pollInterval:500,
+    onCompleted: (data) => {
+      if(matches.length<1 && swalOnce)
+    {
+       let swalWithDaisy = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-primary text-white',
+          image: 'border-4 border-rose-400',
+          swal: 'border-4 border-rose-400'
+        },
+        buttonsStyling: false
+      })
+      swalWithDaisy.fire({
+        title: 'Oops!',
+        text: "You don't have any matches yet",
+        imageUrl: sadDog,
+        imageWidth: 300,
+        imageHeight: 350,
+        imageAlt: 'Custom image',
+       })
+       swalOnce = !swalOnce
+    } else {
+      setActive(data.me.matches[0]._id);
+    }
+    }
   });
 
 	const matches =
@@ -32,40 +57,17 @@ export default function MatchesList({
 		}) || [];
 
 	//TODO: Getting a "cannot udpate a compoennet while rendering a different componenet error"
-	useEffect(() => {
-		if (data && doOnce) {
-      if (data.me.matches.length>0) {
-        setActive(data?.me.matches[0]._id);
-			doOnce = !doOnce;
-      }
+	// useEffect(() => {
+	// 	if (data && doOnce) {
+  //     if (data.me.matches.length>0) {
+  //       setActive(data?.me.matches[0]._id);
+	// 		doOnce = !doOnce;
+  //     }
 
-		}
-	});
+	// 	}
+	// });
 	if (loading) return "loading...";
 	if (error) return `Error! ${error.message}`;
-  const callSweetAlert = () => {
-    if(matches.length<1)
-    {
-       let swalWithDaisy = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-primary text-white',
-          image: 'border-4 border-rose-400',
-          swal: 'border-4 border-rose-400'
-        },
-        buttonsStyling: false
-      })
-      swalWithDaisy.fire({
-        title: 'Oops!',
-        text: "You don't have any matches yet",
-        imageUrl: sadDog,
-        imageWidth: 300,
-        imageHeight: 350,
-        imageAlt: 'Custom image',
-       })
-    }
-     
-  }
-
 
 	return (
     <>
