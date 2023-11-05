@@ -10,7 +10,6 @@ import Matches from "./pages/Matches";
 import Profile from "./pages/Profile.jsx";
 
 import Auth from "./utils/auth.js";
-
 const router = createBrowserRouter([
 	{
 		path: "/",
