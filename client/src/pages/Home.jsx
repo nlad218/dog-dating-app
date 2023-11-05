@@ -67,7 +67,7 @@ export default function LandingPage() {
 	}
 
 	return (
-		<div>
+		<div className="mb-10">
 			<div
 				className="hero min-h-screen"
 				style={{
@@ -135,7 +135,7 @@ export default function LandingPage() {
 					</div>
 				</div>
 			</div>
-			<div className="grid md:flex">
+			<div className="grid md:flex mb-2">
 				{reviews.map((review, index) => (
 					<ReviewCards key={index} name={review.name} review={review.review} />
 				))}
