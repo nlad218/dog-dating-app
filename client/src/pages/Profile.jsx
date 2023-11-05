@@ -10,11 +10,15 @@ import { UPDATE_USER } from "../utils/mutations";
 import UpdateProfileModal from "../components/UpdateProfile";
 
 export default function Profile() {
-	const [imageId, setImageId] = useState("eimq5aiwwim0kdjdztmg");
+	const [imageId, setImageId] = useState("loading_znoemz");
 	const { error, loading, data } = useQuery(QUERY_SELF_PROFILE,{
-		onCompleted: (data) => setImageId(data.me.image)
+		onCompleted: (data) => {
+			setImageId(data.me.image)
+			setNewUserData1(data.me)
+		}
 	} );
 	const [update] = useMutation(UPDATE_USER);
+	const [userData1, setNewUserData1] = useState({})
 	const userData = data?.me || {};
 	const loggedIn = Auth.loggedIn();
 	const [isModalOpen, setModalOpen] = useState(false);
@@ -83,12 +87,12 @@ export default function Profile() {
 				<div className="card-body text-white">
 					{/* <figure>{userData.image}</figure> */}
 					<AdvancedImage cldImg={myImage} className="block" />
-					<h2 className="mb-2 text-black">Owner Name: {userData.ownerName}</h2>
-					<h3 className="mb-2 text-black">Dog Name: {userData.dogName}</h3>
-					<h3 className="mb-2 text-black">Breed: {userData.breed}</h3>
-					<h3 className="mb-2 text-black">Age: {userData.age} years old</h3>
-					<h3 className="mb-2 text-black">Size: {userData.size}</h3>
-					<h3 className="text-black">About: {userData.about}</h3>
+					<h2 className="mb-2 text-black">Owner Name: {userData1.ownerName}</h2>
+					<h3 className="mb-2 text-black">Dog Name: {userData1.dogName}</h3>
+					<h3 className="mb-2 text-black">Breed: {userData1.breed}</h3>
+					<h3 className="mb-2 text-black">Age: {userData1.age} years old</h3>
+					<h3 className="mb-2 text-black">Size: {userData1.size}</h3>
+					<h3 className="text-black">About: {userData1.about}</h3>
 					<button
 						className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
 						onClick={openModal}
@@ -109,7 +113,7 @@ export default function Profile() {
 					</button>
 				</div>
 			</div>
-			<UpdateProfileModal isOpen={isModalOpen} onClose={closeModal} />
+			<UpdateProfileModal isOpen={isModalOpen} onClose={closeModal} userData1 = {userData1} setNewUserData1 = {setNewUserData1} />
 		</div>
 	);
 }

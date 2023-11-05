@@ -33,6 +33,8 @@ export default function MatchesList({
         imageAlt: 'Custom image',
        })
        swalOnce = !swalOnce
+    } else {
+      setActive(data.me.matches[0]._id);
     }
     }
   });
@@ -55,15 +57,15 @@ export default function MatchesList({
 		}) || [];
 
 	//TODO: Getting a "cannot udpate a compoennet while rendering a different componenet error"
-	useEffect(() => {
-		if (data && doOnce) {
-      if (data.me.matches.length>0) {
-        setActive(data?.me.matches[0]._id);
-			doOnce = !doOnce;
-      }
+	// useEffect(() => {
+	// 	if (data && doOnce) {
+  //     if (data.me.matches.length>0) {
+  //       setActive(data?.me.matches[0]._id);
+	// 		doOnce = !doOnce;
+  //     }
 
-		}
-	});
+	// 	}
+	// });
 	if (loading) return "loading...";
 	if (error) return `Error! ${error.message}`;
 
