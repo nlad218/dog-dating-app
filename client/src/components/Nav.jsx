@@ -68,8 +68,8 @@ export default function Nav() {
 		<nav className="flex flex-row justify-around gap-4 w-full text-2xl font-semibold">
 			{navLinks.map(({ name, icon, path }, index) => (
 				<Link to={path} key={index}>
-					<div className="md:hidden text-black">{icon}</div>
-					<div className="hidden md:block">{name}</div>
+					<div className="md:hidden text-black hover:text-primary">{icon}</div>
+					<div className="hidden md:block hover:text-primary">{name}</div>
 				</Link>
 			))}
 		</nav>

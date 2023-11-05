@@ -66,6 +66,7 @@ export default function LoginModal({ isOpen, onClose }) {
 					},
 				});
 				Auth.signUp(data.createUser.token);
+				window.location.href = "/profile";
 			} catch (err) {
 				console.error(err);
 				setDupeText(true);
