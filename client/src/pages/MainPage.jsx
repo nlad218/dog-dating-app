@@ -93,9 +93,9 @@ export default function MainPage() {
 	const myImage = cld.image(profiles[index].image);
 
 	return (
-		<div className="flex items-center my-10">
+		<div className="flex items-center mb-10 mt-5">
 			<div
-				className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10"
+				className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10 border-2 border-black"
 				style={{ maxWidth: 450, maxHeight: 525 }}
 			>
 				<figure>

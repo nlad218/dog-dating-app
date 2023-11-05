@@ -93,7 +93,10 @@ export default function LoginModal({ isOpen, onClose }) {
 			<div className="modal-container mx-2 sm:mx-0">
 				<div className="bg-base-100 w-full sm:w-96 rounded-lg shadow-lg p-4">
 					<div className="flex justify-between">
-						<label htmlFor = "my_modal_login" className="text-black-600 text-2xl hover:cursor-pointer hover:scale-110">
+						<label
+							htmlFor="my_modal_login"
+							className="text-black-600 text-2xl hover:cursor-pointer hover:scale-110"
+						>
 							[&times;]
 						</label>
 					</div>
@@ -120,7 +123,6 @@ export default function LoginModal({ isOpen, onClose }) {
 								>
 									Login
 								</button>
-								
 							</li>
 							<li>
 								<button
@@ -286,7 +288,6 @@ export default function LoginModal({ isOpen, onClose }) {
 					)}
 				</div>
 			</div>
-		{/* </div> */}
 		</>
 	);
 }
