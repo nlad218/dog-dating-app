@@ -6,7 +6,6 @@ const {User} = require('../models')
 db.once('open', async () => {
     try {
         const newSeed = await User.create(userSeeds);
-        console.log(newSeed)
         const allUsers = await User.find();
         for (let x = 0 ; x<allUsers.length; x++) {
             if(x>= allUsers.length-2){
