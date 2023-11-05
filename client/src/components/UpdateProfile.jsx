@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-export default function UpdateProfileModal({ isOpen, onClose }) {
+export default function UpdateProfileModal({ isOpen, onClose, userData1, setNewUserData1 }) {
 	const [update] = useMutation(UPDATE_USER);
 	const [activeTab, setActiveTab] = useState("owner");
 	const [newUserData, setNewUserData] = useState({});
@@ -16,9 +16,13 @@ export default function UpdateProfileModal({ isOpen, onClose }) {
 		e.preventDefault();
 		try {
 			const sendData = {};
+			console.log(newUserData)
 			Object.entries(newUserData).forEach(([key, value]) => {
 				if (value) {
 					sendData[key] = value;
+					let temp = userData1;
+					temp[key] = value
+					setNewUserData1(temp);
 				}
 			});
 			const { data } = await update({
