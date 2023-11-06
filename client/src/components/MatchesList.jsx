@@ -54,17 +54,6 @@ export default function MatchesList({
 			}
 			return { matchId, dogName, ownerName };
 		}) || [];
-
-	//TODO: Getting a "cannot udpate a compoennet while rendering a different componenet error"
-	// useEffect(() => {
-	// 	if (data && doOnce) {
-	//     if (data.me.matches.length>0) {
-	//       setActive(data?.me.matches[0]._id);
-	// 		doOnce = !doOnce;
-	//     }
-
-	// 	}
-	// });
 	if (loading) return <span className="loading loading-ball loading-lg"></span>;
 	if (error) return `Error! ${error.message}`;
 
@@ -86,7 +75,6 @@ export default function MatchesList({
 								<div className="text-xl font-semibold">
 									{ownerName} and {dogName}
 								</div>
-								{/* <div>This is an example message</div> */}
 								<button
 									className="hover:underline"
 									onClick={(event) => {

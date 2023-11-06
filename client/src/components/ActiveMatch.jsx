@@ -39,8 +39,6 @@ export default function ActiveMatch({ active, profileView, children }) {
 	} else {
 		otherUser = user2;
 	}
-	// console.log(data.oneMatch.user1.ownerName)
-	// console.log(Auth.getProfile().data.ownerName)
 	function handleSendMessage(event) {
 		event.preventDefault();
 		// USE MUTATION TO ADD A MESSAGE TO THE CONVERSATION
@@ -49,7 +47,6 @@ export default function ActiveMatch({ active, profileView, children }) {
 		});
 		setNewMessage("");
 	}
-	// console.log(otherUser)
 	return (
 		<div className="w-full min-h-fit rounded-xl bg-base-200 shadow-xl overflow-auto">
 			<div className="text-2xl bg-primary text-primary-content font-semibold rounded-t-xl flex flex-row gap-4">

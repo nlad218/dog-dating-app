@@ -1,12 +1,15 @@
+/* Swipe Page Styling */
 .mainDiv {
 	height: 90vh;
 	width: 80vw;
 	padding-top: 0.5rem;
 }
+
 .imageDiv {
 	height: 100%;
 	border: 0.2rem solid #fd5564;
 	width: 40%;
+	
 }
 .infoDiv {
 	border: 0.2rem solid #fd5564;
@@ -14,7 +17,6 @@
 	display: flex;
 	justify-content: start;
 	flex-direction: column;
-	/* padding: 1rem; */
 	border-top-right-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;
 }
@@ -51,7 +53,7 @@
 	height: 5rem;
 	width: 5rem;
 }
-
+/* Profile Page Styling add-ons */
 .profileButtonDiv{
 	padding-right: 2rem;
 	align-items: start;
@@ -64,6 +66,8 @@
 .profileButton{
 	width: 12rem;
 }
+
+/* Media Queries */
 @media (width<1500px) {
 	.imageDiv {
 		width: 50%;
@@ -93,6 +97,8 @@
 		justify-content: start;
 		height: 40%;
 		padding: 1rem;
+		border-top-right-radius: 0rem;
+		border-bottom-left-radius: 0.5rem;
 	}
 	.cardTitle {
 		font-size: 2rem;

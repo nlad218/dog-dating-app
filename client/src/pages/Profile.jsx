@@ -16,7 +16,8 @@ export default function Profile() {
 			setImageId(data.me.image);
 			setNewUserData1(data.me);
 		},
-		pollInterval: 5000,
+		pollInterval: 500
+		
 	});
 	const [update] = useMutation(UPDATE_USER);
 	const [userData1, setNewUserData1] = useState({});
@@ -40,7 +41,6 @@ export default function Profile() {
 	const widgetRef = useRef();
 	useEffect(() => {
 		cloudinaryRef.current = window.cloudinary;
-		// console.log(cloudinaryRef.current);
 		widgetRef.current = cloudinaryRef.current.createUploadWidget(
 			{
 				cloudName: "dkxtk2v4z",
@@ -143,16 +143,16 @@ export default function Profile() {
 							<h4 className="text-white mb-2 details">
 								<u>Bio</u>: {userData1.about}
 							</h4>
-							<h3 className="text-black">
-								Hobbies:
+							<h4 className="text-black details">
+								<u>Hobbies</u>:
 								<ul>
 									{userData.hobbies.map((hobby, index) => (
-										<li key={index}>
+										<li key={index} className = "cardLi">
 											<h3>{hobby}</h3>
 										</li>
 									))}
 								</ul>
-							</h3>
+							</h4>
 						</div>
 					</div>
 					<div className="card-actions w-full profileButtonDiv flex-nowrap ">

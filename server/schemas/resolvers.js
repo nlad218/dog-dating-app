@@ -99,7 +99,8 @@ const resolvers = {
 		},
 	},
 	Mutation: {
-		addToLikes: async (parent, { otherId }, { user }) => {
+		
+		addToLikes: async (parent, { matchId }, { user }) => {
 			//if not already liked, update user profile
 			const updateMyProfile = await User.findOneAndUpdate(
 				{ _id: user._id },
@@ -125,7 +126,12 @@ const resolvers = {
 		},
 		// CREATE route: create user account - Maya
 		createUser: async (parent, { ownerName, email, password }) => {
-			const user = await User.create({ ownerName, email, password });
+			const user = await User.create({
+				ownerName: ownerName,
+				email: email,
+				password: password,
+				image: "empty-profile_ttux5f"
+				});
 			const token = signToken(user);
 			return { token, user };
 		},

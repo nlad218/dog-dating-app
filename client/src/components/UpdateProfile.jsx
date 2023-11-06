@@ -24,6 +24,14 @@ export default function UpdateProfileModal({
 		e.preventDefault();
 		try {
 			console.log(newUserData);
+			Object.entries(newUserData).forEach(([key, value]) => {
+				if (value) {
+					setNewUserData1((prevUserData1) => ({
+						...prevUserData1,
+						[key]: value,
+					}));
+				}
+			});
 			const { data } = await update({
 				variables: {
 					ownerName: Auth.getProfile().data.ownerName,
