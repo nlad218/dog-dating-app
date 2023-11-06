@@ -8,8 +8,14 @@ const resolvers = {
     user: async (parent, { userId }) => {
       const singleUser = await User.findOne({ _id: userId })
         .populate("likes")
-        .populate("matches")
-        .populate("messages");
+        .populate({
+          path: "matches",
+          populate: [
+            { path: "messages" },
+            { path: "user2" },
+            { path: "messages" },
+          ],
+        });
       return singleUser;
     },
     // GET route: users, find
