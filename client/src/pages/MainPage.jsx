@@ -93,36 +93,38 @@ export default function MainPage() {
 	};
 
 	const myImage = cld.image(profiles[index].image);
-	myImage.resize(scale().width(150));
+	// myImage.resize(scale().width(150));
 
 	return (
-		<div className="flex items-center mb-10 mt-5">
-			<div className="card shadow-xl bg-primary mx-10 border-2 border-black">
-				<figure className="mt-3">
-					<AdvancedImage cldImg={myImage} className="border border-white" />
-				</figure>
-				<div className="card-body">
-					<h2 className="card-title text-white text-4xl">
-						{profiles[index].dogName} - {profiles[index].age} yrs
-					</h2>
-					<h3 className="card-subtitle text-white">
+		<>
+		<div className="card lg:card-side bg-base-100 shadow-xl mainDiv"> 
+			<figure className = "imageDiv">
+			<AdvancedImage cldImg={myImage} className="border border-white h-full imageStyle" />
+			</figure>
+			<div className="card-body bg-primary overflow-auto infoDiv" >
+				<h2 className="cardTitle">
+				{profiles[index].dogName} - {profiles[index].age} yrs
+				</h2>
+				<h3 className="card-subtitle text-white breed">
 						{profiles[index].gender} {profiles[index].breed}
-					</h3>
-					<div className="mt-3">
+				</h3>
+				<div>
 						<button
 							onClick={toggleDetails}
-							className="md:hidden text-white text-sm font-medium p-0 cursor-pointer"
+							className="md:hidden text-white cursor-pointer"
 						>
-							More Details
+							More Details ⇩
 						</button>
 						<div className={`md:block ${showDetails ? "block" : "hidden"}`}>
-							<h4 className="text-white mb-2">Size: {profiles[index].size}</h4>
-							<h4 className="text-white mb-2">Bio: {profiles[index].about}</h4>
-							<h4 className="text-white mb-2">
-								Hobbies:
+							<h4 className="text-white mb-2 details"><u>Size</u>: {profiles[index].size}</h4>
+							<h4 className="text-white mb-2 details"><u>Bio</u>: {profiles[index].about}</h4>
+							<h4 className="text-white mb-2 details">
+							<u>Hobbies</u>:
 								<ul>
 									{profiles[index].hobbies.map((hobby, index) => (
-										<li key={index}>
+										<li key={index}
+											className = "cardLi"
+										>
 											<h4>{hobby}</h4>
 										</li>
 									))}
@@ -130,11 +132,11 @@ export default function MainPage() {
 							</h4>
 						</div>
 					</div>
-					<div className=" mt-3 card-actions justify-between">
-						<button id="left" className="btn btn-circle">
+				<div className="card-actions w-full justify-end buttonDiv">
+					<button id="left" className="btn btn-circle buttonStyle">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="h-6 w-6"
+								className="buttonSvg"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="red"
@@ -147,15 +149,15 @@ export default function MainPage() {
 									d="M6 18L18 6M6 6l12 12"
 								/>
 							</svg>
-						</button>
-						<button id="right" className="btn btn-circle">
+					</button>
+					<button id="right" className="btn btn-circle buttonStyle">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								fill="none"
 								viewBox="0 0 24 24"
 								strokeWidth="1.5"
 								stroke="green"
-								className="w-6 h-6"
+								className="buttonSvg"
 								onClick={rightSwipe}
 							>
 								<path
@@ -164,8 +166,7 @@ export default function MainPage() {
 									d="M4.5 12.75l6 6 9-13.5"
 								/>
 							</svg>
-						</button>
-					</div>
+					</button>
 				</div>
 			</div>
 			{isMatched && (
@@ -176,5 +177,7 @@ export default function MainPage() {
 				</div>
 			)}
 		</div>
+		
+		</>
 	);
 }

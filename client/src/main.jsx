@@ -8,7 +8,7 @@ import LandingPage from "./pages/Home";
 import MainPage from "./pages/MainPage.jsx";
 import Matches from "./pages/Matches";
 import Profile from "./pages/Profile.jsx";
-
+import ErrorPage from "./pages/ErrorPage.jsx"
 import Auth from "./utils/auth.js";
 const router = createBrowserRouter([
 	{
