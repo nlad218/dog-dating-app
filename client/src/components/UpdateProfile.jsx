@@ -12,7 +12,9 @@ export default function UpdateProfileModal({
 }) {
 	const [update] = useMutation(UPDATE_USER);
 	const [activeTab, setActiveTab] = useState("owner");
-	const [newUserData, setNewUserData] = useState({});
+	const [newUserData, setNewUserData] = useState({
+		hobbies: ["", "", ""], // Initialize an array with three empty strings
+	});
 
 	const handleTabClick = (tab) => {
 		setActiveTab(tab);
@@ -33,11 +35,14 @@ export default function UpdateProfileModal({
 			const { data } = await update({
 				variables: {
 					ownerName: Auth.getProfile().data.ownerName,
+					hobbies: newUserData.hobbies, // Use the hobbies array directly
 					...newUserData,
 				},
 			});
 
-			setNewUserData({});
+			setNewUserData({
+				hobbies: ["", "", ""], // Reset the hobbies array after saving
+			});
 
 			onClose(); // Close the modal
 			refetch();
@@ -49,7 +54,13 @@ export default function UpdateProfileModal({
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		const newData = { ...newUserData };
-		newData[name] = name === "age" ? parseInt(value) : value.trim();
+
+		if (name === "hobby") {
+			const dataIndex = parseInt(e.target.getAttribute("data-index"));
+			newData.hobbies[dataIndex] = value;
+		} else {
+			newData[name] = name === "age" ? parseInt(value) : value;
+		}
 		setNewUserData(newData);
 	};
 
@@ -58,7 +69,6 @@ export default function UpdateProfileModal({
 			className={`fixed inset-0 z-50 flex items-center justify-center overflow-none ${
 				isOpen ? "block" : "hidden"
 			}`}
-			
 		>
 			<div className="modal-container mx-2 sm:mx-0">
 				<div className="bg-gray-600 w-full sm:w-96 rounded-lg shadow-lg p-4">
@@ -103,11 +113,22 @@ export default function UpdateProfileModal({
 									Pup
 								</button>
 							</li>
+							<li>
+								<button
+									className={` text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline${
+										activeTab === "hobbies"
+											? "text-white bg-info"
+											: "text-white bg-primary hover:bg-info hover:text-white"
+									}`}
+									onClick={() => handleTabClick("hobbies")}
+								>
+									Hobbies
+								</button>
+							</li>
 						</ul>
 					</div>
 					{activeTab === "owner" && (
-						<form className="mb-3" onSubmit={handleSaveProfile}
-						>
+						<form className="mb-3" onSubmit={handleSaveProfile}>
 							<div className="m-2">
 								<label
 									className="block text-black-700 text-sm font-bold mb-2"
@@ -239,6 +260,29 @@ export default function UpdateProfileModal({
 									onChange={handleInputChange}
 								/>
 							</div>
+						</form>
+					)}
+					{activeTab === "hobbies" && (
+						<form className="mb-3" onSubmit={handleSaveProfile}>
+							{newUserData.hobbies.map((hobby, index) => (
+								<div className="m-2" key={index}>
+									<label
+										className="block text-black-700 text-sm font-bold mb-2"
+										htmlFor={`hobby-${index}`}
+									>
+										Hobby #{index + 1}
+									</label>
+									<input
+										type="text"
+										className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+										placeholder={`Hobby #${index + 1}`}
+										name="hobby"
+										data-index={index}
+										value={hobby}
+										onChange={handleInputChange}
+									/>
+								</div>
+							))}
 						</form>
 					)}
 					<div className="flex items-center justify-center">

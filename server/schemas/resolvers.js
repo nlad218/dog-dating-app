@@ -137,7 +137,7 @@ const resolvers = {
 		},
 
 		// DELETE route: delete user account
-		deleteUser: async (parent, { userId }, {user}) => {
+		deleteUser: async (parent, { userId }, { user }) => {
 			if (context.user) {
 				const user = await User.findOneAndRemove({
 					_id: user._id,
@@ -148,7 +148,6 @@ const resolvers = {
 			throw AuthenticationError;
 		},
 
-		
 		// LOGIN: login User
 		login: async (parent, { email, password }) => {
 			const user = await User.findOne({ email });
