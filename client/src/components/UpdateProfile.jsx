@@ -24,9 +24,6 @@ export default function UpdateProfileModal({
 			console.log(newUserData);
 			Object.entries(newUserData).forEach(([key, value]) => {
 				if (value) {
-					// let temp = newUserData;
-					// temp[key] = value;
-					// setNewUserData1(temp)
 					setNewUserData1((prevUserData1) => ({
 						...prevUserData1,
 						[key]: value,

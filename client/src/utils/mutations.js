@@ -19,13 +19,6 @@ export const DELETE_USER = gql`
 	}
 `;
 
-// export const CHECK_FOR_MATCH_AFTER_LIKES = gql`
-// mutation AddLikeCheckAddMatch($otherId: ID!) {
-//     addLikeCheckAddMatch(otherId: $otherId) {
-//       _id
-//     }
-//   }`;
-
 export const ADD_TO_LIKES = gql`
 	mutation AddToLikes($otherId: ID!) {
 		addToLikes(otherId: $otherId) {

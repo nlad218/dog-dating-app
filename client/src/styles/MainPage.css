@@ -15,7 +15,6 @@
 	display: flex;
 	justify-content: start;
 	flex-direction: column;
-	/* padding: 1rem; */
 	border-top-right-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;
 }

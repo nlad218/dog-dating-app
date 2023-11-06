@@ -5,12 +5,6 @@ import SingleMatchProfile from "../components/SingleMatchProfile";
 import Auth from "../utils/auth";
 
 export default function Chat() {
-	// This page will need to:
-	// - Query the server for the user's connections
-	// - Query the server for some amount of messages for EVERY chat (at least the single most recent & when it was sent)
-	// - Query the server for and/or cache some amount of messages for the active conversation
-	// - Keep track of the active conversation
-
 	const [activeConversation, setActiveConversation] = useState("");
 	const [profileView, setProfileView] = useState(false);
 	const loggedIn = Auth.loggedIn();

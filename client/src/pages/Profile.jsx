@@ -41,7 +41,6 @@ export default function Profile() {
 	const widgetRef = useRef();
 	useEffect(() => {
 		cloudinaryRef.current = window.cloudinary;
-		// console.log(cloudinaryRef.current);
 		widgetRef.current = cloudinaryRef.current.createUploadWidget(
 			{
 				cloudName: "dkxtk2v4z",
