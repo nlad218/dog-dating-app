@@ -79,6 +79,7 @@ export const UPDATE_USER = gql`
 		$size: String
 		$about: String
 		$image: String
+		$hobbies: [String]
 	) {
 		updateUser(
 			ownerName: $ownerName
@@ -90,6 +91,7 @@ export const UPDATE_USER = gql`
 			size: $size
 			about: $about
 			image: $image
+			hobbies: $hobbies
 		) {
 			ownerName
 			email

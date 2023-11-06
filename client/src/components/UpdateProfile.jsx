@@ -12,7 +12,9 @@ export default function UpdateProfileModal({
 }) {
 	const [update] = useMutation(UPDATE_USER);
 	const [activeTab, setActiveTab] = useState("owner");
-	const [newUserData, setNewUserData] = useState({});
+	const [newUserData, setNewUserData] = useState({
+		hobbies: ["", "", ""], // Initialize an array with three empty strings
+	});
 
 	const handleTabClick = (tab) => {
 		setActiveTab(tab);
@@ -22,25 +24,17 @@ export default function UpdateProfileModal({
 		e.preventDefault();
 		try {
 			console.log(newUserData);
-			Object.entries(newUserData).forEach(([key, value]) => {
-				if (value) {
-					// let temp = newUserData;
-					// temp[key] = value;
-					// setNewUserData1(temp)
-					setNewUserData1((prevUserData1) => ({
-						...prevUserData1,
-						[key]: value,
-					}));
-				}
-			});
 			const { data } = await update({
 				variables: {
 					ownerName: Auth.getProfile().data.ownerName,
+					hobbies: newUserData.hobbies, // Use the hobbies array directly
 					...newUserData,
 				},
 			});
 
-			setNewUserData({});
+			setNewUserData({
+				hobbies: ["", "", ""], // Reset the hobbies array after saving
+			});
 
 			onClose(); // Close the modal
 			refetch();
@@ -52,7 +46,13 @@ export default function UpdateProfileModal({
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		const newData = { ...newUserData };
-		newData[name] = name === "age" ? parseInt(value) : value;
+
+		if (name === "hobby") {
+			const dataIndex = parseInt(e.target.getAttribute("data-index"));
+			newData.hobbies[dataIndex] = value;
+		} else {
+			newData[name] = name === "age" ? parseInt(value) : value;
+		}
 		setNewUserData(newData);
 	};
 
@@ -103,6 +103,18 @@ export default function UpdateProfileModal({
 									onClick={() => handleTabClick("pup")}
 								>
 									Pup
+								</button>
+							</li>
+							<li>
+								<button
+									className={` text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline${
+										activeTab === "hobbies"
+											? "text-white bg-info"
+											: "text-white bg-primary hover:bg-info hover:text-white"
+									}`}
+									onClick={() => handleTabClick("hobbies")}
+								>
+									Hobbies
 								</button>
 							</li>
 						</ul>
@@ -240,6 +252,29 @@ export default function UpdateProfileModal({
 									onChange={handleInputChange}
 								/>
 							</div>
+						</form>
+					)}
+					{activeTab === "hobbies" && (
+						<form className="mb-3" onSubmit={handleSaveProfile}>
+							{newUserData.hobbies.map((hobby, index) => (
+								<div className="m-2" key={index}>
+									<label
+										className="block text-black-700 text-sm font-bold mb-2"
+										htmlFor={`hobby-${index}`}
+									>
+										Hobby #{index + 1}
+									</label>
+									<input
+										type="text"
+										className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+										placeholder={`Hobby #${index + 1}`}
+										name="hobby"
+										data-index={index}
+										value={hobby}
+										onChange={handleInputChange}
+									/>
+								</div>
+							))}
 						</form>
 					)}
 					<div className="flex items-center justify-center">
