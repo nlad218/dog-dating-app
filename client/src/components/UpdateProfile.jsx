@@ -3,7 +3,12 @@ import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 
-export default function UpdateProfileModal({ isOpen, onClose, userData1, setNewUserData1 }) {
+export default function UpdateProfileModal({
+	isOpen,
+	onClose,
+	userData1,
+	setNewUserData1,
+}) {
 	const [update] = useMutation(UPDATE_USER);
 	const [activeTab, setActiveTab] = useState("owner");
 	const [newUserData, setNewUserData] = useState({});
@@ -15,20 +20,19 @@ export default function UpdateProfileModal({ isOpen, onClose, userData1, setNewU
 	const handleSaveProfile = async (e) => {
 		e.preventDefault();
 		try {
-			const sendData = {};
-			console.log(newUserData)
+			console.log(newUserData);
 			Object.entries(newUserData).forEach(([key, value]) => {
 				if (value) {
-					sendData[key] = value;
-					let temp = userData1;
-					temp[key] = value
-					setNewUserData1(temp);
+					setNewUserData1((prevUserData1) => ({
+						...prevUserData1,
+						[key]: value,
+					}));
 				}
 			});
 			const { data } = await update({
 				variables: {
 					ownerName: Auth.getProfile().data.ownerName,
-					...sendData,
+					...newUserData,
 				},
 			});
 
@@ -111,8 +115,8 @@ export default function UpdateProfileModal({ isOpen, onClose, userData1, setNewU
 									type="text"
 									className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
 									placeholder="New Email"
-									name="newEmail"
-									value={newUserData.email}
+									name="email"
+									value={newUserData.email || ""}
 									onChange={handleInputChange}
 								/>
 							</div>
@@ -127,8 +131,8 @@ export default function UpdateProfileModal({ isOpen, onClose, userData1, setNewU
 									type="password"
 									className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
 									placeholder="New Password"
-									name="newPassword"
-									value={newUserData.password}
+									name="password"
+									value={newUserData.password || ""}
 									onChange={handleInputChange}
 								/>
 							</div>
@@ -148,7 +152,7 @@ export default function UpdateProfileModal({ isOpen, onClose, userData1, setNewU
 									className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
 									placeholder="New Dog Name"
 									name="dogName"
-									value={newUserData.dogName}
+									value={newUserData.dogName || ""}
 									onChange={handleInputChange}
 								/>
 							</div>
@@ -164,7 +168,7 @@ export default function UpdateProfileModal({ isOpen, onClose, userData1, setNewU
 									placeholder="New Breed"
 									className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
 									name="breed"
-									value={newUserData.breed}
+									value={newUserData.breed || ""}
 									onChange={handleInputChange}
 								/>
 							</div>
@@ -180,7 +184,7 @@ export default function UpdateProfileModal({ isOpen, onClose, userData1, setNewU
 									placeholder="New Age"
 									className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
 									name="age"
-									value={newUserData.age}
+									value={newUserData.age || ""}
 									onChange={handleInputChange}
 								/>
 							</div>
@@ -190,7 +194,7 @@ export default function UpdateProfileModal({ isOpen, onClose, userData1, setNewU
 								</label>
 								<select
 									style={{ color: "black" }}
-									value={newUserData.size}
+									value={newUserData.size || ""}
 									onChange={handleInputChange}
 									name="size"
 								>
@@ -211,7 +215,7 @@ export default function UpdateProfileModal({ isOpen, onClose, userData1, setNewU
 									placeholder="New Bio"
 									className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
 									name="about"
-									value={newUserData.about}
+									value={newUserData.about || ""}
 									onChange={handleInputChange}
 								/>
 							</div>

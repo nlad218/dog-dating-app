@@ -31,7 +31,7 @@ export default function ActiveConversation({ active, children }) {
 
 	if (active == "") return "Select a conversation...";
 
-	if (loading) return "loading...";
+	if (loading) return <span className="loading loading-ball loading-lg"></span>;
 	if (err) return `Error! ${err}`;
 
 	const selfId = Auth.getProfile().data._id;
