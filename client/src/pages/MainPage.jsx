@@ -81,7 +81,6 @@ export default function MainPage() {
 
 		const newIndex = (index + 1) % profiles.length;
 		setIndex(newIndex);
-
 		if (newIndex === 0) {
 			refetch();
 		}
