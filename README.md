@@ -16,6 +16,9 @@ When the user first loads Snif, they will be prompted to either login or sign up
 
 Link to deployed app: https://stormy-mesa-49272-df30e734d644.herokuapp.com/
 
+Link to presentation slides: https://www.canva.com/design/DAFzVZooGrs/RBG59F1gUEnoBWu8I39t4g/view?utm_content=DAFzVZooGrs&utm_campaign=designshare&utm_medium=link&utm_source=editor
+
+
 ## Credits
 
 Nick Fillip: https://github.com/nfillip
