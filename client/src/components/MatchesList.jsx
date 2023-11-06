@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_SELF_MATCHES } from "../utils/queries";
 import { useEffect } from "react";
 import Auth from "../utils/auth";
-import sadDog from "../assets/saddog.avif"
+import sadDog from "../assets/saddog.avif";
 let doOnce = true;
 let swalOnce = true;
 export default function MatchesList({
@@ -12,32 +12,31 @@ export default function MatchesList({
 	setProfileView,
 }) {
 	const { data, loading, error } = useQuery(QUERY_SELF_MATCHES, {
-    pollInterval:500,
-    onCompleted: (data) => {
-      if(matches.length<1 && swalOnce)
-    {
-       let swalWithDaisy = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-primary text-white',
-          image: 'border-4 border-rose-400',
-          swal: 'border-4 border-rose-400'
-        },
-        buttonsStyling: false
-      })
-      swalWithDaisy.fire({
-        title: 'Oops!',
-        text: "You don't have any matches yet",
-        imageUrl: sadDog,
-        imageWidth: 300,
-        imageHeight: 350,
-        imageAlt: 'Custom image',
-       })
-       swalOnce = !swalOnce
-    } else {
-      setActive(data.me.matches[0]._id);
-    }
-    }
-  });
+		pollInterval: 500,
+		onCompleted: (data) => {
+			if (matches.length < 1 && swalOnce) {
+				let swalWithDaisy = Swal.mixin({
+					customClass: {
+						confirmButton: "btn btn-primary text-white",
+						image: "border-4 border-rose-400",
+						swal: "border-4 border-rose-400",
+					},
+					buttonsStyling: false,
+				});
+				swalWithDaisy.fire({
+					title: "Oops!",
+					text: "You don't have any matches yet",
+					imageUrl: sadDog,
+					imageWidth: 300,
+					imageHeight: 350,
+					imageAlt: "Custom image",
+				});
+				swalOnce = !swalOnce;
+			} else {
+				setActive(data.me.matches[0]._id);
+			}
+		},
+	});
 
 	const matches =
 		data?.me.matches.map(({ _id, user1, user2 }) => {
@@ -59,59 +58,62 @@ export default function MatchesList({
 	//TODO: Getting a "cannot udpate a compoennet while rendering a different componenet error"
 	// useEffect(() => {
 	// 	if (data && doOnce) {
-  //     if (data.me.matches.length>0) {
-  //       setActive(data?.me.matches[0]._id);
+	//     if (data.me.matches.length>0) {
+	//       setActive(data?.me.matches[0]._id);
 	// 		doOnce = !doOnce;
-  //     }
+	//     }
 
 	// 	}
 	// });
-	if (loading) return "loading...";
+	if (loading) return <span className="loading loading-ball loading-lg"></span>;
 	if (error) return `Error! ${error.message}`;
 
 	return (
-    <>
-    {matches.length <1 ? <div>
-      Sorry No Matches Yet</div>: <ul className="menu">
-			{matches.map(({ matchId, dogName, ownerName }) => (
-				<li key={matchId}>
-					<div
-						className={
-							matchId == active
-								? "items-start flex flex-col active"
-								: "items-start flex flex-col"
-						}
-					>
-						<div className="text-xl font-semibold">
-							{ownerName} and {dogName}
-						</div>
-						{/* <div>This is an example message</div> */}
-						<button
-							className="hover:underline"
-							onClick={(event) => {
-								event.preventDefault();
-								event.stopPropagation();
-								setActive(matchId);
-								setProfileView(true);
-							}}
-						>
-							See Profile
-						</button>
-						<button
-							className="hover:underline"
-							onClick={(event) => {
-								event.preventDefault();
-								event.stopPropagation();
-								setActive(matchId);
-								setProfileView(false);
-							}}
-						>
-							See Chat
-						</button>
-					</div>
-				</li>
-			))}
-		</ul>}
-    </>
+		<>
+			{matches.length < 1 ? (
+				<div>Sorry No Matches Yet</div>
+			) : (
+				<ul className="menu">
+					{matches.map(({ matchId, dogName, ownerName }) => (
+						<li key={matchId}>
+							<div
+								className={
+									matchId == active
+										? "items-start flex flex-col active"
+										: "items-start flex flex-col"
+								}
+							>
+								<div className="text-xl font-semibold">
+									{ownerName} and {dogName}
+								</div>
+								{/* <div>This is an example message</div> */}
+								<button
+									className="hover:underline"
+									onClick={(event) => {
+										event.preventDefault();
+										event.stopPropagation();
+										setActive(matchId);
+										setProfileView(true);
+									}}
+								>
+									See Profile
+								</button>
+								<button
+									className="hover:underline"
+									onClick={(event) => {
+										event.preventDefault();
+										event.stopPropagation();
+										setActive(matchId);
+										setProfileView(false);
+									}}
+								>
+									See Chat
+								</button>
+							</div>
+						</li>
+					))}
+				</ul>
+			)}
+		</>
 	);
 }

@@ -44,7 +44,7 @@ export default function MainPage() {
 	const { loading, data, error, refetch } = useQuery(QUERY_DISPLAYABLE_USERS);
 
 	if (loading) {
-		return <p>Loading...</p>;
+		return <span className="loading loading-ball loading-lg"></span>;
 	}
 
 	if (error) {

@@ -8,7 +8,7 @@ export default {
 				mytheme: {
 					primary: "#fd5564",
 
-					secondary: "#ffffff",
+					secondary: "#CACACA",
 
 					accent: "#ef4a75",
 
