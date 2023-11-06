@@ -1,0 +1,144 @@
+/* Swipe Page Styling */
+.mainDiv {
+	height: 90vh;
+	width: 80vw;
+	padding-top: 0.5rem;
+}
+
+.imageDiv {
+	height: 100%;
+	border: 0.2rem solid #fd5564;
+	width: 40%;
+	
+}
+.infoDiv {
+	border: 0.2rem solid #fd5564;
+	width: 60%;
+	display: flex;
+	justify-content: start;
+	flex-direction: column;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+}
+.cardTitle {
+	font-size: 5rem;
+	color: black;
+	text-decoration: underline;
+}
+.breed {
+	font-size: 3rem;
+	color: black;
+}
+
+.details {
+	font-size: 2rem;
+	color: black;
+}
+.cardLi {
+	font-size: 2rem;
+	margin-left: 3rem;
+	list-style-type: disc;
+}
+.buttonDiv {
+	padding-right: 2rem;
+	align-items: end;
+	height: 100%;
+}
+.buttonStyle {
+	height: 6rem;
+	width: 6rem;
+	margin-left: 2rem;
+}
+.buttonSvg {
+	height: 5rem;
+	width: 5rem;
+}
+/* Profile Page Styling add-ons */
+.profileButtonDiv{
+	padding-right: 2rem;
+	align-items: start;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly
+}
+.profileButton{
+	width: 12rem;
+}
+
+/* Media Queries */
+@media (width<1500px) {
+	.imageDiv {
+		width: 50%;
+	}
+	.infoDiv {
+		width: 50%;
+	}
+	.cardTitle {
+		font-size: 6rem;
+	}
+}
+@media (width<1024px) {
+	.mainDiv {
+		height: 80vh;
+		width: 95%;
+	}
+	.imageDiv {
+		height: 60%;
+		width: 100%;
+	}
+	.imageStyle {
+		width: 100%;
+		height: auto;
+	}
+	.infoDiv {
+		width: 100%;
+		justify-content: start;
+		height: 40%;
+		padding: 1rem;
+		border-top-right-radius: 0rem;
+		border-bottom-left-radius: 0.5rem;
+	}
+	.cardTitle {
+		font-size: 2rem;
+		color: black;
+		margin-bottom: 0rem;
+	}
+	.breed {
+		font-size: 1.5rem;
+		color: black;
+	}
+
+	.details {
+		font-size: 1rem;
+		color: black;
+	}
+	.cardLi {
+		font-size: 1rem;
+		margin-left: 2rem;
+		list-style-type: disc;
+	}
+	.buttonDiv {
+		padding-right: 2rem;
+	}
+	.buttonStyle {
+		height: 3rem;
+		width: 3rem;
+	}
+	.buttonSvg {
+		height: 2rem;
+		width: 2rem;
+	}
+}
+
+@media (width<768px) {
+	.buttonDiv {
+		padding-right: 0rem;
+		display: flex;
+		justify-content: space-around;
+	}
+	.buttonStyle {
+		margin: 0rem;
+	}
+}
