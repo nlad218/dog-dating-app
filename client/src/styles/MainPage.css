@@ -58,6 +58,19 @@
 	height: 5rem;
 	width: 5rem;
 }
+
+.profileButtonDiv{
+	padding-right: 2rem;
+	align-items: start;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly
+}
+.profileButton{
+	width: 12rem;
+}
 @media (width<1500px) {
 	.imageDiv{
 		width: 50%;
