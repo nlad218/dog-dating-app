@@ -37,16 +37,16 @@ export default function MatchesList({
 			}
 		},
 	});
-
+	// console.log(data.me.matches)
 	const matches =
 		data?.me.matches.map(({ _id, user1, user2 }) => {
 			const matchId = _id;
-			const selfId = Auth.getProfile()._id;
+			const selfId = Auth.getProfile().data._id;
 			let dogName, ownerName;
-			if (user1.id === selfId) {
+			if (user1._id === selfId) {
 				dogName = user2.dogName;
 				ownerName = user2.ownerName;
-			} else if (user2.id === selfId) {
+			} else if (user2._id === selfId) {
 				dogName = user1.dogName;
 				ownerName = user1.ownerName;
 			} else {
