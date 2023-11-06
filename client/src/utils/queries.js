@@ -1,5 +1,15 @@
 import { gql } from "@apollo/client";
 
+export const QUERY_USER_LIKES = gql`
+  query likes($userId: ID!) {
+    user(userId: $userId) {
+      likes {
+        _id
+      }
+    }
+  }
+`;
+
 export const QUERY_SELF_PROFILE = gql`
   query self {
     me {
