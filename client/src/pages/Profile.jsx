@@ -124,6 +124,9 @@ export default function Profile() {
 					<h3 className="card-subtitle text-white breed">
 						Dog Name: {userData1.dogName}
 					</h3>
+					<h3 className="card-subtitle text-white breed">
+						Breed: {userData1.breed}
+					</h3>
 					<div>
 						<button
 							onClick={toggleDetailsProfile}
@@ -140,21 +143,19 @@ export default function Profile() {
 							<h4 className="text-white mb-2 details">
 								<u>Bio</u>: {userData1.about}
 							</h4>
-							<h4 className="text-white mb-2 details">
-								<u>Hobbies</u>:
+							<h3 className="text-black">
+								Hobbies:
 								<ul>
-									{/* {userData1.hobbies.map((hobby, index) => (
-										<li key={index}
-											className = "cardLi"
-										>
-											<h4>{hobby}</h4>
+									{userData.hobbies.map((hobby, index) => (
+										<li key={index}>
+											<h3>{hobby}</h3>
 										</li>
-									))} */}
+									))}
 								</ul>
-							</h4>
+							</h3>
 						</div>
 					</div>
-					<div className="card-actions w-full profileButtonDiv">
+					<div className="card-actions w-full profileButtonDiv flex-nowrap ">
 						<button
 							className="profileButton bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border-2 border-black rounded shadow"
 							onClick={openModal}
@@ -190,55 +191,5 @@ export default function Profile() {
 				/>
 			</div>
 		</>
-		// <div
-		// 	style={{
-		// 		paddingRight: "1rem",
-		// 		paddingLeft: "1rem",
-		// 		paddingBottom: "4rem",
-		// 		marginBottom: "2rem",
-		// 	}}
-		// >
-		// 	<div className="card bg-primary md:p-16 lg:p-16 xl:p-20 mt-3 border-2 border-black">
-		// 		<div className="card-body text-white">
-		// 			<AdvancedImage cldImg={myImage} className="block" />
-		// 			<h2 className="mb-2 text-black">Owner Name: {userData1.ownerName}</h2>
-		// 			<h3 className="mb-2 text-black">Dog Name: {userData1.dogName}</h3>
-		// 			<h3 className="mb-2 text-black">Breed: {userData1.breed}</h3>
-		// 			<h3 className="mb-2 text-black">Age: {userData1.age} years old</h3>
-		// 			<h3 className="mb-2 text-black">Size: {userData1.size}</h3>
-		// 			<h3 className="text-black">About: {userData1.about}</h3>
-		// 			<button
-		// 				className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border-2 border-black rounded shadow"
-		// 				onClick={openModal}
-		// 			>
-		// 				Edit Profile
-		// 			</button>
-		// 			<button
-		// 				onClick={() => widgetRef.current.open()}
-		// 				className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border-2 border-black rounded shadow"
-		// 			>
-		// 				Click Here to Upload Image
-		// 			</button>
-		// 			<button
-		// 				onClick={handleLogout}
-		// 				className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border-2 border-black rounded shadow"
-		// 			>
-		// 				Logout
-		// 			</button>
-		// 			<button
-		// 				onClick={handleDelete}
-		// 				className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border-2 border-black rounded shadow"
-		// 			>
-		// 				Delete
-		// 			</button>
-		// 		</div>
-		// 	</div>
-		// <UpdateProfileModal
-		// 	isOpen={isModalOpen}
-		// 	onClose={closeModal}
-		// 	userData1={userData1}
-		// 	setNewUserData1={setNewUserData1}
-		// />
-		// </div>
 	);
 }
