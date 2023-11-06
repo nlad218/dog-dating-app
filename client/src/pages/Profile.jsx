@@ -11,7 +11,7 @@ import UpdateProfileModal from "../components/UpdateProfile";
 
 export default function Profile() {
 	const [imageId, setImageId] = useState("loading_znoemz");
-	const { error, loading, data } = useQuery(QUERY_SELF_PROFILE, {
+	const { error, loading, data, refetch } = useQuery(QUERY_SELF_PROFILE, {
 		onCompleted: (data) => {
 			setImageId(data.me.image);
 			setNewUserData1(data.me);
@@ -120,16 +120,16 @@ export default function Profile() {
 			<div className="card bg-primary md:p-16 lg:p-16 xl:p-20 mt-3 border-2 border-black">
 				<div className="card-body text-white">
 					<AdvancedImage cldImg={myImage} className="block" />
-					<h2 className="mb-2 text-black">Owner Name: {userData1.ownerName}</h2>
-					<h3 className="mb-2 text-black">Dog Name: {userData1.dogName}</h3>
-					<h3 className="mb-2 text-black">Breed: {userData1.breed}</h3>
-					<h3 className="mb-2 text-black">Age: {userData1.age} years old</h3>
-					<h3 className="mb-2 text-black">Size: {userData1.size}</h3>
-					<h3 className="text-black">About: {userData1.about}</h3>
+					<h2 className="mb-2 text-black">Owner Name: {userData.ownerName}</h2>
+					<h3 className="mb-2 text-black">Dog Name: {userData.dogName}</h3>
+					<h3 className="mb-2 text-black">Breed: {userData.breed}</h3>
+					<h3 className="mb-2 text-black">Age: {userData.age} years old</h3>
+					<h3 className="mb-2 text-black">Size: {userData.size}</h3>
+					<h3 className="text-black">About: {userData.about}</h3>
 					<h3 className="text-black">
 						Hobbies:
 						<ul>
-							{userData1.hobbies.map((hobby, index) => (
+							{userData.hobbies.map((hobby, index) => (
 								<li key={index}>
 									<h4>{hobby}</h4>
 								</li>
@@ -168,6 +168,7 @@ export default function Profile() {
 				onClose={closeModal}
 				userData1={userData1}
 				setNewUserData1={setNewUserData1}
+				refetch={refetch}
 			/>
 		</div>
 	);
