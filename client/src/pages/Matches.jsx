@@ -22,8 +22,6 @@ export default function Chat() {
 				style={{
 					paddingRight: "1rem",
 					paddingLeft: "1rem",
-					paddingBottom: "4rem",
-					marginBottom: "2rem",
 					marginTop: "1rem",
 				}}
 			>
