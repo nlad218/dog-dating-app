@@ -99,13 +99,7 @@ const resolvers = {
 		},
 	},
 	Mutation: {
-		// deleteMatch: async (parent, {matchId, otherId}, {user}) => {
-		// 	if (context.user) {
-		// 		const deleteMatch = await Match.findOneAndRemove({
-		// 			_id: matchId
-		// 		})
-		// 	}
-		// }
+		
 		addToLikes: async (parent, { matchId }, { user }) => {
 			//if not already liked, update user profile
 			const updateMyProfile = await User.findOneAndUpdate(

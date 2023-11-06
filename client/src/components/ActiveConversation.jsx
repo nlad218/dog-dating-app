@@ -14,14 +14,6 @@ export default function ActiveConversation({ active, children }) {
 	useEffect(() => {
 		scrollToBottom();
 	});
-	//TODO: This is returning a 400 bad request and I don't know why at all.
-	// useEffect(() => {
-	//   let { data, loading, err } = useQuery(QUERY_MATCH_MESSAGES, {
-	//     variables: {
-	//       matchId: active,
-	//     },
-	//   });
-	// })
 	let { data, loading, err } = useQuery(QUERY_MATCH_MESSAGES, {
 		variables: {
 			matchId: active,
@@ -36,11 +28,8 @@ export default function ActiveConversation({ active, children }) {
 
 	const selfId = Auth.getProfile().data._id;
 	const messages = data?.oneMatch.messages || [];
-	// console.log(data.oneMatch.user1.ownerName)
-	// console.log(Auth.getProfile().data.ownerName)
 	function handleSendMessage(event) {
 		event.preventDefault();
-		// USE MUTATION TO ADD A MESSAGE TO THE CONVERSATION
 		createMessage({
 			variables: { messageText: newMessage, matchId: active },
 		});

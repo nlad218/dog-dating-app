@@ -114,7 +114,6 @@ export default function LandingPage() {
 						<div className="modal flex flex-col justify-center items-center">
 							<LoginModal isOpen={isModalOpen} onClose={closeModal} />
 						</div>
-						{/* PREVIEW WEBSITE MODAL */}
 						<label htmlFor="my_modal_prev" className="btn w-48">
 							Preview Site
 						</label>
