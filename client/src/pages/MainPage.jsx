@@ -61,14 +61,14 @@ export default function MainPage() {
 		}
 	};
 
-	const rightSwipe = () => {
-		addToLikes({
+	const rightSwipe = async () => {
+		await addToLikes({
 			variables: { otherId: profiles[index]._id },
 		});
-
+		console.log(profiles[index].likes)
 		for (let i = 0; i < profiles[index].likes.length; i++) {
 			if (profiles[index].likes[i]._id == Auth.getProfile().data._id) {
-				createMatch({
+				await createMatch({
 					variables: { otherId: profiles[index]._id },
 				});
 				setIsMatched(true);
