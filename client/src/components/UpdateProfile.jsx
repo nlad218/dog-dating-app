@@ -8,6 +8,7 @@ export default function UpdateProfileModal({
 	onClose,
 	userData1,
 	setNewUserData1,
+	refetch,
 }) {
 	const [update] = useMutation(UPDATE_USER);
 	const [activeTab, setActiveTab] = useState("owner");
@@ -42,6 +43,7 @@ export default function UpdateProfileModal({
 			setNewUserData({});
 
 			onClose(); // Close the modal
+			refetch();
 		} catch (error) {
 			console.error(error);
 		}
@@ -120,6 +122,22 @@ export default function UpdateProfileModal({
 									placeholder="New Email"
 									name="email"
 									value={newUserData.email || ""}
+									onChange={handleInputChange}
+								/>
+							</div>
+							<div className="m-2">
+								<label
+									className="block text-black-700 text-sm font-bold mb-2"
+									htmlFor="ownerName"
+								>
+									Updated Name
+								</label>
+								<input
+									type="text"
+									className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+									placeholder="New name"
+									name="ownerName"
+									value={newUserData.ownerName || ""}
 									onChange={handleInputChange}
 								/>
 							</div>

@@ -1,28 +1,22 @@
-/* @media (min-width: 768px) {
-	.card {
-		max-width: 600px !important;
-		max-height: 600px !important;
-	}
-} */
-.mainDiv{
+.mainDiv {
 	height: 90vh;
 	width: 80vw;
-	padding-top: .5rem;
+	padding-top: 0.5rem;
 }
-.imageDiv{
+.imageDiv {
 	height: 100%;
-	border: .2rem solid #fd5564;
-	width: 40%
+	border: 0.2rem solid #fd5564;
+	width: 40%;
 }
-.infoDiv{
-	border: .2rem solid #fd5564;
-	width:60%;
+.infoDiv {
+	border: 0.2rem solid #fd5564;
+	width: 60%;
 	display: flex;
 	justify-content: start;
 	flex-direction: column;
 	/* padding: 1rem; */
-	border-top-right-radius: .5rem;
-	border-bottom-right-radius: .5rem;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
 }
 .cardTitle {
 	font-size: 5rem;
@@ -47,7 +41,6 @@
 	padding-right: 2rem;
 	align-items: end;
 	height: 100%;
-
 }
 .buttonStyle {
 	height: 6rem;
@@ -72,32 +65,31 @@
 	width: 12rem;
 }
 @media (width<1500px) {
-	.imageDiv{
+	.imageDiv {
 		width: 50%;
 	}
-	.infoDiv{
+	.infoDiv {
 		width: 50%;
 	}
 	.cardTitle {
 		font-size: 6rem;
-		
 	}
 }
 @media (width<1024px) {
-	.mainDiv{
+	.mainDiv {
 		height: 80vh;
 		width: 95%;
 	}
-	.imageDiv{
+	.imageDiv {
 		height: 60%;
-		width: 100%
+		width: 100%;
 	}
 	.imageStyle {
 		width: 100%;
-		height: auto
+		height: auto;
 	}
-	.infoDiv{
-		width:100%;
+	.infoDiv {
+		width: 100%;
 		justify-content: start;
 		height: 40%;
 		padding: 1rem;
@@ -108,10 +100,10 @@
 		margin-bottom: 0rem;
 	}
 	.breed {
-		font-size:1.5rem;
+		font-size: 1.5rem;
 		color: black;
 	}
-	
+
 	.details {
 		font-size: 1rem;
 		color: black;
@@ -123,7 +115,6 @@
 	}
 	.buttonDiv {
 		padding-right: 2rem;
-		
 	}
 	.buttonStyle {
 		height: 3rem;
@@ -132,5 +123,16 @@
 	.buttonSvg {
 		height: 2rem;
 		width: 2rem;
+	}
+}
+
+@media (width<768px) {
+	.buttonDiv {
+		padding-right: 0rem;
+		display: flex;
+		justify-content: space-around;
+	}
+	.buttonStyle {
+		margin: 0rem;
 	}
 }
