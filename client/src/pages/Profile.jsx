@@ -126,6 +126,17 @@ export default function Profile() {
 					<h3 className="mb-2 text-black">Age: {userData1.age} years old</h3>
 					<h3 className="mb-2 text-black">Size: {userData1.size}</h3>
 					<h3 className="text-black">About: {userData1.about}</h3>
+					<h3 className="text-black">
+						Hobbies:
+						<ul>
+							{userData1.hobbies.map((hobby, index) => (
+								<li key={index}>
+									<h4>{hobby}</h4>
+								</li>
+							))}
+						</ul>
+					</h3>
+
 					<button
 						className="bg-white hover:bg-gray-500 text-gray-800 font-semibold py-2 px-4 border-2 border-black rounded shadow"
 						onClick={openModal}
