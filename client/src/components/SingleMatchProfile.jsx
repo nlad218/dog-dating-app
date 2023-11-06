@@ -36,19 +36,19 @@ export default function SingleMatchProfile(otherUser) {
 	};
     const myImage = cld.image(otherUser.otherUser.image);
     return (
-        <div className="flex items-center my-10">
-			<div className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10">
+        <div className="flex justify-center items-center my-10 px-5 heightSet">
+			<div className="card lg:card-side bg-primary h-full m-1 mainDivSingleP">
 				<figure
-					className="object-contain"
-					style={{ maxWidth: 400, maxHeight: 350 }}
+					className="imageDiv"
+					
 				>
-					<AdvancedImage cldImg={myImage} />
+					<AdvancedImage cldImg={myImage} className = "imageStyle" />
 				</figure>
-				<div className="card-body">
-					<h2 className="card-title text-white text-4xl">
+				<div className="card-body overflow-auto infoDiv">
+					<h2 className="cardTitle">
 						{otherUser.otherUser.dogName} - {otherUser.otherUser.age} yrs
 					</h2>
-					<h3 className="card-subtitle text-white">
+					<h3 className="card-subtitle text-white breed">
 						{otherUser.otherUser.breed}
 					</h3>
 					<div className="mt-3">
@@ -59,13 +59,13 @@ export default function SingleMatchProfile(otherUser) {
 							More Details
 						</button>
 						<div className={`md:block ${showDetails ? "block" : "hidden"}`}>
-							<h4 className="text-white mb-2">Size: {otherUser.otherUser.size}</h4>
-							<h4 className="text-white mb-2">Bio: {otherUser.otherUser.about}</h4>
-							<h4 className="text-white mb-2">
+							<h4 className="text-white mb-2 details">Size: {otherUser.otherUser.size}</h4>
+							<h4 className="text-white mb-2 details">Bio: {otherUser.otherUser.about}</h4>
+							<h4 className="text-white mb-2 details">
 								Hobbies:
 								<ul>
 									{otherUser.otherUser.hobbies.map((hobby, index) => (
-										<li key={index}>
+										<li key={index} className = "cardLi">
 											<h4>{hobby}</h4>
 										</li>
 									))}
