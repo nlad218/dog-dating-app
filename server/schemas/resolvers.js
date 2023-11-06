@@ -132,7 +132,12 @@ const resolvers = {
 		},
 		// CREATE route: create user account - Maya
 		createUser: async (parent, { ownerName, email, password }) => {
-			const user = await User.create({ ownerName, email, password });
+			const user = await User.create({
+				ownerName: ownerName,
+				email: email,
+				password: password,
+				image: "empty-profile_ttux5f"
+				});
 			const token = signToken(user);
 			return { token, user };
 		},
