@@ -52,7 +52,7 @@ export default function UpdateProfileModal({
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		const newData = { ...newUserData };
-		newData[name] = name === "age" ? parseInt(value) : value.trim();
+		newData[name] = name === "age" ? parseInt(value) : value;
 		setNewUserData(newData);
 	};
 
