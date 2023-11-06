@@ -61,6 +61,7 @@ export default function UpdateProfileModal({
 			className={`fixed inset-0 z-50 flex items-center justify-center overflow-none ${
 				isOpen ? "block" : "hidden"
 			}`}
+			
 		>
 			<div className="modal-container mx-2 sm:mx-0">
 				<div className="bg-gray-600 w-full sm:w-96 rounded-lg shadow-lg p-4">
@@ -108,7 +109,8 @@ export default function UpdateProfileModal({
 						</ul>
 					</div>
 					{activeTab === "owner" && (
-						<form className="mb-3" onSubmit={handleSaveProfile}>
+						<form className="mb-3" onSubmit={handleSaveProfile}
+						>
 							<div className="m-2">
 								<label
 									className="block text-black-700 text-sm font-bold mb-2"

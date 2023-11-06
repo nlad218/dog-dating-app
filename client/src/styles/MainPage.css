@@ -7,6 +7,7 @@
 	height: 100%;
 	border: 0.2rem solid #fd5564;
 	width: 40%;
+	
 }
 .infoDiv {
 	border: 0.2rem solid #fd5564;
@@ -93,6 +94,8 @@
 		justify-content: start;
 		height: 40%;
 		padding: 1rem;
+		border-top-right-radius: 0rem;
+		border-bottom-left-radius: 0.5rem;
 	}
 	.cardTitle {
 		font-size: 2rem;
