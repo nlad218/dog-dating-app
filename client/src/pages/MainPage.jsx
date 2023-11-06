@@ -3,8 +3,11 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_DISPLAYABLE_USERS } from "../utils/queries";
 import { ADD_TO_LIKES, CREATE_MATCH } from "../utils/mutations";
 import { Cloudinary } from "@cloudinary/url-gen";
+import { scale } from "@cloudinary/url-gen/actions/resize";
+
 import { AdvancedImage } from "@cloudinary/react";
 import Auth from "../utils/auth";
+import "../styles/MainPage.css";
 
 export default function MainPage() {
 	const [index, setIndex] = useState(0);
@@ -66,7 +69,6 @@ export default function MainPage() {
 
 		for (let i = 0; i < profiles[index].likes.length; i++) {
 			if (profiles[index].likes[i]._id == Auth.getProfile().data._id) {
-				console.log("match");
 				createMatch({
 					variables: { otherId: profiles[index]._id },
 				});
@@ -91,15 +93,13 @@ export default function MainPage() {
 	};
 
 	const myImage = cld.image(profiles[index].image);
+	myImage.resize(scale().width(150));
 
 	return (
 		<div className="flex items-center mb-10 mt-5">
-			<div
-				className="card h-full w-full md:max-w-2xl shadow-xl bg-primary mx-10 border-2 border-black"
-				style={{ maxWidth: 450, maxHeight: 525 }}
-			>
-				<figure>
-					<AdvancedImage cldImg={myImage} />
+			<div className="card shadow-xl bg-primary mx-10 border-2 border-black">
+				<figure className="mt-3">
+					<AdvancedImage cldImg={myImage} className="border border-white" />
 				</figure>
 				<div className="card-body">
 					<h2 className="card-title text-white text-4xl">
