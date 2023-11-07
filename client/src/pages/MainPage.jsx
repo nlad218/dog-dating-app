@@ -50,7 +50,7 @@ export default function MainPage() {
 
   if (error) {
     console.error("Error fetching data:", error);
-    return <p>Error fetching data</p>;
+    return <p>You are out of users to like!</p>;
   }
 
   const profiles = data.getRandomUsers;

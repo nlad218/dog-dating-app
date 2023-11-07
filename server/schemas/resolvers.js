@@ -55,51 +55,53 @@ const resolvers = {
     // // GET route: purpose - find selected user's likes and return them
     getLikes: async (parent, { userId }) => {
       const userInfo = await User.findOne({ _id: userId }).populate("likes");
-      console.log(userInfo);
       return userInfo;
     },
     //filters already liked profiles and own profile
     getRandomUsers: async (parent, args, { user }) => {
-      let res = await User.findOne({ _id: user._id });
+      if (user) {
+        let res = await User.findOne({ _id: user._id });
 
-      let skipTheseIds = res.likes;
+        let skipTheseIds = res.likes;
 
-      let ids = [];
+        let ids = [];
 
-      skipTheseIds.push(user._id);
-      skipTheseIds.map((index) => {
-        ids.push(index.toString());
-      });
+        skipTheseIds.push(user._id);
+        skipTheseIds.map((index) => {
+          ids.push(index.toString());
+        });
 
-      let allUsers = await User.find({ _id: { $nin: ids } }).populate({
-        path: "likes",
-        model: "User",
-      });
-      //fisher-yates sort
-      for (let i = allUsers.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        const temp = allUsers[i];
-        allUsers[i] = allUsers[j];
-        allUsers[j] = temp;
+        let allUsers = await User.find({ _id: { $nin: ids } }).populate({
+          path: "likes",
+          model: "User",
+        });
+
+        if (allUsers.length === 0) throw new Error("You are out users to like");
+        //fisher-yates sort
+        for (let i = allUsers.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const temp = allUsers[i];
+          allUsers[i] = allUsers[j];
+          allUsers[j] = temp;
+        }
+        return allUsers;
       }
-      return allUsers;
+      throw AuthenticationError;
     },
     //filter out already liked profile,own profile, then shows alike breeds
     filterUsersByBreed: async (parent, args, { user }) => {
       let skipTheseIds = user.likes;
-      console.log(user);
       skipTheseIds.push(user._id);
       const filteredBreed = await User.find({
         $and: [{ breed: { $eq: user.breed } }, { _id: { $nin: skipTheseIds } }],
       }).populate("likes");
-      console.log(filteredBreed);
+
       //fisher yates sort
       for (let i = filteredBreed.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         const temp = filteredBreed[i];
         filteredBreed[i] = filteredBreed[j];
         filteredBreed[j] = temp;
-        console.log(filteredBreed);
       }
       return filteredBreed;
     },
